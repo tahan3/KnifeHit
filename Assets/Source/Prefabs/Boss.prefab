@@ -357,7 +357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knifesParent: {fileID: 8645217281217758624}
   ejectorPrefab: {fileID: 4663029247926925525, guid: 123378c7e7c30354c8ce9bfe07dcc9ef, type: 3}
-  forceValue: 5
+  forceValue: 3
 --- !u!1 &4351973997692523171
 GameObject:
   m_ObjectHideFlags: 0

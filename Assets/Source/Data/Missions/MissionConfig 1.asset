@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MissionConfig 1
   m_EditorClassIdentifier: 
   stages:
-  - {fileID: 11400000, guid: 87ef3276f15e3ff4eaf37e891f006377, type: 2}
+  - {fileID: 11400000, guid: 84cd82f49403f4114bb11d64a52da87b, type: 2}

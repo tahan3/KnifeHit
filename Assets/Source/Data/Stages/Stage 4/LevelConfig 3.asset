@@ -10,18 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c7b0f762c2d4fcea0c02c9aad548e62, type: 3}
-  m_Name: LevelConfig 2
+  m_Name: LevelConfig 3
   m_EditorClassIdentifier: 
-  mainKnifeAimPrefab: {fileID: 6434203063968360719, guid: 8b31bd23a1824504aa1dfe650c72ff83, type: 3}
+  mainKnifeAimPrefab: {fileID: 6434203063968360719, guid: bd893148036d09246bf35629aa4f5ff7, type: 3}
   knifePrefab: {fileID: 542345929285737691, guid: c1ed0ad4f7e06e04cabe9c9395ae9f99, type: 3}
   knifesToWin: 10
   mainAimRotationSequences:
-  - angle: 360
+  - angle: -540
     time: 5
     ease: 19
-  - angle: -360
+  - angle: 180
+    time: 1
+    ease: 17
+  - angle: -630
     time: 5
     ease: 19
   ejectorPositions:
-  - {x: 0.748, y: -0.10291898, z: 0.669}
-  - {x: -0.693, y: 0, z: -0.53}
+  - {x: 0.75, y: 0, z: -0.75}
+  - {x: -0.75, y: 0, z: 0.75}
+  - {x: 0.75, y: 0, z: 0.75}
