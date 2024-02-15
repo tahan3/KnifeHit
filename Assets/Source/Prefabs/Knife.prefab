@@ -158,6 +158,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 0f6d9a2ddbad1dc4c93e8f4e2ad9b953, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 0f6d9a2ddbad1dc4c93e8f4e2ad9b953, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0f6d9a2ddbad1dc4c93e8f4e2ad9b953, type: 3}
       propertyPath: m_Name
       value: knife1

@@ -10,6 +10,7 @@ using Source.Scripts.Pool;
 using Source.Scripts.Spawn;
 using Source.Scripts.Thrower;
 using Source.Scripts.UI.ProgressBar;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -33,6 +34,7 @@ namespace Source.Scripts.Test
         [Header("View")] 
         [SerializeField] private StepProgress knifesProgress;
         [SerializeField] private StepProgress levelProgress;
+        [SerializeField] private TextMeshProUGUI challengeText;
         
         private MainEventsHandler _mainEvents;
         private GameOverHandler _gameOverHandler;
@@ -78,6 +80,8 @@ namespace Source.Scripts.Test
                 _stageHandler.Clear();
                 SceneManager.LoadScene("MainMenu");
             }
+
+            challengeText.text = "challenge " + (_levelHandler.Level + 1);
 
             Container.Bind<MainEventsHandler>().FromInstance(_mainEvents).AsSingle();
             Container.Bind<LevelConfig>().FromInstance(_missionsHandler.currentMission.stages[_stageHandler.Stage].levels[_levelHandler.Level]).AsSingle();

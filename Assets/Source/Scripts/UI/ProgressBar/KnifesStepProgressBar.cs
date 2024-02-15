@@ -19,6 +19,16 @@ namespace Source.Scripts.UI.ProgressBar
             {
                 steps.Add(Instantiate(stepPrefab, transform));
             }
+
+            ReverseKnifes();
+        }
+
+        private void ReverseKnifes()
+        {
+            for (int i = 0; i < steps.Count; i++)
+            {
+                steps[i].transform.SetSiblingIndex(steps.Count - 1 - i);
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Source.Scripts.Aim
     public class KnifeEjector : KnifeAim
     {
         [SerializeField] private float knifeForce = 3f;
-        [SerializeField] private float knifeForceTime = 1f;
+        [SerializeField] private float knifeForceTime = 0.5f;
 
         [Inject] private MainEventsHandler _mainEvents;
         

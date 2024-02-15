@@ -13,7 +13,7 @@ namespace Source.Scripts.Aim
 {
     public class DefaultKnifeAim : KnifeAim
     {
-        [SerializeField] private Transform knifesParent;
+        [SerializeField] protected Transform knifesParent;
         [SerializeField] private KnifeEjector ejectorPrefab;
         [SerializeField] private float forceValue;
 
@@ -39,7 +39,7 @@ namespace Source.Scripts.Aim
             _mainEvents.OnKnifeHitAim?.Invoke();
         }
 
-        public void Explosion()
+        public virtual void Explosion()
         {
             for (int i = 0; i < knifesParent.childCount; i++)
             {
@@ -55,7 +55,7 @@ namespace Source.Scripts.Aim
             knifesParent.DetachChildren();
         }
         
-        public async UniTask StartRotation(LevelConfig levelConfig)
+        private async UniTask StartRotation(LevelConfig levelConfig)
         {
             for (int i = 0; i < levelConfig.ejectorPositions.Count; i++)
             {

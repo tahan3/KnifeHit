@@ -9,12 +9,14 @@ namespace Source.Scripts.Gameplay
     public class GameOverHandler
     {
         public event Action OnGameOver;
-        
-        private int _pointsToWin;
 
-        public GameOverHandler(ICounter counter, int pointsToWin)
+        private readonly int _pointsToWin;
+        private readonly float _gameOverDelay;
+
+        public GameOverHandler(ICounter counter, int pointsToWin, float gameOverDelay = 1f)
         {
             _pointsToWin = pointsToWin;
+            _gameOverDelay = gameOverDelay;
 
             InitCounter(counter);
         }
@@ -36,7 +38,7 @@ namespace Source.Scripts.Gameplay
         {
             OnGameOver?.Invoke();
 
-            await UniTask.WaitForSeconds(0.5f);
+            await UniTask.WaitForSeconds(_gameOverDelay);
             
             SceneManager.LoadSceneAsync("MainGameplay");
         }

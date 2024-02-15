@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ToggleKnifesSprites
   m_EditorClassIdentifier: 
   onSprite: {fileID: 21300000, guid: 0c6e801c6c815a34da50eb365a056118, type: 3}
-  offSprite: {fileID: 21300000, guid: 97702ad4ec09d47488bc2be74fc76c9a, type: 3}
+  offSprite: {fileID: 21300000, guid: 019a3057c4d667540b3e8447bdcfa4ae, type: 3}
