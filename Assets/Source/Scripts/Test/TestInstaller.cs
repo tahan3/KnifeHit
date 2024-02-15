@@ -22,7 +22,6 @@ namespace Source.Scripts.Test
 {
     public class TestInstaller : MonoInstaller
     {
-        //[SerializeField] private List<StageConfig> stages;
         [SerializeField] private Button throwKnifeButton;
         [SerializeField] private Transform knifesParent;
         
@@ -81,7 +80,7 @@ namespace Source.Scripts.Test
                 SceneManager.LoadScene("MainMenu");
             }
 
-            challengeText.text = "challenge " + (_levelHandler.Level + 1);
+            challengeText.text = "challenge " + (_stageHandler.Stage + 1);
 
             Container.Bind<MainEventsHandler>().FromInstance(_mainEvents).AsSingle();
             Container.Bind<LevelConfig>().FromInstance(_missionsHandler.currentMission.stages[_stageHandler.Stage].levels[_levelHandler.Level]).AsSingle();

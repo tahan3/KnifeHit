@@ -18,11 +18,5 @@ MonoBehaviour:
   mainAimRotationSequences:
   - angle: 540
     time: 5
-    ease: 1
-  - angle: 0
-    time: 1
-    ease: 1
-  - angle: 540
-    time: 5
-    ease: 0
+    ease: 10
   ejectorPositions: []

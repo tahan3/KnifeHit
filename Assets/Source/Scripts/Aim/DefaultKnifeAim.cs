@@ -46,7 +46,6 @@ namespace Source.Scripts.Aim
                 var child = knifesParent.GetChild(i);
 
                 Vector3 forceDirection = (child.position - knifesParent.position).normalized;
-                
                 child.DOMove(-forceDirection * forceValue, 0.5f);
                 child.DORotate(new Vector3(Random.Range(0f, 360f), Random.Range(0f, 360f), Random.Range(0f, 360f)),
                     0.5f, RotateMode.FastBeyond360);
