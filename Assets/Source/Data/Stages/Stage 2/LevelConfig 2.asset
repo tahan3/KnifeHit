@@ -23,7 +23,7 @@ MonoBehaviour:
     time: 2
     ease: 1
   - angle: 270
-    time: 2
+    time: 3
     ease: 1
   ejectorPositions:
   - {x: 0, y: 0, z: -1}
