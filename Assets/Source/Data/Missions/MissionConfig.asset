@@ -18,3 +18,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7ea52c80b45f64c79a9cbfd4a93125c1, type: 2}
   - {fileID: 11400000, guid: 1ae12099d1e624993bc9d7492b8463b6, type: 2}
   - {fileID: 11400000, guid: 84cd82f49403f4114bb11d64a52da87b, type: 2}
+  missionName: Kek Challenge
+  playersLimit: 5
+  time: 240

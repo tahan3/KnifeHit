@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 8645217281217758624}
   - component: {fileID: 5089068393066114454}
   - component: {fileID: 2627658554073180390}
-  - component: {fileID: 6434203063968360719}
+  - component: {fileID: 942327375330967205}
   m_Layer: 7
   m_Name: KnifeAim
   m_TagString: Aim
@@ -117,7 +117,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.75
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6434203063968360719
+--- !u!114 &942327375330967205
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,12 +126,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2752269046416817268}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92cb74da14a7412583c69d54f5bc716c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a50b533ef204857aca7f38664e1647e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   knifesParent: {fileID: 8645217281217758624}
   ejectorPrefab: {fileID: 4663029247926925525, guid: 123378c7e7c30354c8ce9bfe07dcc9ef, type: 3}
-  forceValue: 3
+  forceValue: 6
+  forceTime: 1
 --- !u!1 &3354355292952567377
 GameObject:
   m_ObjectHideFlags: 0

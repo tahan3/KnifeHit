@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a56b083ead4c4860bef75ed8849a031b, type: 3}
+  m_Name: GamePlayParticles
+  m_EditorClassIdentifier: 
+  items:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: 9200836151421661958, guid: 45a09dd055d5ede4d9ee8f8448fbd8c0, type: 3}
+    - Key: 1
+      Value: {fileID: 6216164609975036396, guid: 0368927cd6b73b54a8136248d69ce718, type: 3}
+    - Key: 2
+      Value: {fileID: 1933703925796757990, guid: 921ac79570a2a2841b37d55aadf49dec, type: 3}
+    - Key: 3
+      Value: {fileID: 2097745275097067988, guid: e1124bf0ee26b8541b9a83f5596d8e7b, type: 3}

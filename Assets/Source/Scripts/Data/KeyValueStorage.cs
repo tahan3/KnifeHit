@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -9,6 +11,14 @@ namespace Source.Scripts.Data
         [SerializedDictionary("Key", "Value")] 
         [SerializeField] protected SerializedDictionary<TKey, TValue> items;
 
-        public abstract TValue GetValue(TKey key);
+        public bool TryGetValue(TKey key, out TValue value)
+        {
+            return items.TryGetValue(key, out value);
+        }
+
+        public List<TKey> GetKeys()
+        {
+            return items.Keys.ToList();
+        }
     }
 }

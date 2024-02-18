@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffeb476131244881985fe5e4d2c55dc1, type: 3}
+  m_Name: MainMenuScreens
+  m_EditorClassIdentifier: 
+  items:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: 2605979295666947215, guid: 36945363b6defff41bc3a8b1a1dc4e39, type: 3}
+    - Key: 3
+      Value: {fileID: 2392050105458600230, guid: e1ff0a429e39a6f4297749dfe17440ed, type: 3}
+    - Key: 4
+      Value: {fileID: 8012296043704604559, guid: f189e6fd7d2c9cd438900af1034b17ca, type: 3}
+    - Key: 5
+      Value: {fileID: 4801084000652285664, guid: f4c6c61a70792c6489aa9bb043da460c, type: 3}
+    - Key: 6
+      Value: {fileID: 5955552241899753604, guid: cb6b989b797108f418e8ba6ed4f7000a, type: 3}

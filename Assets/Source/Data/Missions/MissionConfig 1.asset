@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stages:
   - {fileID: 11400000, guid: 84cd82f49403f4114bb11d64a52da87b, type: 2}
+  missionName: "\u043F\u0443\u043C-\u043F\u0443\u043C"
+  playersLimit: 9
+  time: 660

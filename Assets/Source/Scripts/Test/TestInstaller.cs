@@ -31,8 +31,6 @@ namespace Source.Scripts.Test
         [SerializeField] private float knifeForce;
 
         [Header("View")] 
-        [SerializeField] private StepProgress knifesProgress;
-        [SerializeField] private StepProgress levelProgress;
         [SerializeField] private TextMeshProUGUI challengeText;
         
         private MainEventsHandler _mainEvents;
@@ -47,7 +45,7 @@ namespace Source.Scripts.Test
 
         private KnifesHandler _knifesHandler;
 
-        private ICounter _knifesPerRoundCounter;
+        private KnifesPerRoundCounter _knifesPerRoundCounter;
         
         [Inject]
         private MissionsHandler _missionsHandler;
@@ -58,7 +56,7 @@ namespace Source.Scripts.Test
             _levelHandler = new LevelHandler();
             _stageHandler = new StageHandler();
 
-            if (_stageHandler.Stage >= _missionsHandler.currentMission.stages.Count)
+            if (_stageHandler.Stage >= _missionsHandler.Mission.stages.Count)
             {
                 _stageHandler.Stage = 0;
                 _levelHandler.Clear();
@@ -66,13 +64,13 @@ namespace Source.Scripts.Test
                 SceneManager.LoadScene("MainMenu");
             }
             
-            if (_levelHandler.Level >= _missionsHandler.currentMission.stages[_stageHandler.Stage].levels.Count)
+            if (_levelHandler.Level >= _missionsHandler.Mission.stages[_stageHandler.Stage].levels.Count)
             {
                 _levelHandler.Level = 0;
                 _stageHandler.IncrementStage();
             }
             
-            if (_stageHandler.Stage >= _missionsHandler.currentMission.stages.Count)
+            if (_stageHandler.Stage >= _missionsHandler.Mission.stages.Count)
             {
                 _stageHandler.Stage = 0;
                 _levelHandler.Clear();
@@ -80,22 +78,21 @@ namespace Source.Scripts.Test
                 SceneManager.LoadScene("MainMenu");
             }
 
-            challengeText.text = "challenge " + (_stageHandler.Stage + 1);
+            //challengeText.text = "challenge " + (_stageHandler.Stage + 1);
 
-            Container.Bind<MainEventsHandler>().FromInstance(_mainEvents).AsSingle();
-            Container.Bind<LevelConfig>().FromInstance(_missionsHandler.currentMission.stages[_stageHandler.Stage].levels[_levelHandler.Level]).AsSingle();
-            Container.Bind<StageConfig>().FromInstance(_missionsHandler.currentMission.stages[_stageHandler.Stage]).AsSingle();
-            Container.Bind<LevelHandler>().FromInstance(_levelHandler).AsSingle();
-            
             _knifesPerRoundCounter = new KnifesPerRoundCounter();
-
-            _knifesPerRoundCounter.CounterNumber.OnValueChanged += knifesProgress.SetProgress;
+            
+            Container.Bind<MainEventsHandler>().FromInstance(_mainEvents).AsSingle();
+            Container.Bind<LevelConfig>().FromInstance(_missionsHandler.Mission.stages[_stageHandler.Stage].levels[_levelHandler.Level]).AsSingle();
+            Container.Bind<StageConfig>().FromInstance(_missionsHandler.Mission.stages[_stageHandler.Stage]).AsSingle();
+            Container.Bind<LevelHandler>().FromInstance(_levelHandler).AsSingle();
+            Container.Bind<KnifesPerRoundCounter>().FromInstance(_knifesPerRoundCounter).AsSingle();
             
             ICounter totalBonusesCounter = new TotalBonusesCounter();
             ICounter totalKnifesCounter = new TotalKnifesCounter();
 
             _gameOverHandler =
-                new GameOverHandler(_knifesPerRoundCounter, _missionsHandler.currentMission.stages[_stageHandler.Stage].levels[_levelHandler.Level].knifesToWin);
+                new GameOverHandler(_knifesPerRoundCounter, _missionsHandler.Mission.stages[_stageHandler.Stage].levels[_levelHandler.Level].knifesToWin);
 
             Container.Bind<GameOverHandler>().FromInstance(_gameOverHandler).AsSingle();
 
@@ -108,10 +105,10 @@ namespace Source.Scripts.Test
             
             _mainEvents.OnKnifeHitBonus += () => totalBonusesCounter.CounterNumber.Value++;
 
-            Container.InstantiatePrefab(_missionsHandler.currentMission.stages[_stageHandler.Stage].levels[_levelHandler.Level].mainKnifeAimPrefab);
+            Container.InstantiatePrefab(_missionsHandler.Mission.stages[_stageHandler.Stage].levels[_levelHandler.Level].mainKnifeAimPrefab);
             
-            _pool = new ComponentsPool<Knife>(Container, _missionsHandler.currentMission.stages[_stageHandler.Stage].levels[_levelHandler.Level].knifePrefab,
-                _missionsHandler.currentMission.stages[_stageHandler.Stage].levels[_levelHandler.Level].knifesToWin, knifesParent);
+            _pool = new ComponentsPool<Knife>(Container, _missionsHandler.Mission.stages[_stageHandler.Stage].levels[_levelHandler.Level].knifePrefab,
+                _missionsHandler.Mission.stages[_stageHandler.Stage].levels[_levelHandler.Level].knifesToWin, knifesParent);
             _spawner = new KnifeSpawner(_pool, initialSpawnPosition, initialStartPosition);
             _thrower = new KnifesThrower(knifeForce);
             
