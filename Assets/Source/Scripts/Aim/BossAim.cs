@@ -15,7 +15,7 @@ namespace Source.Scripts.Aim
 
         private void Start()
         {
-            _gameOverHandler.OnGameOver += () => _windowsHandler.OpenWindow(WindowType.BossDefeated);
+            _gameOverHandler.OnLevelEnded += () => _windowsHandler.OpenWindow(WindowType.BossDefeated);
         }
         
         public override void Explosion()

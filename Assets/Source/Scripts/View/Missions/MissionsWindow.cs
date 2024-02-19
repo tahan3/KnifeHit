@@ -52,7 +52,7 @@ namespace Source.Scripts.View.Missions
 
         private void SetMission(int missionIndex)
         {
-            _missionsHandler.SetMission(mainConfig.missions[missionIndex]);
+            _missionsHandler.LoadMission(mainConfig.missions[missionIndex]);
         }
     }
 }

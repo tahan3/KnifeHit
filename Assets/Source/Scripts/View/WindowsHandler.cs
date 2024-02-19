@@ -12,10 +12,13 @@ namespace Source.Scripts.View
 
         private AWindow _currentWindow;
         
-        public WindowsHandler(KeyValueStorage<WindowType, AWindow> windowsStorage, DiContainer container, Transform parent = null)
+        public WindowsHandler()
         {
             _windows = new Dictionary<WindowType, AWindow>();
-            
+        }
+        
+        public void InitWindows(KeyValueStorage<WindowType, AWindow> windowsStorage, DiContainer container, Transform parent)
+        {
             foreach (var windowType in windowsStorage.GetKeys())
             {
                 if (windowsStorage.TryGetValue(windowType, out var value))
@@ -28,25 +31,7 @@ namespace Source.Scripts.View
             }
         }
         
-        public WindowsHandler(KeyValueStorage<WindowType, AWindow> windowsStorage, DiContainer container, KeyValueStorage<BGWindowType, AWindow> bgWindows, Transform parent = null)
-        {
-            _windows = new Dictionary<WindowType, AWindow>();
-
-            InitBGWindows(bgWindows, container, parent);
-            
-            foreach (var windowType in windowsStorage.GetKeys())
-            {
-                if (windowsStorage.TryGetValue(windowType, out var value))
-                {
-                    var item = container.InstantiatePrefabForComponent<AWindow>(value, parent);
-                    item.Close();
-                    
-                    _windows.Add(windowType, item);
-                }
-            }
-        }
-        
-        private void InitBGWindows(KeyValueStorage<BGWindowType, AWindow> bgWindows, DiContainer container, Transform parent)
+        public void InitBGWindows(KeyValueStorage<BGWindowType, AWindow> bgWindows, DiContainer container, Transform parent)
         {
             foreach (var windowType in bgWindows.GetKeys())
             {

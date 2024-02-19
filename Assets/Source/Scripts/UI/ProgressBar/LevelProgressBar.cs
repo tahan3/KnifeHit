@@ -16,18 +16,18 @@ namespace Source.Scripts.UI.ProgressBar
         [SerializeField] private ToggleSpritesStorage bossSpritesStorage;
         
         [Inject]
-        public void Construct(StageConfig stageConfig, LevelHandler levelHandler)
+        public void Construct(MissionsHandler missionsHandler)
         {
             steps = new List<Image>();
-            
-            for (int i = 0; i < stageConfig.levels.Count - 1; i++)
+
+            for (int i = 0; i < missionsHandler.Mission.stages[missionsHandler.Stage].levels.Count - 1; i++)
             {
                 steps.Add(Instantiate(levelPrefab, transform));
             }
 
             steps.Add(Instantiate(bossPrefab, transform));
 
-            SetProgress(levelHandler.Level);
+            SetProgress(missionsHandler.Level);
         }
 
         public override void SetProgress(int progress)

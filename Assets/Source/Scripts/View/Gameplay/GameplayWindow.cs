@@ -1,4 +1,3 @@
-using Source.Scripts.Counter;
 using Source.Scripts.UI.ProgressBar;
 using Source.Scripts.View.Windows;
 using TMPro;
@@ -22,9 +21,12 @@ namespace Source.Scripts.View.Gameplay
         public StepProgress stageProgress;
 
         [Inject]
-        public void Construct(KnifesPerRoundCounter knifesPerRoundCounter)
+        private void Construct(DiContainer container)
         {
-            knifesPerRoundCounter.CounterNumber.OnValueChanged += knifesProgress.SetProgress;
+            var gameplayWindowHandler = new GameplayWindowHandler(this);
+            container.Inject(gameplayWindowHandler);
+
+            gameplayWindowHandler.Init();
         }
     }
 }

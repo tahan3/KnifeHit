@@ -14,11 +14,16 @@ namespace Source.Scripts.View
 
         public override void InstallBindings()
         {
-            _windowsHandler = bgWindowsData
-                ? new WindowsHandler(windowsData, Container, bgWindowsData, transform)
-                : new WindowsHandler(windowsData, Container, transform);
+            _windowsHandler = new WindowsHandler();
 
-            Container.Bind<WindowsHandler>().FromInstance(_windowsHandler).AsSingle();
+            Container.Bind<WindowsHandler>().FromInstance(_windowsHandler).AsSingle().NonLazy();
+
+            if (bgWindowsData)
+            {
+                _windowsHandler.InitBGWindows(bgWindowsData, Container, transform);
+            }
+
+            _windowsHandler.InitWindows(windowsData, Container, transform);
         }
     }
 }

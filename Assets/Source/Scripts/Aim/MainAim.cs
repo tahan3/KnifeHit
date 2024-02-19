@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -10,6 +11,7 @@ using Source.Scripts.Particles;
 using Source.Scripts.Sequence;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace Source.Scripts.Aim
 {
@@ -31,8 +33,9 @@ namespace Source.Scripts.Aim
             _mainEvents = mainEvents;
             _particlesHandler = particlesHandler;
             
-            gameOverHandler.OnGameOver += Explosion;
+            gameOverHandler.OnLevelEnded += Explosion;
 
+            InstantiateEjectors(levelConfig);
             StartRotation(levelConfig);
         }
         
@@ -63,12 +66,7 @@ namespace Source.Scripts.Aim
         
         private async UniTask StartRotation(LevelConfig levelConfig)
         {
-            for (int i = 0; i < levelConfig.ejectorPositions.Count; i++)
-            {
-                var ejector = _container.InstantiatePrefab(ejectorPrefab, knifesParent);
-                ejector.transform.localPosition = levelConfig.ejectorPositions[i];
-                ejector.transform.LookAt(knifesParent, Vector3.up);
-            }
+            var cancellationToken = gameObject.GetCancellationTokenOnDestroy();
             
             if (levelConfig.mainAimRotationSequences.Count == 0) return;
             
@@ -80,10 +78,25 @@ namespace Source.Scripts.Aim
                     .DORotate(Vector3.up * levelConfig.mainAimRotationSequences[index].angle,
                         levelConfig.mainAimRotationSequences[index].time,
                         RotateMode.WorldAxisAdd).SetEase(levelConfig.mainAimRotationSequences[index].ease)
-                    .AsyncWaitForCompletion();
+                    .AsyncWaitForCompletion().AsUniTask().AttachExternalCancellation(cancellationToken);
 
                 index = index >= levelConfig.mainAimRotationSequences.Count - 1 ? 0 : index + 1;
             }
+        }
+
+        private void InstantiateEjectors(LevelConfig levelConfig)
+        {
+            for (int i = 0; i < levelConfig.ejectorPositions.Count; i++)
+            {
+                var ejector = _container.InstantiatePrefab(ejectorPrefab, knifesParent);
+                ejector.transform.localPosition = levelConfig.ejectorPositions[i];
+                ejector.transform.LookAt(knifesParent, Vector3.up);
+            }
+        }
+
+        private void OnDisable()
+        {
+            transform.DOKill();
         }
     }
 }

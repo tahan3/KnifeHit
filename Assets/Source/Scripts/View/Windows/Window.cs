@@ -15,12 +15,5 @@ namespace Source.Scripts.View.Windows
         {
             canvas.enabled = false;
         }
-
-        public void Redraw()
-        {
-            var state = gameObject.activeSelf;
-            gameObject.SetActive(!state);
-            gameObject.SetActive(state);
-        }
     }
 }

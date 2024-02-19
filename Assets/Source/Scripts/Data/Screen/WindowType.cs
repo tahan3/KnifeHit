@@ -8,6 +8,8 @@ namespace Source.Scripts.Data.Screen
         DailyReward,
         Missions,
         Profile,
-        Shop
+        Shop,
+        TimeBonus,
+        YourScore
     }
 }
