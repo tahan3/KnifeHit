@@ -440,7 +440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knifesParent: {fileID: 8645217281217758624}
   ejectorPrefab: {fileID: 4663029247926925525, guid: 123378c7e7c30354c8ce9bfe07dcc9ef, type: 3}
-  forceValue: 6
+  forceValue: 8
   forceTime: 1
   explosionParticle: {fileID: 2097745275097067988, guid: e1124bf0ee26b8541b9a83f5596d8e7b, type: 3}
 --- !u!1 &6203221567895813163
