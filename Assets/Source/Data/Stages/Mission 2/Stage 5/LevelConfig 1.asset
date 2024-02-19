@@ -16,12 +16,18 @@ MonoBehaviour:
   knifePrefab: {fileID: 542345929285737691, guid: c1ed0ad4f7e06e04cabe9c9395ae9f99, type: 3}
   knifesToWin: 9
   mainAimRotationSequences:
-  - angle: 375
-    time: 5
-    ease: 19
-  - angle: -375
-    time: 5
-    ease: 19
+  - angle: 360
+    time: 3
+    ease: 4
+  - angle: 0
+    time: 1
+    ease: 4
+  - angle: -360
+    time: 3
+    ease: 4
+  - angle: 0
+    time: 1
+    ease: 4
   ejectorPositions:
-  - {x: -0.75, y: 0, z: 0.75}
-  - {x: 0.75, y: 0, z: -0.75}
+  - {x: -0.982, y: 0, z: -0.012}
+  - {x: 0.991, y: 0, z: -0.012}

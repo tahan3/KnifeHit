@@ -18,6 +18,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 75eb9b0e618f62b40b417251adf7b213, type: 2}
   - {fileID: 11400000, guid: 6f914bcfc43025740990c981c0efd883, type: 2}
   - {fileID: 11400000, guid: 29ec86ccdb17ffe45a8e8b048a76a7bf, type: 2}
-  missionName: "\u043F\u0443\u043C-\u043F\u0443\u043C"
-  playersLimit: 9
-  time: 660
+  missionName: Treasure Challenge
+  playersLimit: 6
+  time: 240

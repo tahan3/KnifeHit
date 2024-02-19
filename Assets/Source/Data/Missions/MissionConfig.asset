@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: MissionConfig
   m_EditorClassIdentifier: 
   stages:
-  - {fileID: 11400000, guid: b19212beb65c9454488c30ccfa63940c, type: 2}
-  - {fileID: 11400000, guid: 87ef3276f15e3ff4eaf37e891f006377, type: 2}
-  - {fileID: 11400000, guid: 7ea52c80b45f64c79a9cbfd4a93125c1, type: 2}
-  - {fileID: 11400000, guid: 1ae12099d1e624993bc9d7492b8463b6, type: 2}
-  - {fileID: 11400000, guid: 84cd82f49403f4114bb11d64a52da87b, type: 2}
-  missionName: Kek Challenge
-  playersLimit: 5
+  - {fileID: 11400000, guid: 6a87787d510d14f0a8c6e5965ea8b259, type: 2}
+  - {fileID: 11400000, guid: ec09018b2309d4b33aa9af74b01f69b8, type: 2}
+  - {fileID: 11400000, guid: c98eb23c46cb244d581eddb0cdb95c0d, type: 2}
+  - {fileID: 11400000, guid: fb08c53de0fcb4fbeb1e4bdbcff0ba1d, type: 2}
+  - {fileID: 11400000, guid: 76d9126a9df0f49958b61b265ec8dca3, type: 2}
+  missionName: Jungle Challenge
+  playersLimit: 6
   time: 240
