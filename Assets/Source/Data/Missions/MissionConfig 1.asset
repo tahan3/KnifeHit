@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: MissionConfig 1
   m_EditorClassIdentifier: 
   stages:
-  - {fileID: 11400000, guid: 84cd82f49403f4114bb11d64a52da87b, type: 2}
+  - {fileID: 11400000, guid: 1dc7de8f5cab08446b6223a0c5b99678, type: 2}
+  - {fileID: 11400000, guid: c33790c32ce839848af5c80a618f91ab, type: 2}
+  - {fileID: 11400000, guid: 75eb9b0e618f62b40b417251adf7b213, type: 2}
+  - {fileID: 11400000, guid: 6f914bcfc43025740990c981c0efd883, type: 2}
+  - {fileID: 11400000, guid: 29ec86ccdb17ffe45a8e8b048a76a7bf, type: 2}
   missionName: "\u043F\u0443\u043C-\u043F\u0443\u043C"
   playersLimit: 9
   time: 660

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c7b0f762c2d4fcea0c02c9aad548e62, type: 3}
+  m_Name: LevelConfig 3
+  m_EditorClassIdentifier: 
+  mainKnifeAimPrefab: {fileID: 298094273657236070, guid: 6a8aba43004f85c4e8f97b7a17cebf30, type: 3}
+  knifePrefab: {fileID: 542345929285737691, guid: c1ed0ad4f7e06e04cabe9c9395ae9f99, type: 3}
+  knifesToWin: 10
+  mainAimRotationSequences:
+  - angle: 540
+    time: 5
+    ease: 4
+  ejectorPositions:
+  - {x: 0, y: 0, z: -1}
