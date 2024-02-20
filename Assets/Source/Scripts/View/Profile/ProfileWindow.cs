@@ -9,7 +9,30 @@ namespace Source.Scripts.View.Profile
     public class ProfileWindow : Window
     {
         [Header("Containers")] 
-        public AWindow mainWindowPrefab;
+        public AWindow mainWindow;
         public AWindow profileEditWindow;
+        
+        public override void Open()
+        {
+            mainWindow.Open();
+            profileEditWindow.Close();
+            
+            base.Open();
+        }
+
+        public override void Close()
+        {
+            mainWindow.Close();
+            profileEditWindow.Close();
+            
+            base.Close();
+        }
+
+        [Inject]
+        public void Construct(DiContainer container)
+        {
+            container.Inject(mainWindow);
+            container.Inject(profileEditWindow);
+        }
     }
 }

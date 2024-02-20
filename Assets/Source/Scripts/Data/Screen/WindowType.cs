@@ -10,6 +10,7 @@ namespace Source.Scripts.Data.Screen
         Profile,
         Shop,
         TimeBonus,
-        YourScore
+        YourScore,
+        Leaderboard
     }
 }

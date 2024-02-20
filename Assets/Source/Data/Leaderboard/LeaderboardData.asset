@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80b5ca8154c64385ab5058b22a4cb9ad, type: 3}
+  m_Name: LeaderboardData
+  m_EditorClassIdentifier: 
+  icons: {fileID: 11400000, guid: a28feec97b59c4641b493eaa19ae8c55, type: 2}
+  firstPlacePrefab: {fileID: 2162309464085086800, guid: 7157f00a444a91f44800c7481d106d1f, type: 3}
+  secondPlacePrefab: {fileID: 8262122612198426395, guid: 6137df3c5ee82ea40896c70f705708f2, type: 3}
+  thirdPlacePrefab: {fileID: 8189112837057622686, guid: 098ea35eb7cfb1547ba38cb0b0eff91f, type: 3}
+  anyPlacePrefab: {fileID: 2427960137366653348, guid: 8b31ab436743e564a8038ff2773b4e3e, type: 3}
+  playerPlacePrefab: {fileID: 7505552191308682506, guid: c514cb88ef7ba3f4aab8ee8f9a593bb8, type: 3}

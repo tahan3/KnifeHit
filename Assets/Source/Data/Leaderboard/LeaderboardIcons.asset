@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bec5c524cb740fcbecb067f3610812b, type: 3}
+  m_Name: LeaderboardIcons
+  m_EditorClassIdentifier: 
+  items:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: 21300000, guid: 5487926fc86be9c459e0460563e909fe, type: 3}
+    - Key: 1
+      Value: {fileID: 21300000, guid: 31722ac1b03ee444594457be9593663c, type: 3}
+    - Key: 2
+      Value: {fileID: 21300000, guid: 5fcdccda1e1639f4fabae3b0142ff53d, type: 3}
+    - Key: 3
+      Value: {fileID: 21300000, guid: 0ac8603154cd2ab479698e22bd3dc982, type: 3}
+    - Key: 4
+      Value: {fileID: 21300000, guid: 10bfe5561e2bc3041807e042606a98d2, type: 3}

@@ -18,7 +18,7 @@ namespace Source.Scripts.View
 
         private void Start()
         {
-            //leaderboardButton.onClick.AddListener(()=>_windowsHandler.OpenWindow());
+            leaderboardButton.onValueChanged.AddListener((bool x)=>_windowsHandler.OpenWindow(WindowType.Leaderboard, true));
             shopButton.onValueChanged.AddListener((bool x)=>_windowsHandler.OpenWindow(WindowType.Shop, true));
             homeButton.onValueChanged.AddListener((bool x)=>_windowsHandler.OpenWindow(WindowType.Missions, true));
             dailyRewardButton.onValueChanged.AddListener((bool x)=>_windowsHandler.OpenWindow(WindowType.DailyReward, true));

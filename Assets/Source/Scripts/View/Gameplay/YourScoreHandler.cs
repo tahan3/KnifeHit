@@ -1,4 +1,5 @@
 using Source.Scripts.Gameplay;
+using Source.Scripts.Leaderboard;
 using Source.Scripts.Scene;
 using Zenject;
 
@@ -9,6 +10,7 @@ namespace Source.Scripts.View.Gameplay
         private YourScoreWindow _yourScoreWindow;
 
         [Inject] private MissionsHandler _missionsHandler;
+        [Inject] private ILeaderboardHandler _leaderboardHandler;
         
         public YourScoreHandler(YourScoreWindow yourScoreWindow)
         {
@@ -24,6 +26,8 @@ namespace Source.Scripts.View.Gameplay
             _yourScoreWindow.timeScore.text = timeScore.ToString();
             _yourScoreWindow.totalScore.text = (yourScore + timeScore).ToString();
             _yourScoreWindow.okButton.onClick.AddListener(OkButtonAction);
+            
+            _leaderboardHandler.SetLeaderboard(LeaderboardType.Points, yourScore + timeScore);
         }
 
         private void OkButtonAction()
