@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 692bc41b5e754418b81042ebf180b00d, type: 3}
+  m_Name: ProfileStorage
+  m_EditorClassIdentifier: 
+  icons: {fileID: 11400000, guid: 8745e6ac62f4612448274f7f192caa02, type: 2}
+  randomNicknames:
+  - Kekich
+  - 4uva4ek
+  - Roflan
+  - Kyvirok s perdejom
+  profileIconPrefab: {fileID: 6789217566504985159, guid: f31e66ae26293cc47ba46e02f8830c22, type: 3}
+  applyButtonSprites: {fileID: 11400000, guid: f3a040af6c1918e4bba7078aa6dfd051, type: 2}

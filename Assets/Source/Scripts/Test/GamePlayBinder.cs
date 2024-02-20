@@ -6,6 +6,7 @@ using Source.Scripts.Data.LevelData;
 using Source.Scripts.Events;
 using Source.Scripts.Gameplay;
 using Source.Scripts.Knifes;
+using Source.Scripts.Leaderboard;
 using Source.Scripts.Pool;
 using Source.Scripts.Spawn;
 using Source.Scripts.Thrower;
@@ -33,6 +34,8 @@ namespace Source.Scripts.Test
         
         public override void InstallBindings()
         {
+            Container.Bind<ILeaderboardHandler>().To<PlayFabLeaderboardHandler>().FromNew().AsSingle().NonLazy();
+            
             _mainEvents = new MainEventsHandler();
             _knifesPerRoundCounter = new KnifesPerRoundCounter();
             _multiplierHandler = new MultiplierHandler(1f, 1.5f, 0.1f);

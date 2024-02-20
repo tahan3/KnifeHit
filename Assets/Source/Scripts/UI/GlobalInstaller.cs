@@ -1,5 +1,7 @@
 using Source.Scripts.Data.LevelData;
 using Source.Scripts.Gameplay;
+using Source.Scripts.Leaderboard;
+using Source.Scripts.Profile;
 using Source.Scripts.Scene;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,8 +14,6 @@ namespace Source.Scripts.UI
         public override void InstallBindings()
         {
             Container.Bind<MissionsHandler>().FromNew().AsSingle().NonLazy();
-
-            SceneManager.LoadScene("MainMenu");
         }
     }
 }

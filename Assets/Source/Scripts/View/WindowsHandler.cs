@@ -23,7 +23,9 @@ namespace Source.Scripts.View
             {
                 if (windowsStorage.TryGetValue(windowType, out var value))
                 {
-                    var item = container.InstantiatePrefabForComponent<AWindow>(value, parent);
+                    AWindow item = Object.Instantiate(value, parent);
+                    container.Inject(item);
+                    //var item = container.InstantiatePrefabForComponent<AWindow>(value, parent);
                     item.Close();
                     
                     _windows.Add(windowType, item);
