@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 700560d4661c4ef88f9e1b552cd7c8ed, type: 3}
+  m_Name: MissionConfig 2
+  m_EditorClassIdentifier: 
+  stages:
+  - {fileID: 11400000, guid: a67f0859ebd4b4b2f97a1bdf874f0e5f, type: 2}
+  - {fileID: 11400000, guid: a936c5c1855ef4fcda6764d5e6ec8a7e, type: 2}
+  - {fileID: 11400000, guid: bdff1abf18ef744aaa2fd0348f81d039, type: 2}
+  - {fileID: 11400000, guid: 7781b29ff29e6434cb94668c439d0772, type: 2}
+  - {fileID: 11400000, guid: deec556045fb74e81bb14917c7511990, type: 2}
+  missionName: Kingdom Challenge
+  playersLimit: 6
+  time: 180
