@@ -29,4 +29,5 @@ MonoBehaviour:
   - {x: -0.539, y: 0, z: 0.75}
   - {x: 0.75, y: 0, z: -0.75}
   - {x: 0, y: 0, z: -1}
-  bonusPositions: []
+  bonusPositions:
+  - {x: 0.336, y: 0, z: -0.804}

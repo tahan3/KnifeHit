@@ -15,13 +15,26 @@ MonoBehaviour:
   mainKnifeAimPrefab: {fileID: 942327375330967205, guid: 8b31bd23a1824504aa1dfe650c72ff83, type: 3}
   knifePrefab: {fileID: 542345929285737691, guid: c1ed0ad4f7e06e04cabe9c9395ae9f99, type: 3}
   bonusPrefab: {fileID: 8358730840571906533, guid: f7220ba550d35ff47a3f4049e81485c2, type: 3}
-  knifesToWin: 12
+  knifesToWin: 1
   mainAimRotationSequences:
-  - angle: 2160
-    time: 10
-    ease: 19
+  - angle: 540
+    time: 3
+    ease: 1
   ejectorPositions:
-  - {x: 0, y: 0, z: -1}
-  - {x: 0.75, y: 0, z: -0.75}
-  bonusPositions:
-  - {x: 0.348, y: 0, z: -0.816}
+  - {x: 0.011, y: 0, z: 0.958}
+  - {x: 0.01, y: 0, z: -0.965}
+  - {x: 0.946, y: 0, z: -0.018}
+  - {x: -0.977, y: 0, z: -0.018}
+  - {x: -0.955, y: 0, z: 0.313}
+  - {x: -0.77, y: 0, z: 0.644}
+  - {x: -0.473, y: 0, z: 0.874}
+  - {x: 0.396, y: 0, z: 0.84}
+  - {x: 0.671, y: 0, z: 0.717}
+  - {x: 0.929, y: 0, z: 0.381}
+  - {x: 0.901, y: 0, z: -0.331}
+  - {x: -0.911, y: 0, z: -0.331}
+  - {x: -0.709, y: 0, z: -0.735}
+  - {x: 0.668, y: 0, z: -0.735}
+  - {x: 0.337, y: 0, z: -0.909}
+  - {x: -0.37, y: 0, z: -0.909}
+  bonusPositions: []

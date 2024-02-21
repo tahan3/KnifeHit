@@ -12,19 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7b0f762c2d4fcea0c02c9aad548e62, type: 3}
   m_Name: LevelConfig 2
   m_EditorClassIdentifier: 
-  mainKnifeAimPrefab: {fileID: 4215422416738777865, guid: 3ea1a67898d65684c91cdfe5bc849df2, type: 3}
+  mainKnifeAimPrefab: {fileID: 942327375330967205, guid: 8b31bd23a1824504aa1dfe650c72ff83, type: 3}
   knifePrefab: {fileID: 542345929285737691, guid: c1ed0ad4f7e06e04cabe9c9395ae9f99, type: 3}
   bonusPrefab: {fileID: 8358730840571906533, guid: f7220ba550d35ff47a3f4049e81485c2, type: 3}
-  knifesToWin: 8
+  knifesToWin: 1
   mainAimRotationSequences:
-  - angle: 410
-    time: 3
-    ease: 13
-  - angle: -410
-    time: 3
-    ease: 13
+  - angle: 0
+    time: 5
+    ease: 19
   ejectorPositions: []
   bonusPositions:
-  - {x: -0.007, y: 0, z: 0.852}
-  - {x: 0.869, y: 0, z: 0.006}
-  - {x: 0.557, y: 0, z: 0.648}
+  - {x: 0, y: 0, z: -0.9}

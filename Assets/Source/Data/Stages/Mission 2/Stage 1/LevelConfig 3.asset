@@ -19,9 +19,9 @@ MonoBehaviour:
   mainAimRotationSequences:
   - angle: 90
     time: 2
-    ease: 19
+    ease: 35
   - angle: -190
     time: 3
-    ease: 19
+    ease: 35
   ejectorPositions: []
   bonusPositions: []

@@ -27,7 +27,7 @@ MonoBehaviour:
     time: 5
     ease: 19
   ejectorPositions:
-  - {x: 0.75, y: 0, z: -0.75}
-  - {x: -0.75, y: 0, z: 0.75}
-  - {x: 0.75, y: 0, z: 0.75}
+  - {x: 0.666, y: 0, z: -0.684}
+  - {x: 0.666, y: 0, z: 0.62}
+  - {x: -0.613, y: 0, z: 0.62}
   bonusPositions: []

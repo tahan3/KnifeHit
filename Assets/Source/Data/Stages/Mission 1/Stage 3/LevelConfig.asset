@@ -19,7 +19,7 @@ MonoBehaviour:
   mainAimRotationSequences:
   - angle: 360
     time: 5
-    ease: 11
+    ease: 4
   ejectorPositions:
   - {x: 1, y: 0, z: 0}
   - {x: -1, y: 0, z: 0}
@@ -27,4 +27,7 @@ MonoBehaviour:
   - {x: -0.75, y: 0, z: 0.75}
   - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: -1}
-  bonusPositions: []
+  bonusPositions:
+  - {x: -0.748, y: 0, z: -0.38}
+  - {x: -0.448, y: 0, z: -0.722}
+  - {x: 0.566, y: 0, z: 0.628}
