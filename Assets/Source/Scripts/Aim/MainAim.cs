@@ -36,6 +36,7 @@ namespace Source.Scripts.Aim
             gameOverHandler.OnLevelEnded += Explosion;
 
             InstantiateEjectors(levelConfig);
+            InstantiateBonuses(levelConfig);
             StartRotation(levelConfig);
         }
         
@@ -45,6 +46,8 @@ namespace Source.Scripts.Aim
             knife.SetIdle();
 
             _particlesHandler.PlayParticle(ParticleType.KnifeHitAim, knife.transform.position);
+            
+            Debug.Log("Get knife");
             
             _mainEvents.OnKnifeHitAim?.Invoke();
         }
@@ -91,6 +94,16 @@ namespace Source.Scripts.Aim
                 var ejector = _container.InstantiatePrefab(ejectorPrefab, knifesParent);
                 ejector.transform.localPosition = levelConfig.ejectorPositions[i];
                 ejector.transform.LookAt(knifesParent, Vector3.up);
+            }
+        }
+
+        private void InstantiateBonuses(LevelConfig levelConfig)
+        {
+            for (int i = 0; i < levelConfig.bonusPositions.Count; i++)
+            {
+                var bonus = _container.InstantiatePrefab(levelConfig.bonusPrefab, knifesParent);
+                bonus.transform.localPosition = levelConfig.bonusPositions[i];
+                bonus.transform.LookAt(knifesParent, Vector3.up);
             }
         }
 

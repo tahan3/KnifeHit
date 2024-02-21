@@ -23,12 +23,14 @@ namespace Source.Scripts.Test
 {
     public class GamePlayBinder : MonoInstaller
     {
+        [SerializeField] private int pointsPerHitAim = 100;
+        [SerializeField] private int pointsPerHitBonus = 200;
+        [SerializeField] private float multiplierPerHitBonus = 0.2f;
+        
         private MainEventsHandler _mainEvents;
         private GameOverHandler _gameOverHandler;
 
         private KnifesPerRoundCounter _knifesPerRoundCounter;
-
-        private MultiplierHandler _multiplierHandler;
         
         [Inject] private MissionsHandler _missionsHandler;
         
@@ -38,7 +40,6 @@ namespace Source.Scripts.Test
             
             _mainEvents = new MainEventsHandler();
             _knifesPerRoundCounter = new KnifesPerRoundCounter();
-            _multiplierHandler = new MultiplierHandler(1f, 1.5f, 0.1f);
 
             _gameOverHandler = new GameOverHandler(_knifesPerRoundCounter, _missionsHandler);
             
@@ -47,14 +48,16 @@ namespace Source.Scripts.Test
             Container.Bind<StageConfig>().FromInstance(_missionsHandler.Mission.stages[_missionsHandler.Stage]).AsSingle();
             Container.Bind<KnifesPerRoundCounter>().FromInstance(_knifesPerRoundCounter).AsSingle();
             Container.Bind<GameOverHandler>().FromInstance(_gameOverHandler).AsSingle();
-            Container.Bind<MultiplierHandler>().FromInstance(_multiplierHandler).AsSingle();
 
             _mainEvents.OnKnifeHitAim += () =>
-                _missionsHandler.PointsCounter.CounterNumber.Value += (int)(100 * _multiplierHandler.Multiplier.Value);
-            _mainEvents.OnKnifeHitAim += _multiplierHandler.IncreaseMultiplier;
+                _missionsHandler.PointsCounter.CounterNumber.Value += (int)(pointsPerHitAim * _missionsHandler.Multiplier.Multiplier.Value);
+            _mainEvents.OnKnifeHitAim += _missionsHandler.Multiplier.IncreaseMultiplier;
             _mainEvents.OnKnifeHitAim += () => _knifesPerRoundCounter.CounterNumber.Value++;
 
-            _mainEvents.OnKnifeEjected += _multiplierHandler.SetDefaultMultiplier;
+            _mainEvents.OnKnifeEjected += _missionsHandler.Multiplier.SetDefaultMultiplier;
+
+            _mainEvents.OnKnifeHitBonus += () => _missionsHandler.PointsCounter.CounterNumber.Value += pointsPerHitBonus;
+            _mainEvents.OnKnifeHitBonus += () => _missionsHandler.Multiplier.IncreaseMultiplier(multiplierPerHitBonus);
         }
     }
 }

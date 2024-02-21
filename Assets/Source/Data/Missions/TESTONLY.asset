@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: TESTONLY
   m_EditorClassIdentifier: 
   stages:
-  - {fileID: 11400000, guid: 1dc7de8f5cab08446b6223a0c5b99678, type: 2}
+  - {fileID: 11400000, guid: 73e0601f2b2aec24a87fef87380635e2, type: 2}
   missionName: TEST ONLY
   playersLimit: 5
   time: 120
+  bgSprite: {fileID: 0}

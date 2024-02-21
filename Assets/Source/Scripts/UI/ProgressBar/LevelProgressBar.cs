@@ -32,9 +32,15 @@ namespace Source.Scripts.UI.ProgressBar
 
         public override void SetProgress(int progress)
         {
-            steps[progress].sprite = progress < steps.Count - 1
+            for (int i = 0; i < steps.Count - 1; i++)
+            {
+                steps[i].sprite = spritesStorage.GetSprite(progress >= i);
+            }
+
+            steps[^1].sprite = bossSpritesStorage.GetSprite(progress >= steps.Count - 1);
+            /*steps[progress].sprite = progress < steps.Count - 1
                 ? spritesStorage.GetSprite(true)
-                : bossSpritesStorage.GetSprite(true);
+                : bossSpritesStorage.GetSprite(true);*/
         }
     }
 }

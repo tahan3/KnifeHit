@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainKnifeAimPrefab: {fileID: 4215422416738777865, guid: e0d48ebfe6ac6574f941644d8e44ccd4, type: 3}
   knifePrefab: {fileID: 542345929285737691, guid: c1ed0ad4f7e06e04cabe9c9395ae9f99, type: 3}
+  bonusPrefab: {fileID: 8358730840571906533, guid: f7220ba550d35ff47a3f4049e81485c2, type: 3}
   knifesToWin: 8
   mainAimRotationSequences:
   - angle: 450
@@ -23,3 +24,4 @@ MonoBehaviour:
   - {x: 1, y: 0, z: 0}
   - {x: -1, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
+  bonusPositions: []

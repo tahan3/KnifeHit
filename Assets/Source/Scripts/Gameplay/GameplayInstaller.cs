@@ -46,6 +46,7 @@ namespace Source.Scripts.Gameplay
 
             _mainEventsHandler.OnKnifeHitAim += () => _spawner.Spawn();
             _mainEventsHandler.OnKnifeEjected += () => _spawner.Spawn();
+            _mainEventsHandler.OnKnifeEjected += Handheld.Vibrate;
 
             bgImage.sprite = _missionsHandler.Mission.bgSprite;
 

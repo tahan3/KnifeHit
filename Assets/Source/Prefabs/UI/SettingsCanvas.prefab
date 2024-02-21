@@ -240,8 +240,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2605979295666947215}
-        m_TargetAssemblyTypeName: Source.Scripts.View.Windows.Window, Assembly-CSharp
+      - m_Target: {fileID: 4957788609238643761}
+        m_TargetAssemblyTypeName: Source.Scripts.View.PauseWindow, Assembly-CSharp
         m_MethodName: Close
         m_Mode: 1
         m_Arguments:
@@ -311,9 +311,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 0
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -708,7 +708,7 @@ GameObject:
   - component: {fileID: 3015149245090322670}
   - component: {fileID: 9157027555550310614}
   - component: {fileID: 2412149956556305267}
-  - component: {fileID: 2605979295666947215}
+  - component: {fileID: 4957788609238643761}
   m_Layer: 5
   m_Name: SettingsCanvas
   m_TagString: Untagged
@@ -777,7 +777,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &2605979295666947215
+--- !u!114 &4957788609238643761
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -786,7 +786,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6740233667181442458}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18c41331f0054263be8b1f98b136d36a, type: 3}
+  m_Script: {fileID: 11500000, guid: 425d857804a9444b9edc0efa0eb1066b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 9157027555550310614}

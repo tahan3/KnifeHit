@@ -22,16 +22,26 @@ namespace Source.Scripts.Gameplay
         public void IncreaseMultiplier()
         {
             Multiplier.Value += _perIncrement;
+            MultiplierMaximumCheck();
+        }
 
+        public void IncreaseMultiplier(float value)
+        {
+            Multiplier.Value += value;
+            MultiplierMaximumCheck();
+        }
+        
+        public void SetDefaultMultiplier()
+        {
+            Multiplier.Value = _minMultiplier;
+        }
+
+        private void MultiplierMaximumCheck()
+        {
             if (Multiplier.Value > _maxMultiplier)
             {
                 Multiplier.Value = _maxMultiplier;
             }
-        }
-
-        public void SetDefaultMultiplier()
-        {
-            Multiplier.Value = _minMultiplier;
         }
     }
 }

@@ -11,12 +11,14 @@ namespace Source.Scripts.Gameplay
         private MissionConfig _currentMission;
         private ITimer _currentTimer;
         private ICounter _pointsCounter;
+        private MultiplierHandler _multiplierHandler;
 
         public int Level { get; private set; }
         public int Stage { get; private set; }
         public MissionConfig Mission => _currentMission;
         public ITimer Timer => _currentTimer;
         public ICounter PointsCounter => _pointsCounter;
+        public MultiplierHandler Multiplier => _multiplierHandler;
         
         public void LoadMission(MissionConfig mission)
         {
@@ -24,6 +26,7 @@ namespace Source.Scripts.Gameplay
             
             _currentTimer = new Timer.Timer(mission.time);
             _pointsCounter = new PositiveCounter();
+            _multiplierHandler = new MultiplierHandler(1f, 1.5f, 0.1f);
 
             Level = 0;
             Stage = 0;
@@ -50,6 +53,11 @@ namespace Source.Scripts.Gameplay
                 Level = 0;
                 Stage++;
             }
+        }
+
+        public void RestartWave()
+        {
+            Level = 0;
         }
     }
 }

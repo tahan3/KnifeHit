@@ -11,6 +11,7 @@ namespace Source.Scripts.Data.Screen
         Shop,
         TimeBonus,
         YourScore,
-        Leaderboard
+        Leaderboard,
+        ShopError
     }
 }
