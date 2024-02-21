@@ -34,6 +34,16 @@ namespace Source.Scripts.View.Leaderboard
 
         private void GetLeaderboard()
         {
+            if (_items.Count > 0)
+            {
+                for (var i = 0; i < _items.Count; i++)
+                {
+                    Object.Destroy(_items[i].gameObject);
+                }
+
+                _items.Clear();
+            }
+            
             var request = new GetLeaderboardRequest
             {
                 StatisticName = LeaderboardType.Points.ToString(),
@@ -52,13 +62,38 @@ namespace Source.Scripts.View.Leaderboard
         private void OnSuccessGetLeaderboard(GetLeaderboardResult obj)
         {
             var items = obj.Leaderboard;
-            
+
             for (var i = 0; i < items.Count; i++)
             {
-                InitLeaderboardItem(items[i]);
+                var item = Object.Instantiate(GetLeaderboardItemByIndex(i), _leaderboardWindow.itemsContainer);
+                item.playerName.text = string.IsNullOrEmpty(items[i].DisplayName) ? "Name" : items[i].DisplayName;
+                item.number.text = (i + 1).ToString();
+                item.points.text = items[i].StatValue.ToString();
+
+                _items.Add(item);
             }
+
+            /*for (var i = 0; i < items.Count; i++)
+            {
+                InitLeaderboardItem(items[i]);
+            }*/
         }
 
+        private LeaderboardItem GetLeaderboardItemByIndex(int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    return _leaderboardData.firstPlacePrefab;
+                case 1:
+                    return _leaderboardData.secondPlacePrefab;
+                case 2:
+                    return _leaderboardData.thirdPlacePrefab;
+                default:
+                    return _leaderboardData.anyPlacePrefab;
+            }
+        }
+        
         private void InitLeaderboardItem(PlayerLeaderboardEntry playerLeaderboard)
         {
             var request = new GetUserDataRequest

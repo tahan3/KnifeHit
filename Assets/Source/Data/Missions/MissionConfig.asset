@@ -21,3 +21,4 @@ MonoBehaviour:
   missionName: Jungle Challenge
   playersLimit: 6
   time: 240
+  bgSprite: {fileID: 21300000, guid: 990cfc8029f75a04abb0f2b04bb71280, type: 3}

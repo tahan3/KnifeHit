@@ -297,6 +297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwKnifeButton: {fileID: 2038647206}
   knifesParent: {fileID: 845615160}
+  bgImage: {fileID: 1153613400}
   initialSpawnPosition: {x: 0, y: 0, z: -3}
   initialStartPosition: {x: 0, y: 0, z: -5}
   knifeForce: 15

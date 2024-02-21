@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7b0f762c2d4fcea0c02c9aad548e62, type: 3}
   m_Name: LevelConfig 3
   m_EditorClassIdentifier: 
-  mainKnifeAimPrefab: {fileID: 8515221712166452529, guid: 08980747c5ab54e46bc0b039b08ba3b6, type: 3}
+  mainKnifeAimPrefab: {fileID: 1127486405766419427, guid: d427ce14390985c459d30af481d9eaca, type: 3}
   knifePrefab: {fileID: 542345929285737691, guid: c1ed0ad4f7e06e04cabe9c9395ae9f99, type: 3}
   knifesToWin: 9
   mainAimRotationSequences:

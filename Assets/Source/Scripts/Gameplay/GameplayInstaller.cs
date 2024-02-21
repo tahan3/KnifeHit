@@ -14,6 +14,9 @@ namespace Source.Scripts.Gameplay
     {
         [SerializeField] private Button throwKnifeButton;
         [SerializeField] private Transform knifesParent;
+
+        [Header("BG")] 
+        [SerializeField] private Image bgImage;
         
         [Header("Settings")]
         [SerializeField] private Vector3 initialSpawnPosition;
@@ -27,6 +30,7 @@ namespace Source.Scripts.Gameplay
         [Inject] private LevelConfig _levelConfig;
         [Inject] private GameOverHandler _gameOverHandler;
         [Inject] private MainEventsHandler _mainEventsHandler;
+        [Inject] private MissionsHandler _missionsHandler;
         
         public override void InstallBindings()
         {
@@ -42,6 +46,8 @@ namespace Source.Scripts.Gameplay
 
             _mainEventsHandler.OnKnifeHitAim += () => _spawner.Spawn();
             _mainEventsHandler.OnKnifeEjected += () => _spawner.Spawn();
+
+            bgImage.sprite = _missionsHandler.Mission.bgSprite;
 
             Container.InstantiatePrefab(_levelConfig.mainKnifeAimPrefab);
             

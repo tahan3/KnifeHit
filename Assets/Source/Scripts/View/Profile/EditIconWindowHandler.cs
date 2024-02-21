@@ -51,7 +51,11 @@ namespace Source.Scripts.View.Profile
 
         private void SelectIcon(ProfileIcon icon, int iconID)
         {
-            _selectedIcon.selectedMark.SetActive(false);
+            if (_selectedIcon)
+            {
+                _selectedIcon.selectedMark.SetActive(false);
+            }
+
             _selectedIcon = icon;
             _selectedIcon.selectedMark.SetActive(true);
 

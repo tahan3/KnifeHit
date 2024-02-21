@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StageConfig 2
   m_EditorClassIdentifier: 
   levels:
-  - {fileID: 11400000, guid: fc5e059d19d93924e8f13c9b40b7919a, type: 2}
-  - {fileID: 11400000, guid: daad910409434344386ce8ac9c9309bd, type: 2}
-  - {fileID: 11400000, guid: cc6e5c43828bd7b448af4afaeb5b8f55, type: 2}
-  - {fileID: 11400000, guid: 48a490b077e553441a4e645c230d7b10, type: 2}
+  - {fileID: 11400000, guid: 39142d043234a4306974be0ea76bd308, type: 2}
+  - {fileID: 11400000, guid: 3a580d6accafb48419037cc7f9644700, type: 2}
+  - {fileID: 11400000, guid: 6f1dcfd6787624677bddc27dfb568c57, type: 2}
+  - {fileID: 11400000, guid: b0e140286757248fc8ceca2c07d91744, type: 2}
