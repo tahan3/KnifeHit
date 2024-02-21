@@ -47,8 +47,6 @@ namespace Source.Scripts.Aim
 
             _particlesHandler.PlayParticle(ParticleType.KnifeHitAim, knife.transform.position);
             
-            Debug.Log("Get knife");
-            
             _mainEvents.OnKnifeHitAim?.Invoke();
         }
 
