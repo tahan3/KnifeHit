@@ -25,7 +25,7 @@ namespace Source.Scripts.Test
     {
         [SerializeField] private int pointsPerHitAim = 100;
         [SerializeField] private int pointsPerHitBonus = 200;
-        [SerializeField] private float multiplierPerHitBonus = 0.2f;
+        [SerializeField] private float multiplierPerHitBonus = 0.1f;
         
         private MainEventsHandler _mainEvents;
         private GameOverHandler _gameOverHandler;
@@ -50,13 +50,13 @@ namespace Source.Scripts.Test
             Container.Bind<GameOverHandler>().FromInstance(_gameOverHandler).AsSingle();
 
             _mainEvents.OnKnifeHitAim += () =>
-                _missionsHandler.PointsCounter.CounterNumber.Value += (int)(pointsPerHitAim * _missionsHandler.Multiplier.Multiplier.Value);
+                _missionsHandler.PointsCounter.Counter.Value += (int)(pointsPerHitAim * _missionsHandler.Multiplier.Multiplier.Value);
             _mainEvents.OnKnifeHitAim += _missionsHandler.Multiplier.IncreaseMultiplier;
-            _mainEvents.OnKnifeHitAim += () => _knifesPerRoundCounter.CounterNumber.Value++;
+            _mainEvents.OnKnifeHitAim += () => _knifesPerRoundCounter.Counter.Value++;
 
             _mainEvents.OnKnifeEjected += _missionsHandler.Multiplier.SetDefaultMultiplier;
 
-            _mainEvents.OnKnifeHitBonus += () => _missionsHandler.PointsCounter.CounterNumber.Value += pointsPerHitBonus;
+            _mainEvents.OnKnifeHitBonus += () => _missionsHandler.PointsCounter.Counter.Value += pointsPerHitBonus;
             _mainEvents.OnKnifeHitBonus += () => _missionsHandler.Multiplier.IncreaseMultiplier(multiplierPerHitBonus);
         }
     }

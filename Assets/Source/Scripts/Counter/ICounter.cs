@@ -4,6 +4,6 @@ namespace Source.Scripts.Counter
 {
     public interface ICounter
     {
-        public ReactiveVariable<int> CounterNumber { get; }
+        public ReactiveVariable<int> Counter { get; }
     }
 }

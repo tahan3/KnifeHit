@@ -33,10 +33,26 @@ namespace Source.Scripts.View.Missions
                 item.playerCountText.text = mainConfig.missions[i].playersLimit + " players";
 
                 int minutes = mainConfig.missions[i].time / 60;
-                item.timeLimitText.text = "Time Limit: " + minutes + " minutes";
-                
-                
-                item.playButton.onClick.AddListener(() => SetMission(i1));
+                int seconds = mainConfig.missions[i].time % 60;
+
+                if (seconds > 0)
+                {
+                    item.timeLimitText.text = "Time Limit: " + minutes + " minutes " + seconds + " seconds";
+                }
+                else
+                {
+                    item.timeLimitText.text = "Time Limit: " + minutes + " minutes";
+                }
+
+                if (i <= _missionsHandler.OpenedMissions)
+                {
+                    item.Open();
+                    item.playButton.onClick.AddListener(() => SetMission(i1));
+                }
+                else
+                {
+                    item.Close();
+                }
             }
         }
 

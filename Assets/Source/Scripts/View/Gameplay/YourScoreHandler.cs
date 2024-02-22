@@ -19,7 +19,7 @@ namespace Source.Scripts.View.Gameplay
 
         public void Init()
         {
-            int yourScore = _missionsHandler.PointsCounter.CounterNumber.Value;
+            int yourScore = _missionsHandler.PointsCounter.Counter.Value;
             int timeScore = _missionsHandler.Timer.Time.Value * 200;
             
             _yourScoreWindow.yourScore.text = yourScore.ToString();

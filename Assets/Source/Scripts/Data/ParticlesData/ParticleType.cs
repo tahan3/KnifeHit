@@ -5,6 +5,7 @@ namespace Source.Scripts.Data.ParticlesData
         KnifeEject,
         KnifeHitAim,
         MainAimExplosion,
-        BossAimExplosion
+        BossAimExplosion,
+        BonusAimExplosion
     }
 }

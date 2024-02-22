@@ -5,19 +5,19 @@ namespace Source.Scripts.Counter
 {
     public class PositiveCounter : ICounter
     {
-        public ReactiveVariable<int> CounterNumber { get; }
+        public ReactiveVariable<int> Counter { get; }
 
         public PositiveCounter()
         {
-            CounterNumber = new ReactiveVariable<int>();
-            CounterNumber.OnValueChanged += OnlyPositive;
+            Counter = new ReactiveVariable<int>();
+            Counter.OnValueChanged += OnlyPositive;
         }
 
         private void OnlyPositive(int value)
         {
             if (value < 0)
             {
-                CounterNumber.Value = 0;
+                Counter.Value = 0;
             }
         }
     }

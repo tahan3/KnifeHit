@@ -11,6 +11,7 @@ namespace Source.Scripts.Gameplay
         private MissionConfig _currentMission;
         private ITimer _currentTimer;
         private ICounter _pointsCounter;
+        private MissionsCounter _missionsCounter;
         private MultiplierHandler _multiplierHandler;
 
         public int Level { get; private set; }
@@ -19,6 +20,12 @@ namespace Source.Scripts.Gameplay
         public ITimer Timer => _currentTimer;
         public ICounter PointsCounter => _pointsCounter;
         public MultiplierHandler Multiplier => _multiplierHandler;
+        public int OpenedMissions => _missionsCounter.Counter.Value;
+
+        public MissionsHandler()
+        {
+            _missionsCounter = new MissionsCounter();
+        }
         
         public void LoadMission(MissionConfig mission)
         {
@@ -26,7 +33,7 @@ namespace Source.Scripts.Gameplay
             
             _currentTimer = new Timer.Timer(mission.time);
             _pointsCounter = new PositiveCounter();
-            _multiplierHandler = new MultiplierHandler(1f, 1.5f, 0.1f);
+            _multiplierHandler = new MultiplierHandler(1f, 5f, 0.1f);
 
             Level = 0;
             Stage = 0;
@@ -41,6 +48,8 @@ namespace Source.Scripts.Gameplay
         
         public void EndMission()
         {
+            _missionsCounter.Counter.Value++;
+            _missionsCounter.Save();
             _currentTimer.StopTimer();
         }
 
@@ -58,6 +67,7 @@ namespace Source.Scripts.Gameplay
         public void RestartWave()
         {
             Level = 0;
+            SceneLoader.LoadScene("MainGameplay");
         }
     }
 }

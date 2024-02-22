@@ -24,7 +24,7 @@ namespace Source.Scripts.Gameplay
                 .knifesToWin;
             _gameOverDelay = gameOverDelay;
 
-            counter.CounterNumber.OnValueChanged += LevelEndedCheck;
+            counter.Counter.OnValueChanged += LevelEndedCheck;
         }
 
         private void LevelEndedCheck(int currentPointsNumber)

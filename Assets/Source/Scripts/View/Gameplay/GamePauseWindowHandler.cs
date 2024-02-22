@@ -25,13 +25,12 @@ namespace Source.Scripts.View.Gameplay
 
         private void Restart()
         {
-            _missionsHandler.LoadMission(_missionsHandler.Mission);
+            _missionsHandler.RestartWave();
         }
         
         private void Exit()
         {
-            _missionsHandler.RestartWave();
-            SceneLoader.LoadScene("MainGameplay");
+            SceneLoader.LoadScene("MainMenu");
         }
     }
 }

@@ -5,5 +5,6 @@ namespace Source.Scripts.Prefs
         TotalBonuses,
         LevelNumber,
         StageNumber,
+        OpenedMissionsNumber,
     }
 }

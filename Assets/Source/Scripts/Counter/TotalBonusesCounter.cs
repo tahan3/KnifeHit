@@ -15,7 +15,7 @@ namespace Source.Scripts.Counter
         public int Load()
         {
             var value = PlayerPrefs.GetInt(PrefsNames.TotalBonuses.ToString(), 0);
-            CounterNumber.Value = value;
+            Counter.Value = value;
             
             return value;
         }

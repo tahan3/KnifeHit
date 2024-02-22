@@ -21,6 +21,8 @@ namespace Source.Scripts.Aim
         [SerializeField] private KnifeEjector ejectorPrefab;
         [SerializeField] private float forceValue;
         [SerializeField] private float forceTime;
+        [SerializeField] private float shakeTime = 0.1f;
+        [SerializeField] private float shakeForce = 0.05f;
 
         private MainEventsHandler _mainEvents;
         private ParticlesHandler _particlesHandler;
@@ -35,9 +37,13 @@ namespace Source.Scripts.Aim
             
             gameOverHandler.OnLevelEnded += Explosion;
 
-            InstantiateEjectors(levelConfig);
-            InstantiateBonuses(levelConfig);
-            StartRotation(levelConfig);
+            knifesParent.localScale = Vector3.zero;
+            knifesParent.DOScale(Vector3.one, 0.4f).onComplete += () =>
+            {
+                InstantiateEjectors(levelConfig);
+                InstantiateBonuses(levelConfig);
+                StartRotation(levelConfig);
+            };
         }
         
         public override void GetKnife(Knife knife)
@@ -48,6 +54,8 @@ namespace Source.Scripts.Aim
             _particlesHandler.PlayParticle(ParticleType.KnifeHitAim, knife.transform.position);
             
             _mainEvents.OnKnifeHitAim?.Invoke();
+
+            knifesParent.DOShakePosition(shakeTime, Vector3.forward * shakeForce);
         }
 
         public virtual void Explosion()

@@ -26,7 +26,7 @@ namespace Source.Scripts.View.Gameplay
             
             _gameplayWindow.challengeText.text = "Challenge " + (_missionsHandler.Stage + 1).ToString();
             
-            _knifesPerRoundCounter.CounterNumber.OnValueChanged += _gameplayWindow.knifesProgress.SetProgress;
+            _knifesPerRoundCounter.Counter.OnValueChanged += _gameplayWindow.knifesProgress.SetProgress;
 
             OnTimerTick(_missionsHandler.Timer.Time.Value);
             _missionsHandler.Timer.Time.OnValueChanged += OnTimerTick;
@@ -34,8 +34,8 @@ namespace Source.Scripts.View.Gameplay
             OnMultiplierChange(_missionsHandler.Multiplier.Multiplier.Value);
             _missionsHandler.Multiplier.Multiplier.OnValueChanged += OnMultiplierChange;
 
-            OnPointsChanged(_missionsHandler.PointsCounter.CounterNumber.Value);
-            _missionsHandler.PointsCounter.CounterNumber.OnValueChanged += OnPointsChanged;
+            OnPointsChanged(_missionsHandler.PointsCounter.Counter.Value);
+            _missionsHandler.PointsCounter.Counter.OnValueChanged += OnPointsChanged;
         }
 
         private void ShowSettings()
