@@ -12,6 +12,16 @@ namespace Source.Scripts.Counter
             Counter = new ReactiveVariable<int>();
             Counter.OnValueChanged += OnlyPositive;
         }
+        
+        public PositiveCounter(int value)
+        {
+            Counter = new ReactiveVariable<int>
+            {
+                Value = value
+            };
+            
+            Counter.OnValueChanged += OnlyPositive;
+        }
 
         private void OnlyPositive(int value)
         {

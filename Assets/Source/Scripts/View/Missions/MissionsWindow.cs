@@ -1,4 +1,5 @@
 using System;
+using Source.Scripts.Currency;
 using Source.Scripts.Data;
 using Source.Scripts.Gameplay;
 using Source.Scripts.UI;
@@ -16,6 +17,7 @@ namespace Source.Scripts.View.Missions
         [SerializeField] private Transform parent;
 
         [SerializeField] private MainConfig mainConfig;
+        [SerializeField] private KeyValueStorage<CurrencyType, Sprite> currencySprites;
 
         private MissionsHandler _missionsHandler;
         
@@ -52,6 +54,12 @@ namespace Source.Scripts.View.Missions
                 else
                 {
                     item.Close();
+                }
+
+                if (currencySprites.TryGetValue(mainConfig.missions[i].reward.currency, out var sprite))
+                {
+                    item.rewardIcon.sprite = sprite;
+                    item.rewardText.text = mainConfig.missions[i].reward.amount.ToString();
                 }
             }
         }

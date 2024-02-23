@@ -263,6 +263,7 @@ MonoBehaviour:
   prefab: {fileID: 7335276227875463740, guid: 94ad769369885d245a2a654b47111878, type: 3}
   parent: {fileID: 5350680344703200740}
   mainConfig: {fileID: 11400000, guid: 8f1723c3836d45247bcf933f55dea605, type: 2}
+  currencySprites: {fileID: 11400000, guid: 5e43b8fa2a19f74479c9cbb65708990b, type: 2}
 --- !u!1 &7229536142399447163
 GameObject:
   m_ObjectHideFlags: 0

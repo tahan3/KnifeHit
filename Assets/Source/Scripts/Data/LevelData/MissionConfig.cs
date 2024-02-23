@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using AYellowpaper.SerializedCollections;
+using Source.Scripts.Currency;
+using Source.Scripts.Data.LevelReward;
 using UnityEngine;
 
 namespace Source.Scripts.Data.LevelData
@@ -17,5 +20,8 @@ namespace Source.Scripts.Data.LevelData
 
         [Header("BG")] 
         public Sprite bgSprite;
+
+        [Header("Mission rewards")]
+        public RewardData reward;
     }
 }

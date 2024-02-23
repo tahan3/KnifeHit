@@ -1,8 +1,11 @@
 using Source.Scripts.Counter;
+using Source.Scripts.Currency;
 using Source.Scripts.Data.LevelData;
 using Source.Scripts.Gameplay.Timer;
+using Source.Scripts.Level;
 using Source.Scripts.Scene;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace Source.Scripts.Gameplay
 {
@@ -22,6 +25,11 @@ namespace Source.Scripts.Gameplay
         public MultiplierHandler Multiplier => _multiplierHandler;
         public int OpenedMissions => _missionsCounter.Counter.Value;
 
+        [Inject] private CurrencyHandler _currencyHandler;
+        [Inject] private ExpHandler _expHandler;
+
+        private const int ExpPerMission = 75;
+        
         public MissionsHandler()
         {
             _missionsCounter = new MissionsCounter();
@@ -49,11 +57,20 @@ namespace Source.Scripts.Gameplay
         
         public void EndMission()
         {
+            AddRewards();
+            _expHandler.GetExp(ExpPerMission);
             _missionsCounter.Counter.Value++;
             _missionsCounter.Save();
             _currentTimer.StopTimer();
         }
 
+        private void AddRewards()
+        {
+            _currencyHandler.Currencies[_currentMission.reward.currency].Counter.Value += _currentMission.reward.amount;
+
+            _currencyHandler.Save();
+        }
+        
         public void EndLevel()
         {
             Level++;

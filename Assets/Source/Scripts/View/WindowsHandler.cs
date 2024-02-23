@@ -11,10 +11,13 @@ namespace Source.Scripts.View
         private Dictionary<WindowType, AWindow> _windows;
 
         private AWindow _currentWindow;
+
+        private Stack<AWindow> _prevWindows;
         
         public WindowsHandler()
         {
             _windows = new Dictionary<WindowType, AWindow>();
+            _prevWindows = new Stack<AWindow>();
         }
         
         public void InitWindows(KeyValueStorage<WindowType, AWindow> windowsStorage, DiContainer container, Transform parent)
@@ -47,22 +50,49 @@ namespace Source.Scripts.View
         
         public void OpenWindow(WindowType type, bool force = false)
         {
+            if (_currentWindow == _windows[type]) return;
+            
             if (force)
             {
-                foreach (var window in _windows.Values)
-                {
-                    window.Close();
-                }
+                ForceClose();
+            }
+
+            if (_currentWindow)
+            {
+                _prevWindows.Push(_currentWindow);
             }
 
             _currentWindow = _windows[type];
             _currentWindow.Open();
         }
 
+        public void OpenPreviousWindow(bool force = false)
+        {
+            if (force)
+            {
+                ForceClose();
+            }
+
+            _currentWindow = _prevWindows.Pop();
+            
+            if (_currentWindow)
+            {
+                _currentWindow.Open();
+            }
+        }
+        
         public void CloseWindow(WindowType type)
         {
             _currentWindow = _windows[type];
             _currentWindow.Close();
+        }
+
+        private void ForceClose()
+        {
+            foreach (var window in _windows.Values)
+            {
+                window.Close();
+            }
         }
     }
 }

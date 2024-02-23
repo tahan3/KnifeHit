@@ -3,10 +3,11 @@ namespace Source.Scripts.Prefs
     public enum PrefsNames : byte
     {
         TotalBonuses,
-        LevelNumber,
-        StageNumber,
+        PlayersLevelInfo,
+        RewardLevelInfo,
         OpenedMissionsNumber,
         Sounds,
         Vibration,
+        Currency
     }
 }

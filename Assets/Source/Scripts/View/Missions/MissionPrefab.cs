@@ -12,6 +12,8 @@ namespace Source.Scripts.View.Missions
         public GameObject locker;
         public GameObject lockPlayButton;
         public Button playButton;
+        public Image rewardIcon;
+        public TextMeshProUGUI rewardText;
 
         public void Open()
         {

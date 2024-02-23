@@ -13,6 +13,7 @@ namespace Source.Scripts.Data.Screen
         YourScore,
         Leaderboard,
         ShopError,
-        TimeIsUp
+        TimeIsUp,
+        LevelReward
     }
 }

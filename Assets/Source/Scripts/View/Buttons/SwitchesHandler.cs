@@ -16,7 +16,7 @@ namespace Source.Scripts.View.Buttons
             }
         }
 
-        private void DisableAll()
+        public void DisableAll()
         {
             for (var i = 0; i < _switches.Count; i++)
             {
