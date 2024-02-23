@@ -28,6 +28,8 @@ namespace Source.Scripts.Aim
         private ParticlesHandler _particlesHandler;
         private DiContainer _container;
 
+        private List<Knife> _knifes = new List<Knife>();
+
         [Inject]
         public void Construct(MainEventsHandler mainEvents, GameOverHandler gameOverHandler, LevelConfig levelConfig, DiContainer container, ParticlesHandler particlesHandler)
         {
@@ -48,6 +50,8 @@ namespace Source.Scripts.Aim
         
         public override void GetKnife(Knife knife)
         {
+            _knifes.Add(knife);
+            
             knife.transform.SetParent(knifesParent);
             knife.SetIdle();
 
@@ -60,6 +64,11 @@ namespace Source.Scripts.Aim
 
         public virtual void Explosion()
         {
+            for (var i = 0; i < _knifes.Count; i++)
+            {
+                _knifes[i].SetActive(false);
+            }
+            
             for (int i = 0; i < knifesParent.childCount; i++)
             {
                 var child = knifesParent.GetChild(i);

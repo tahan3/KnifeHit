@@ -45,6 +45,7 @@ namespace Source.Scripts.View.Profile
                     }
                 }
 
+                _editIconWindow.applyButton.image.sprite = _profileStorage.applyButtonSprites.GetSprite(false);
                 _editIconWindow.applyButton.onClick.AddListener(OnApplyButtonClick);
             }
         }
@@ -56,12 +57,18 @@ namespace Source.Scripts.View.Profile
                 _selectedIcon.selectedMark.SetActive(false);
             }
 
+            var selectedIcon = _selectedIcon;
+            
             _selectedIcon = icon;
             _selectedIcon.selectedMark.SetActive(true);
 
+            if (selectedIcon == icon) return;
+            
             var data = _profileHandler.Profile;
             data.IconID = iconID;
             _profileHandler.Profile = data;
+
+            _editIconWindow.applyButton.image.sprite = _profileStorage.applyButtonSprites.GetSprite(true);
         }
 
         private void OnApplyButtonClick()
@@ -70,6 +77,7 @@ namespace Source.Scripts.View.Profile
             
             _editIconWindow.profileWindow.profileEditWindow.Close();
             _editIconWindow.profileWindow.mainWindow.Open();
+            _editIconWindow.applyButton.image.sprite = _profileStorage.applyButtonSprites.GetSprite(false);
         }
     }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5107269339016601305}
   - component: {fileID: 6767789003691403131}
   - component: {fileID: 1450753317472074495}
-  - component: {fileID: 996506330325539332}
+  - component: {fileID: 904723500343608884}
   m_Layer: 5
   m_Name: BossDefeatedCanvas
   m_TagString: Untagged
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &996506330325539332
+--- !u!114 &904723500343608884
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,10 +129,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1558110285795114914}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18c41331f0054263be8b1f98b136d36a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7514aa9b5204421c9dee83f5acf39a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 4034595819734938871}
+  soundType: 8
 --- !u!1 &5710052656725018169
 GameObject:
   m_ObjectHideFlags: 0

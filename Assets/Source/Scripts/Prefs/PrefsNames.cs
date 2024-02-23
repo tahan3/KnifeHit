@@ -6,5 +6,7 @@ namespace Source.Scripts.Prefs
         LevelNumber,
         StageNumber,
         OpenedMissionsNumber,
+        Sounds,
+        Vibration,
     }
 }

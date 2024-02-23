@@ -1,6 +1,9 @@
+using System;
 using Source.Scripts.Spawn;
 using Source.Scripts.Thrower;
+using Source.Scripts.UI;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Source.Scripts.Knifes
@@ -11,17 +14,18 @@ namespace Source.Scripts.Knifes
 
         private IThrower<Knife> _knifesThrower;
 
-        public KnifesHandler(ISpawner<Knife> knifesSpawner, IThrower<Knife> knifesThrower, Button button)
+        public KnifesHandler(ISpawner<Knife> knifesSpawner, IThrower<Knife> knifesThrower, ClickPanel clickPanel)
         {
             knifesSpawner.OnSpawned += GetNewKnife;
             _knifesThrower = knifesThrower;
-            button.onClick.AddListener(ThrowKnife);
+            clickPanel.OnClick += ThrowKnife;
         }
 
         private void ThrowKnife()
         {
             if (!_currentKnife) return;
-            
+
+            _currentKnife.SetActive(true);
             _knifesThrower.Throw(_currentKnife);
             _currentKnife = null;
         }

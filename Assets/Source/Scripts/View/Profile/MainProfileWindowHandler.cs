@@ -58,6 +58,7 @@ namespace Source.Scripts.View.Profile
                 _profileHandler.Profile = data;
 
                 _profileHandler.Save();
+                _mainProfileWindow.applyButton.image.sprite = _profileStorage.applyButtonSprites.GetSprite(false);
             }
         }
 

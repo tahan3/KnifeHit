@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Source.Scripts.Data.Screen;
 using Source.Scripts.Gameplay;
+using Source.Scripts.Sounds;
 using UnityEngine;
 using Zenject;
 
@@ -15,8 +16,10 @@ namespace Source.Scripts.View.Gameplay
 
         private MissionsHandler _missionsHandler;
         private WindowsHandler _windowsHandler;
+        private SoundsHandler _soundsHandler;
         
-        public TimeBonusHandler(TimeBonusWindow timeBonusWindow, int bonusPerSecond = 200, float delay = 2f)
+        
+        public TimeBonusHandler(TimeBonusWindow timeBonusWindow, int bonusPerSecond = 200, float delay = 1f)
         {
             _timeBonusWindow = timeBonusWindow;
             _bonusPerSecond = bonusPerSecond;
@@ -24,11 +27,13 @@ namespace Source.Scripts.View.Gameplay
         }
 
         [Inject]
-        public void Construct(MissionsHandler missionsHandler, GameOverHandler gameOverHandler, WindowsHandler windowsHandler)
+        public void Construct(MissionsHandler missionsHandler, GameOverHandler gameOverHandler,
+            WindowsHandler windowsHandler, SoundsHandler soundsHandler)
         {
             _missionsHandler = missionsHandler;
             _windowsHandler = windowsHandler;
-
+            _soundsHandler = soundsHandler;
+            
             gameOverHandler.OnMissionEnded += () => windowsHandler.OpenWindow(WindowType.TimeBonus, true);
         }
         
@@ -37,6 +42,8 @@ namespace Source.Scripts.View.Gameplay
             int time = _missionsHandler.Timer.Time.Value;
             int points = 0;
 
+            _soundsHandler.PlaySound(SoundType.PointsPerTime);
+            
             while (time >= 0)
             {
                 _timeBonusWindow.seconds.text = time + " sec";

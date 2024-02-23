@@ -1,5 +1,4 @@
 using Source.Scripts.View.Windows;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -11,6 +10,10 @@ namespace Source.Scripts.View.Profile
         [Header("Containers")] 
         public AWindow mainWindow;
         public AWindow profileEditWindow;
+
+        [Header("Content")] 
+        public Image depositDescription;
+        public Button depositButton;
         
         public override void Open()
         {
@@ -33,6 +36,10 @@ namespace Source.Scripts.View.Profile
         {
             container.Inject(mainWindow);
             container.Inject(profileEditWindow);
+
+            var handler = new ProfileWindowHandler(this);
+            container.Inject(handler);
+            handler.Init();
         }
     }
 }

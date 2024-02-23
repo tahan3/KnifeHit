@@ -28,6 +28,12 @@ namespace Source.Scripts.Knifes
             _container.Inject(_ejector);
         }
 
+        public void SetActive(bool mode)
+        {
+            collider.enabled = mode;
+            rigidbody.detectCollisions = mode;
+        }
+        
         public void SetFree()
         {
             state = KnifeState.Free;

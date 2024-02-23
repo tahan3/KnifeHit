@@ -25,6 +25,7 @@ namespace Source.Scripts.Gameplay
         public MissionsHandler()
         {
             _missionsCounter = new MissionsCounter();
+            _missionsCounter.Counter.Value = 10;
         }
         
         public void LoadMission(MissionConfig mission)

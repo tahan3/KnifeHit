@@ -19,6 +19,8 @@ namespace Source.Scripts.Aim.Bonuses
         
         public override void GetKnife(Knife knife)
         {
+            Handheld.Vibrate();
+            
             _particlesHandler.PlayParticle(ParticleType.BonusAimExplosion, transform.position);
             
             _mainEvents.OnKnifeHitBonus?.Invoke();

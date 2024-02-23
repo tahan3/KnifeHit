@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Source.Scripts.Data.Screen;
+using Source.Scripts.Sounds;
 using UnityEngine;
 using Zenject;
 
@@ -10,6 +11,7 @@ namespace Source.Scripts.View.Shop
         private ShopWindow _shopWindow;
 
         [Inject] private WindowsHandler _windowsHandler;
+        [Inject] private SoundsHandler _soundsHandler;
         
         public ShopWindowHandler(ShopWindow shopWindow)
         {
@@ -33,6 +35,7 @@ namespace Source.Scripts.View.Shop
         
         private void ShowDescription()
         {
+            _soundsHandler.PlaySound(SoundType.Error);
             _shopWindow.depositDescription.DOKill();
             _shopWindow.depositDescription.DOFade(1f, 1f).onComplete += SetInvisible;
         }
