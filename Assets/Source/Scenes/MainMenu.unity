@@ -276,6 +276,7 @@ MonoBehaviour:
   _leaderboardData: {fileID: 11400000, guid: 15247f2e73f920040b2b0cb560b6a899, type: 2}
   _levelRewardConfig: {fileID: 11400000, guid: 30a79cf640f40664684ab00f8d20d3ed, type: 2}
   _levelRewardWindowData: {fileID: 11400000, guid: 64953fba07e79e9499e21cad7626b79a, type: 2}
+  _dailyRewardWindowData: {fileID: 11400000, guid: 54507d22156272645b72fa1a4aad38e3, type: 2}
 --- !u!114 &256572803
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 765b4c397ed544daaa92bd8c720d25f7, type: 3}
+  m_Name: DailyRewardWindowData
+  m_EditorClassIdentifier: 
+  dailyRewardConfig: {fileID: 11400000, guid: 4a51a3c1edfdfb745a947e7b41a5c733, type: 2}
+  todaySprites: {fileID: 11400000, guid: 1ff1ff2954ff3f74fa01afc1fa531e5e, type: 2}
+  rewardSprites: {fileID: 11400000, guid: 08f382e8c76afd84e8ae792fec767736, type: 2}

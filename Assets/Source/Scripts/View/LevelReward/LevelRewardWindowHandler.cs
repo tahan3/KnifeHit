@@ -69,7 +69,8 @@ namespace Source.Scripts.View.LevelReward
                     item.rewardIcon.SetNativeSize();
                 }
 
-                item.rewardText.text = _levelRewardConfig.rewardPerLevel[i].amount.ToString();
+                item.rewardText.text = CurrencyConverter.Convert(_levelRewardConfig.rewardPerLevel[i].currency,
+                    _levelRewardConfig.rewardPerLevel[i].amount);
 
                 item.rewardTakenMark.SetActive(i <= _levelRewardHandler.CollectedRewards.level);
                 

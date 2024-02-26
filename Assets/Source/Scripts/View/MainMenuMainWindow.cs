@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using Source.Scripts.Currency;
+using Source.Scripts.DailyReward;
 using Source.Scripts.Data.Screen;
 using Source.Scripts.Level;
 using Source.Scripts.UI.ProgressBar;
@@ -34,14 +36,17 @@ namespace Source.Scripts.View
         public TextMeshProUGUI cash;
         
         private CurrencyHandler _currencyHandler;
+        private WindowsHandler _windowsHandler;
         
         [Inject]
         public void Construct(WindowsHandler windowsHandler, ExpHandler expHandler, CurrencyHandler currencyHandler)
         {
+            _windowsHandler = windowsHandler;
+            
             leaderboardButton.button.onClick.AddListener(()=>windowsHandler.OpenWindow(WindowType.Leaderboard, true));
             shopButton.button.onClick.AddListener(()=>windowsHandler.OpenWindow(WindowType.Shop, true));
             homeButton.button.onClick.AddListener(()=>windowsHandler.OpenWindow(WindowType.Missions, true));
-            dailyRewardButton.button.onClick.AddListener(()=>windowsHandler.OpenWindow(WindowType.DailyReward, true));
+            dailyRewardButton.button.onClick.AddListener(()=>windowsHandler.OpenWindow(WindowType.DailyGift, true));
             settingsButton.onClick.AddListener(() => windowsHandler.OpenWindow(WindowType.Settings));
             profileButton.button.onClick.AddListener(() => windowsHandler.OpenWindow(WindowType.Profile, true));
 
@@ -63,16 +68,24 @@ namespace Source.Scripts.View
         private void Start()
         {
             homeButton.button.onClick?.Invoke();
+
+            DateTime lastTime = DateTime.FromBinary(Convert.ToInt64(PlayerPrefs.GetString(RewardPrefs.Time.ToString(),
+                DateTime.MinValue.ToBinary().ToString())));
+
+            if (lastTime <= DateTime.Now.AddDays(-1))
+            {
+                _windowsHandler.OpenWindow(WindowType.DailyReward, true);
+            }
         }
 
         private void ChangeCash(int value)
         {
-            cash.text = value.ToString() + '$';
+            cash.text = CurrencyConverter.Convert(CurrencyType.Cash, value);
         }
 
         private void ChangeCoins(int value)
         {
-            coins.text = value.ToString();
+            coins.text = CurrencyConverter.Convert(CurrencyType.Coin, value);
         }
     }
 }
