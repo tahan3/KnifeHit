@@ -1,5 +1,84 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1549949579038503101
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3966750960751226620}
+  - component: {fileID: 3665539057087637747}
+  m_Layer: 0
+  m_Name: NotificationInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3966750960751226620
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549949579038503101}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 785820010314665286}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3665539057087637747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549949579038503101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e95bc3e3821d2042aa5df4526726c00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pathToIcon: icon_0
+  _channelID: knife_tour_channel
+  _notificationDatas:
+  - id: 0
+    delayToShow: 30
+    text: New challengers are waiting for you! Play now!
+    title: 
+  - id: 1
+    delayToShow: 45
+    text: You lose your position on top leaders! Where are you?
+    title: 
+  - id: 2
+    delayToShow: 65
+    text: You lose your position on top leaders! Where are you?
+    title: 
+  - id: 3
+    delayToShow: 75
+    text: You lose your position on top leaders! Where are you?
+    title: 
+  - id: 4
+    delayToShow: 85
+    text: You lose your position on top leaders! Where are you?
+    title: 
+  - id: 5
+    delayToShow: 95
+    text: You lose your position on top leaders! Where are you?
+    title: 
+  - id: 6
+    delayToShow: 105
+    text: You lose your position on top leaders! Where are you?
+    title: 
+  - id: 7
+    delayToShow: 115
+    text: You lose your position on top leaders! Where are you?
+    title: 
 --- !u!1 &3721393160878641070
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,6 +111,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6750500644723993662}
+  - {fileID: 3966750960751226620}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6329528315918083356
@@ -50,6 +130,7 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: 4233031948406511715}
   - {fileID: -8796961279063880381}
+  - {fileID: 3665539057087637747}
   _installerPrefabs: []
   _parentNewObjectsUnderContext: 1
   _editorReflectionBakingCoverageMode: 0
