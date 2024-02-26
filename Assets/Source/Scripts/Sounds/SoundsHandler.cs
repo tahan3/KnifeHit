@@ -2,11 +2,12 @@ using System.Collections.Generic;
 using Source.Scripts.Data;
 using Source.Scripts.Load;
 using Source.Scripts.Prefs;
+using Source.Scripts.Save;
 using UnityEngine;
 
 namespace Source.Scripts.Sounds
 {
-    public class SoundsHandler : ILoader<bool>
+    public class SoundsHandler : ILoader<bool>, ISaver
     {
         private Dictionary<SoundType, AudioSource> _sounds;
         
@@ -32,6 +33,11 @@ namespace Source.Scripts.Sounds
                 }
             }
         }
+
+        public void ChangeMuteStatus()
+        {
+            Mute = !Mute;
+        }
         
         public void PlaySound(SoundType type)
         {
@@ -44,6 +50,11 @@ namespace Source.Scripts.Sounds
         public bool Load()
         {
             return PlayerPrefs.GetInt(PrefsNames.Sounds.ToString(), 0) > 0;
+        }
+
+        public void Save()
+        {
+            PlayerPrefs.SetInt(PrefsNames.Sounds.ToString(), Mute ? 1 : 0);
         }
     }
 }

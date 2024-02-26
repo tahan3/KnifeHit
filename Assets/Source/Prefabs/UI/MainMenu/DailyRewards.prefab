@@ -723,6 +723,7 @@ MonoBehaviour:
   - {fileID: 7249669570434142160}
   _lastItem: {fileID: 4250988082427759615}
   closeButton: {fileID: 4386314581751267742}
+  description: {fileID: 3006493103186917623}
 --- !u!1 &3006493103186917623
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,7 +741,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5196329699776030411
 RectTransform:
   m_ObjectHideFlags: 0

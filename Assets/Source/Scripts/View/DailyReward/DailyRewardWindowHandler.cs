@@ -119,6 +119,7 @@ namespace Source.Scripts.View.DailyReward
             }
             
             _dailyRewardWindow.closeButton.gameObject.SetActive(true);
+            _dailyRewardWindow.description.SetActive(true);
             
             _dailyRewardLoader.Save();
         }
