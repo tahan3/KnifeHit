@@ -239,19 +239,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7594624248665293397}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4957788609238643761}
-        m_TargetAssemblyTypeName: Source.Scripts.View.PauseWindow, Assembly-CSharp
-        m_MethodName: Close
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1482046872711532995
 GameObject:
   m_ObjectHideFlags: 0
@@ -708,7 +696,7 @@ GameObject:
   - component: {fileID: 3015149245090322670}
   - component: {fileID: 9157027555550310614}
   - component: {fileID: 2412149956556305267}
-  - component: {fileID: 4957788609238643761}
+  - component: {fileID: 7356134985905486758}
   m_Layer: 5
   m_Name: SettingsCanvas
   m_TagString: Untagged
@@ -777,7 +765,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4957788609238643761
+--- !u!114 &7356134985905486758
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -786,10 +774,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6740233667181442458}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 425d857804a9444b9edc0efa0eb1066b, type: 3}
+  m_Script: {fileID: 11500000, guid: 354eec32720941fda648513d718fa254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 9157027555550310614}
+  soundSprites: {fileID: 11400000, guid: 21b0412e45fa0d6499bfbad4af02f902, type: 2}
+  vibroSprites: {fileID: 11400000, guid: d52026ca81d964b438076660af5d4c35, type: 2}
+  soundButton: {fileID: 6290296011048545174}
+  vibroButton: {fileID: 8510841601118270371}
+  closeButton: {fileID: 8872835824337879221}
 --- !u!1 &8347690319273515916
 GameObject:
   m_ObjectHideFlags: 0

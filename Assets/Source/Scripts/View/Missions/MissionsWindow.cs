@@ -59,7 +59,7 @@ namespace Source.Scripts.View.Missions
                 if (currencySprites.TryGetValue(mainConfig.missions[i].reward.currency, out var sprite))
                 {
                     item.rewardIcon.sprite = sprite;
-                    item.rewardText.text = mainConfig.missions[i].reward.amount.ToString();
+                    item.rewardText.text = CurrencyConverter.Convert(mainConfig.missions[i].reward.currency, mainConfig.missions[i].reward.amount);
                 }
             }
         }

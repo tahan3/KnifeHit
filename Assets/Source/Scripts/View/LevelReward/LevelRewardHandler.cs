@@ -27,6 +27,11 @@ namespace Source.Scripts.View.LevelReward
 
         public void ClaimRewards()
         {
+            if (CollectedRewards.level < 0)
+            {
+                CollectedRewards.level = 0;
+            }
+            
             if (CollectedRewards.level < _playersLevelInfo.level)
             {
                 for (int i = CollectedRewards.level + 1; i <= _playersLevelInfo.level; i++)

@@ -3,6 +3,7 @@ using Source.Scripts.Data.ParticlesData;
 using Source.Scripts.Events;
 using Source.Scripts.Knifes;
 using Source.Scripts.Particles;
+using Source.Scripts.UI.Vibration;
 using UnityEngine;
 using Zenject;
 
@@ -16,10 +17,11 @@ namespace Source.Scripts.Aim.Bonuses
         
         [Inject] private MainEventsHandler _mainEvents;
         [Inject] private ParticlesHandler _particlesHandler;
+        [Inject] private VibrationHandler _vibrationHandler;
         
         public override void GetKnife(Knife knife)
         {
-            Handheld.Vibrate();
+            _vibrationHandler.Vibrate();
             
             _particlesHandler.PlayParticle(ParticleType.BonusAimExplosion, transform.position);
             

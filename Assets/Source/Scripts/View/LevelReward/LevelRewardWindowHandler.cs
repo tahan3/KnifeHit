@@ -36,7 +36,7 @@ namespace Source.Scripts.View.LevelReward
             _levelRewardWindowData = levelRewardWindowData;
             _expHandler = expHandler;
 
-            _levelRewardHandler = new LevelRewardHandler(_levelRewardConfig, _expHandler.LevelInfo, currencyHandler);
+            _levelRewardHandler = new LevelRewardHandler(_levelRewardConfig, _expHandler.LevelInfo.Value, currencyHandler);
         }
 
         public void Init()
@@ -69,18 +69,20 @@ namespace Source.Scripts.View.LevelReward
                     item.rewardIcon.SetNativeSize();
                 }
 
-                item.rewardText.text = _levelRewardConfig.rewardPerLevel[i].amount.ToString();
+                item.rewardText.text = CurrencyConverter.Convert(_levelRewardConfig.rewardPerLevel[i].currency,
+                    _levelRewardConfig.rewardPerLevel[i].amount);
 
                 item.rewardTakenMark.SetActive(i <= _levelRewardHandler.CollectedRewards.level);
-                
-                item.canTakeMark.SetActive(i > _levelRewardHandler.CollectedRewards.level && i <= _expHandler.LevelInfo.level);
 
-                if (i == _expHandler.LevelInfo.level + 1)
+                item.canTakeMark.SetActive(i > _levelRewardHandler.CollectedRewards.level &&
+                                           i <= _expHandler.LevelInfo.Value.level);
+
+                if (i == _expHandler.LevelInfo.Value.level + 1)
                 {
-                    item.SetProgress(_expHandler.LevelInfo.exp);
+                    item.SetProgress(_expHandler.LevelInfo.Value.exp);
                     position = item.fillImage.rectTransform.anchoredPosition;
                 }
-                else if (i <= _expHandler.LevelInfo.level)
+                else if (i <= _expHandler.LevelInfo.Value.level)
                 {
                     item.SetProgress(100);
                 }
@@ -94,7 +96,7 @@ namespace Source.Scripts.View.LevelReward
 
             _levelRewardWindow.claimButton.image.sprite =
                 _levelRewardWindowData.claimButtonSprites.GetSprite(_levelRewardHandler.CollectedRewards.level <
-                                                                    _expHandler.LevelInfo.level);
+                                                                    _expHandler.LevelInfo.Value.level);
             _levelRewardWindow.claimButton.onClick.AddListener(ClaimButtonClick);
 
             _levelRewardWindow.itemsContainer.anchoredPosition = _levelRewardWindow.itemsContainer.TransformPoint(position);
@@ -102,12 +104,18 @@ namespace Source.Scripts.View.LevelReward
 
         private void ClaimButtonClick()
         {
-            if (_levelRewardHandler.CollectedRewards.level < _expHandler.LevelInfo.level)
+            if (_levelRewardHandler.CollectedRewards.level < _expHandler.LevelInfo.Value.level)
             {
                 int currentLevel = _levelRewardHandler.CollectedRewards.level;
+
+                if (currentLevel < 0)
+                {
+                    currentLevel = 0;
+                }
+                
                 _levelRewardHandler.ClaimRewards();
 
-                for (int i = currentLevel; i <= _expHandler.LevelInfo.level; i++)
+                for (int i = currentLevel; i <= _expHandler.LevelInfo.Value.level; i++)
                 {
                     _items[i].canTakeMark.SetActive(false);
                     _items[i].rewardTakenMark.SetActive(true);

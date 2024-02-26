@@ -5,7 +5,7 @@ namespace Source.Scripts.Data.Screen
         Settings,
         BossDefeated,
         Pause,
-        DailyReward,
+        DailyGift,
         Missions,
         Profile,
         Shop,
@@ -14,6 +14,7 @@ namespace Source.Scripts.Data.Screen
         Leaderboard,
         ShopError,
         TimeIsUp,
-        LevelReward
+        LevelReward,
+        DailyReward
     }
 }
