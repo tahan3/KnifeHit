@@ -23,5 +23,5 @@ MonoBehaviour:
   time: 180
   bgSprite: {fileID: 21300000, guid: d8f0aff1d92bda34fa1600510f7859c7, type: 3}
   reward:
-    currency: 0
-    amount: 12
+    currency: 1
+    amount: 120

@@ -24,4 +24,4 @@ MonoBehaviour:
   bgSprite: {fileID: 21300000, guid: 3b69bc9fd755165468738ca449ed9904, type: 3}
   reward:
     currency: 1
-    amount: 15
+    amount: 420

@@ -14,14 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rewardPerLevel:
   - currency: 0
-    amount: 5
+    amount: 10
   - currency: 1
-    amount: 11
+    amount: 10
   - currency: 0
-    amount: 22
+    amount: 26
   - currency: 1
-    amount: 15
+    amount: 35
   - currency: 0
-    amount: 21
+    amount: 42
   - currency: 1
-    amount: 4
+    amount: 60
+  - currency: 0
+    amount: 58
+  - currency: 1
+    amount: 85
+  - currency: 0
+    amount: 74
+  - currency: 1
+    amount: 110
+  - currency: 0
+    amount: 90
+  - currency: 1
+    amount: 135
+  - currency: 0
+    amount: 106
+  - currency: 1
+    amount: 160
+  - currency: 0
+    amount: 122
