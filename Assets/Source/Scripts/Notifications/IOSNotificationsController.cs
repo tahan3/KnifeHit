@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.Notifications.iOS;
 using UnityEngine;
 
@@ -23,7 +24,13 @@ namespace Notifications
             iOSNotificationCenter.RemoveScheduledNotification(id.ToString());
         }
 
-        public async override void RequestPermission()
+        public override void CancelNotifications()
+        {
+            iOSNotificationCenter.RemoveAllDeliveredNotifications();
+            iOSNotificationCenter.RemoveAllScheduledNotifications();
+        }
+
+        public async override Task RequestPermission()
         {
             var authorizationOption = AuthorizationOption.Alert | AuthorizationOption.Badge;
             using (var req = new AuthorizationRequest(authorizationOption, true))

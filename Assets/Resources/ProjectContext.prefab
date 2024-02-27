@@ -79,6 +79,11 @@ MonoBehaviour:
     delayToShow: 115
     text: You lose your position on top leaders! Where are you?
     title: 
+  _dailyRewardNotificationData:
+    id: 8
+    delayToShow: 0
+    text: Return to Knife Tour today!
+    title: A new daily reward wait you!
 --- !u!1 &3721393160878641070
 GameObject:
   m_ObjectHideFlags: 0
