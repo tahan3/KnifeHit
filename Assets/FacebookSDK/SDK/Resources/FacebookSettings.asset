@@ -16,9 +16,9 @@ MonoBehaviour:
   clientTokens:
   - 1111111111111111
   appIds:
-  - 1111111111111111
+  - 691780686211043
   appLabels:
-  - App Name
+  - Knife Tour
   cookie: 1
   logging: 1
   status: 1
