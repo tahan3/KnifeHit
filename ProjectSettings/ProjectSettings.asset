@@ -159,6 +159,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.DefaultCompany.KnifeHit
+    iPhone: com.DefaultCompany.Knife-Hit
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -855,7 +856,7 @@ PlayerSettings:
     WebGL: DOTWEEN
     Windows Store Apps: DOTWEEN
     XboxOne: DOTWEEN
-    iPhone: DOTWEEN
+    iPhone: DOTWEEN;UNITY_IOS
     tvOS: DOTWEEN
   additionalCompilerArguments: {}
   platformArchitecture: {}
