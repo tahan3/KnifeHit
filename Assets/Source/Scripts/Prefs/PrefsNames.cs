@@ -9,5 +9,7 @@ namespace Source.Scripts.Prefs
         Sounds,
         Vibration,
         Currency
+
+        , TutorStage
     }
 }
