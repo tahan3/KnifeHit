@@ -28,12 +28,11 @@ namespace Source.Scripts.Gameplay
         [Inject] private CurrencyHandler _currencyHandler;
         [Inject] private ExpHandler _expHandler;
 
-        private const int ExpPerMission = 75;
+        private const int ExpPerMission = 25;
 
         public MissionsHandler()
         {
             _missionsCounter = new MissionsCounter();
-            _missionsCounter.Counter.Value = 10;
         }
 
         public void LoadMission(MissionConfig mission, bool isTutor = false)
@@ -66,8 +65,7 @@ namespace Source.Scripts.Gameplay
         {
             AddRewards();
             _expHandler.GetExp(ExpPerMission);
-            _missionsCounter.Counter.Value++;
-            _missionsCounter.Save();
+            _missionsCounter.TrySaveProgress(Mission);
             _currentTimer.StopTimer();
         }
 
@@ -87,13 +85,17 @@ namespace Source.Scripts.Gameplay
                 Level = 0;
                 Stage++;
             }
+            
+            _currentTimer.StopTimer();
         }
 
         public void RestartWave()
         {
             Level = 0;
+            _currentTimer.StopTimer();
             //SceneLoader.LoadScene("MainGameplay_RomaTest");
-            SceneLoader.LoadScene("MainGameplay");
+            //SceneLoader.LoadScene("MainGameplay");
+            SceneLoader.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

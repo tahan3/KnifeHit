@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Source.Scripts.Counter;
+using Source.Scripts.Scene;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -52,7 +53,9 @@ namespace Source.Scripts.Gameplay
                 await UniTask.WaitForSeconds(_gameOverDelay);
             
                 //SceneManager.LoadSceneAsync("MainGameplay_RomaTest");
-                SceneManager.LoadSceneAsync("MainGameplay");
+                //SceneManager.LoadSceneAsync("MainGameplay");
+                //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+                SceneLoader.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
     }
