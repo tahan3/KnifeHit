@@ -22,15 +22,15 @@ public class NotificationInstaller : MonoInstaller
 #elif UNITY_IOS
         _notificationsController = new IOSNotificationsController(_pathToIcon, _channelID);
 #endif
-        for (int i = 0; i < _notificationDatas.Count; i++)
+        for (int i = 0; i < 2; i++)
         {
             var scheduleNotification = new ScheduledNotification(_notificationDatas[i]);
 
             _notificationsController.AddNotification(scheduleNotification);
         }
 
-        var dailyRewardNotification = new DailyRewardNotification(_dailyRewardNotificationData);
-        _notificationsController.AddNotification(dailyRewardNotification);
+        //var dailyRewardNotification = new DailyRewardNotification(_dailyRewardNotificationData);
+        //_notificationsController.AddNotification(dailyRewardNotification);
 
         await _notificationsController.RequestPermission();
         //_notificationsController.SendNotifications();
