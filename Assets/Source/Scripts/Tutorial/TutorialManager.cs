@@ -30,6 +30,7 @@ namespace Source.Scripts.Tutorial
             _tutorStage = PlayerPrefs.GetInt(PrefsNames.TutorStage.ToString(), 3);
 
             _gameOverHandler.OnLevelEnded += OnLevelEnd;
+            _gameOverHandler.OnTimerEnded += TimerEnded;
 
             _buttonClick.onClick.AddListener(OnClicked);
         }
@@ -117,7 +118,8 @@ namespace Source.Scripts.Tutorial
 
         private void Stage23()
         {
-            StartCoroutine(Delayed(() => ShowStage(23), 2.1f, false));
+            ShowStage(23);
+            //StartCoroutine(Delayed(() => , 2.1f));
         }
 
         private void Stage24()
@@ -195,11 +197,14 @@ namespace Source.Scripts.Tutorial
         {
             if (_missionsHandler.Level == 0)
                 Stage9();
+        }
 
+        private void TimerEnded()
+        {
             if (_missionsHandler.Level == 6)
                 Stage23();
         }
-
+        
         private IEnumerator Delayed(Action task, float delay, bool unscaledTime = true)
         {
             float timer = 0f;

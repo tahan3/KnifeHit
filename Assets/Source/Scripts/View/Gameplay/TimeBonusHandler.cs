@@ -1,3 +1,4 @@
+using System.Text;
 using Cysharp.Threading.Tasks;
 using Source.Scripts.Data.Screen;
 using Source.Scripts.Gameplay;
@@ -17,6 +18,7 @@ namespace Source.Scripts.View.Gameplay
         private MissionsHandler _missionsHandler;
         private WindowsHandler _windowsHandler;
         private SoundsHandler _soundsHandler;
+        private GameOverHandler _gameOverHandler;
         
         
         public TimeBonusHandler(TimeBonusWindow timeBonusWindow, int bonusPerSecond = 200, float delay = 1f)
@@ -33,6 +35,7 @@ namespace Source.Scripts.View.Gameplay
             _missionsHandler = missionsHandler;
             _windowsHandler = windowsHandler;
             _soundsHandler = soundsHandler;
+            _gameOverHandler = gameOverHandler;
             
             gameOverHandler.OnMissionEnded += () => windowsHandler.OpenWindow(WindowType.TimeBonus, true);
         }
@@ -54,8 +57,10 @@ namespace Source.Scripts.View.Gameplay
                 time--;
                 points += _bonusPerSecond;
             }
-
+            
             await UniTask.WaitForSeconds(0.5f);
+
+            _gameOverHandler.OnTimerEnded?.Invoke();
 
             _windowsHandler.OpenWindow(WindowType.YourScore, true);
         }
