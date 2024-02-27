@@ -108,18 +108,26 @@ namespace Source.Scripts.View.Leaderboard
         private void OnGetUserDataSuccess(GetUserDataResult result)
         {
             var key = PlayFabUserData.Profile.ToString();
+            GetUserDataRequest request = (GetUserDataRequest)result.Request;
+            string id = request.PlayFabId;
             
             if (result.Data != null && result.Data.TryGetValue(key, out var value))
             {
                 ProfileData profileData = JsonConvert.DeserializeObject<ProfileData>(value.Value);
-                profileData.IconID = Random.Range(0, 3);
                 
-                /*if (_leaderboardData.icons.TryGetValue(profileData.IconID, out var sprite))
+                if (_leaderboardData.icons.TryGetValue(profileData.IconID, out var sprite))
                 {
-                    item.icon.sprite = sprite;
-                    item.playerName.text = profileData.Nickname;
-                }*/
+                    _items[id].icon.sprite = sprite;
+                    _items[id].playerName.text = profileData.Nickname;
+                }
             }
+            /*else
+            {
+                if (_leaderboardData.icons.TryGetValue(Random.Range(0,4), out var sprite))
+                {
+                    _items[id].icon.sprite = sprite;
+                }
+            }*/
         }
 
         private void OnGetUserDataError(PlayFabError obj)

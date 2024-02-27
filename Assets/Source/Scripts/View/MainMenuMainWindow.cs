@@ -4,6 +4,7 @@ using Source.Scripts.Currency;
 using Source.Scripts.DailyReward;
 using Source.Scripts.Data.Screen;
 using Source.Scripts.Level;
+using Source.Scripts.Prefs;
 using Source.Scripts.UI.ProgressBar;
 using Source.Scripts.View.Buttons;
 using Source.Scripts.View.Windows;
@@ -30,6 +31,7 @@ namespace Source.Scripts.View
 
         [Header("ExpProgressBar")] 
         public ProgressBar<float> expProgress;
+        public TextMeshProUGUI levelText;
 
         [Header("Currency")] 
         public TextMeshProUGUI coins;
@@ -58,6 +60,7 @@ namespace Source.Scripts.View
             expProgressButton.onClick.AddListener(() => windowsHandler.OpenWindow(WindowType.LevelReward, true));
 
             expProgress.SetProgress(expHandler.LevelInfo.Value.exp / (float)expHandler.ExpToLevelUp);
+            levelText.text = (expHandler.LevelInfo.Value.level + 1).ToString();
             
             ChangeCoins(currencyHandler.Currencies[CurrencyType.Coin].Counter.Value);
             currencyHandler.Currencies[CurrencyType.Coin].Counter.OnValueChanged += ChangeCoins;
@@ -70,12 +73,16 @@ namespace Source.Scripts.View
         {
             homeButton.button.onClick?.Invoke();
 
-            DateTime lastTime = DateTime.FromBinary(Convert.ToInt64(PlayerPrefs.GetString(RewardPrefs.Time.ToString(),
-                DateTime.MinValue.ToBinary().ToString())));
-
-            if (lastTime <= DateTime.Now.AddDays(-1))
+            if (!PlayerPrefs.HasKey(PrefsNames.TutorStage.ToString()))
             {
-                _windowsHandler.OpenWindow(WindowType.DailyReward, true);
+                DateTime lastTime = DateTime.FromBinary(Convert.ToInt64(PlayerPrefs.GetString(
+                    RewardPrefs.Time.ToString(),
+                    DateTime.MinValue.ToBinary().ToString())));
+
+                if (lastTime <= DateTime.Now.AddDays(-1))
+                {
+                    _windowsHandler.OpenWindow(WindowType.DailyReward, true);
+                }
             }
         }
         

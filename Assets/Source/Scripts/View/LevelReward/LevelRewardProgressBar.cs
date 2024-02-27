@@ -13,6 +13,7 @@ namespace Source.Scripts.View.LevelReward
         public TextMeshProUGUI rewardText;
         public GameObject canTakeMark;
         public GameObject rewardTakenMark;
+        public TextMeshProUGUI levelNumberText;
         
         [Header("Progress")]
         public Image fillImage;

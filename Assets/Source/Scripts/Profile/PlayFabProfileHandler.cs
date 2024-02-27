@@ -20,7 +20,7 @@ namespace Source.Scripts.Profile
         
         public ProfileData Load()
         {
-            PlayFabSaveProfile();
+            //PlayFabSaveProfile();
 
             Profile = new ProfileLoader().Load();
             return Profile;

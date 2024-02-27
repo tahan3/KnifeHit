@@ -91,6 +91,8 @@ namespace Source.Scripts.View.LevelReward
                     item.SetProgress(0);
                 }
 
+                item.levelNumberText.text = (i + 1).ToString();
+                
                 _items.Add(item);
             }
 
