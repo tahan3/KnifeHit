@@ -42,7 +42,7 @@ namespace Source.Scripts.Level
 
         public void Save()
         {
-            PlayerPrefs.SetString(PrefsNames.PlayersLevelInfo.ToString(), JsonConvert.SerializeObject(LevelInfo));
+            PlayerPrefs.SetString(PrefsNames.PlayersLevelInfo.ToString(), JsonConvert.SerializeObject(LevelInfo.Value));
         }
     }
 }

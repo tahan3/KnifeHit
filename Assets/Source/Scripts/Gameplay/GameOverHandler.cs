@@ -11,6 +11,7 @@ namespace Source.Scripts.Gameplay
     {
         public event Action OnLevelEnded;
         public event Action OnMissionEnded;
+        public Action OnTimerEnded;
 
         private readonly int _pointsToWin;
         private readonly float _gameOverDelay;
