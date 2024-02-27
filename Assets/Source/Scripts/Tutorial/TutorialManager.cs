@@ -117,7 +117,7 @@ namespace Source.Scripts.Tutorial
 
         private void Stage23()
         {
-            StartCoroutine(Delayed(() => ShowStage(23), 2.1f));
+            StartCoroutine(Delayed(() => ShowStage(23), 2.1f, false));
         }
 
         private void Stage24()
@@ -210,6 +210,7 @@ namespace Source.Scripts.Tutorial
 
                 yield return null;
             }
+            
             task?.Invoke();
         }
     }

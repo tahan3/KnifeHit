@@ -121,13 +121,13 @@ namespace Source.Scripts.View.Leaderboard
                     _items[id].playerName.text = profileData.Nickname;
                 }
             }
-            /*else
+            else
             {
                 if (_leaderboardData.icons.TryGetValue(Random.Range(0,4), out var sprite))
                 {
                     _items[id].icon.sprite = sprite;
                 }
-            }*/
+            }
         }
 
         private void OnGetUserDataError(PlayFabError obj)

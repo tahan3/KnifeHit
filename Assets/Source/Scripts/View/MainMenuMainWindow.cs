@@ -5,6 +5,7 @@ using Source.Scripts.DailyReward;
 using Source.Scripts.Data.Screen;
 using Source.Scripts.Level;
 using Source.Scripts.Prefs;
+using Source.Scripts.Tutorial;
 using Source.Scripts.UI.ProgressBar;
 using Source.Scripts.View.Buttons;
 using Source.Scripts.View.Windows;
@@ -36,15 +37,20 @@ namespace Source.Scripts.View
         [Header("Currency")] 
         public TextMeshProUGUI coins;
         public TextMeshProUGUI cash;
+
+        [Header("Tutor")]
+        public LastTutorWindow tutorWindow;
         
         private WindowsHandler _windowsHandler;
         private ExpHandler _expHandler;
+        private CurrencyHandler _currencyHandler;
         
         [Inject]
         public void Construct(WindowsHandler windowsHandler, ExpHandler expHandler, CurrencyHandler currencyHandler)
         {
             _windowsHandler = windowsHandler;
             _expHandler = expHandler;
+            _currencyHandler = currencyHandler;
             
             leaderboardButton.button.onClick.AddListener(()=>windowsHandler.OpenWindow(WindowType.Leaderboard, true));
             shopButton.button.onClick.AddListener(()=>windowsHandler.OpenWindow(WindowType.Shop, true));
@@ -73,16 +79,40 @@ namespace Source.Scripts.View
         {
             homeButton.button.onClick?.Invoke();
 
-            if (!PlayerPrefs.HasKey(PrefsNames.TutorStage.ToString()))
+            if (PlayerPrefs.HasKey(PrefsNames.TutorStage.ToString()))
             {
-                DateTime lastTime = DateTime.FromBinary(Convert.ToInt64(PlayerPrefs.GetString(
-                    RewardPrefs.Time.ToString(),
-                    DateTime.MinValue.ToBinary().ToString())));
-
-                if (lastTime <= DateTime.Now.AddDays(-1))
+                int lastTutorStage = 24;
+                
+                if (PlayerPrefs.GetInt(PrefsNames.TutorStage.ToString()) == lastTutorStage)
                 {
-                    _windowsHandler.OpenWindow(WindowType.DailyReward, true);
+                    tutorWindow.gameObject.SetActive(true);
+                    tutorWindow.submitButton.onClick.AddListener(TutorClose);
+                    PlayerPrefs.SetInt(PrefsNames.TutorStage.ToString(), ++lastTutorStage);
                 }
+                else
+                {
+                    DailyRewardWindowOpen();
+                }
+            }
+        }
+
+        private void TutorClose()
+        {
+            tutorWindow.gameObject.SetActive(false);
+            DailyRewardWindowOpen();
+            _expHandler.GetExp(25);
+            _currencyHandler.Currencies[CurrencyType.Coin].Counter.Value += 200;
+        }
+        
+        private void DailyRewardWindowOpen()
+        {
+            DateTime lastTime = DateTime.FromBinary(Convert.ToInt64(PlayerPrefs.GetString(
+                RewardPrefs.Time.ToString(),
+                DateTime.MinValue.ToBinary().ToString())));
+
+            if (lastTime <= DateTime.Now.AddDays(-1))
+            {
+                _windowsHandler.OpenWindow(WindowType.DailyReward, true);
             }
         }
         

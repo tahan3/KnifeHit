@@ -48,36 +48,40 @@ MonoBehaviour:
   _channelID: knife_tour_channel
   _notificationDatas:
   - id: 0
-    delayToShow: 30
+    delayToShow: 86400
     text: New challengers are waiting for you! Play now!
     title: 
   - id: 1
-    delayToShow: 45
+    delayToShow: 172800
     text: You lose your position on top leaders! Where are you?
     title: 
   - id: 2
-    delayToShow: 65
+    delayToShow: 259200
     text: You lose your position on top leaders! Where are you?
     title: 
   - id: 3
-    delayToShow: 75
+    delayToShow: 345600
     text: You lose your position on top leaders! Where are you?
     title: 
   - id: 4
-    delayToShow: 85
+    delayToShow: 432000
     text: You lose your position on top leaders! Where are you?
     title: 
-  - id: 5
+  - id: 518400
     delayToShow: 95
     text: You lose your position on top leaders! Where are you?
     title: 
   - id: 6
-    delayToShow: 105
+    delayToShow: 604800
     text: You lose your position on top leaders! Where are you?
     title: 
   - id: 7
-    delayToShow: 115
+    delayToShow: 691200
     text: You lose your position on top leaders! Where are you?
+    title: 
+  - id: 8
+    delayToShow: 86400
+    text: A new daily reward wait you!
     title: 
 --- !u!1 &3721393160878641070
 GameObject:

@@ -49,7 +49,7 @@ namespace Source.Scripts.View.Gameplay
                 _timeBonusWindow.seconds.text = time + " sec";
                 _timeBonusWindow.points.text = points.ToString();
 
-                await UniTask.WaitForSeconds(_delay / _missionsHandler.Timer.Time.Value);
+                await UniTask.WaitForSeconds(_delay / _missionsHandler.Timer.Time.Value, true);
 
                 time--;
                 points += _bonusPerSecond;

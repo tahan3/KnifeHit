@@ -43,7 +43,8 @@ namespace Source.Scripts.Profile
                 Data = new Dictionary<string, string>
                 {
                     { PlayFabUserData.Profile.ToString(), Newtonsoft.Json.JsonConvert.SerializeObject(Profile) }
-                }
+                },
+                Permission = UserDataPermission.Public
             };
 
             var titleDisplayNameRequest = new UpdateUserTitleDisplayNameRequest()

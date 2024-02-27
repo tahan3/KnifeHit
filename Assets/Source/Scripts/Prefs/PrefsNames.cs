@@ -8,8 +8,7 @@ namespace Source.Scripts.Prefs
         OpenedMissionsNumber,
         Sounds,
         Vibration,
-        Currency
-
-        , TutorStage
+        Currency,
+        TutorStage
     }
 }
