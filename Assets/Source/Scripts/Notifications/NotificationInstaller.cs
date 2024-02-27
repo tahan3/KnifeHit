@@ -10,6 +10,7 @@ public class NotificationInstaller : MonoInstaller
     [SerializeField] private string _pathToIcon;
     [SerializeField] private string _channelID;
     [SerializeField] private List<NotificationData> _notificationDatas;
+    [SerializeField] private NotificationData _dailyRewardNotificationData;
 
     private NotificationController _notificationsController;
 
@@ -17,7 +18,6 @@ public class NotificationInstaller : MonoInstaller
     public async override void InstallBindings()
     {
 #if UNITY_ANDROID
-        Debug.Log("android");
         _notificationsController = new AndroidNotificationsController(_pathToIcon, _channelID);
 #elif UNITY_IOS
         _notificationsController = new IOSNotificationsController(_pathToIcon, _channelID);
@@ -29,8 +29,12 @@ public class NotificationInstaller : MonoInstaller
             _notificationsController.AddNotification(scheduleNotification);
         }
 
+        var dailyRewardNotification = new DailyRewardNotification(_dailyRewardNotificationData);
+        _notificationsController.AddNotification(dailyRewardNotification);
+
+
         await _notificationsController.RequestPermission();
-        _notificationsController.SendNotifications();
+        //_notificationsController.SendNotifications();
     }
 
     private void OnApplicationPause(bool isPause)

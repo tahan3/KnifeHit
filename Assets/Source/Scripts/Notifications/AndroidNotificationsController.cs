@@ -53,5 +53,10 @@ namespace Notifications
                 Permission.RequestUserPermission("android.permission.POST_NOTIFICATIONS");
             }
         }
+
+        public override void CancelNotifications()
+        {
+            AndroidNotificationCenter.CancelAllNotifications();
+        }
     }
 }

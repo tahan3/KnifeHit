@@ -27,13 +27,7 @@ public abstract class NotificationController : INotificationsController
     public abstract Task RequestPermission();
     public abstract int SendNotification(Notification notification);
 
-    public void CancelNotifications()
-    {
-        for (int i = 0; i < _notifications.Count; i++)
-        {
-            CancelNotification(_notifications[i].NotificationData.id);
-        }
-    }
+    public abstract void CancelNotifications();
 
     public void SendNotifications()
     {

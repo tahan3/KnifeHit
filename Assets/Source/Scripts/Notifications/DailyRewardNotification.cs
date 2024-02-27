@@ -6,6 +6,6 @@ public class DailyRewardNotification : Notification
 
     public override int GetDelayToShow()
     {
-        return 10;
+        return 86400;
     }
 }
