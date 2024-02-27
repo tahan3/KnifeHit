@@ -38,6 +38,8 @@ namespace Source.Scripts.Gameplay
         
         public override void InstallBindings()
         {
+            _missionsHandler.Timer.StartTimer();
+            
             _pool = new ComponentsPool<Knife>(Container, _levelConfig.knifePrefab, _levelConfig.knifesToWin,
                 knifesParent);
             _spawner = new KnifeSpawner(_pool, initialSpawnPosition, initialStartPosition);

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Source.Scripts.View.Windows
@@ -5,7 +6,7 @@ namespace Source.Scripts.View.Windows
     public class Window : AWindow
     {
         [SerializeField] private Canvas canvas;
-        
+
         public override void Open()
         {
             canvas.enabled = true;

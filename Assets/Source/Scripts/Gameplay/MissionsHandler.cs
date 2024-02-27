@@ -28,18 +28,17 @@ namespace Source.Scripts.Gameplay
         [Inject] private CurrencyHandler _currencyHandler;
         [Inject] private ExpHandler _expHandler;
 
-        private const int ExpPerMission = 75;
-        
+        private const int ExpPerMission = 25;
+
         public MissionsHandler()
         {
             _missionsCounter = new MissionsCounter();
-            _missionsCounter.Counter.Value = 10;
         }
-        
-        public void LoadMission(MissionConfig mission)
+
+        public void LoadMission(MissionConfig mission, bool isTutor = false)
         {
             _currentMission = mission;
-            
+
             _currentTimer = new Timer.Timer(mission.time);
             _pointsCounter = new PositiveCounter();
             _multiplierHandler = new MultiplierHandler(1f, 5f, 0.1f);
@@ -47,20 +46,26 @@ namespace Source.Scripts.Gameplay
             Level = 0;
             Stage = 0;
 
-            SceneLoader.LoadScene("MainGameplay", StartMission);
+            if (isTutor)
+            {
+                SceneLoader.LoadScene("MainGameplay_RomaTest", StartMission);
+            }
+            else
+            {
+                SceneLoader.LoadScene("MainGameplay", StartMission);
+            }
         }
 
         public void StartMission()
         {
             _currentTimer.StartTimer();
         }
-        
+
         public void EndMission()
         {
             AddRewards();
             _expHandler.GetExp(ExpPerMission);
-            _missionsCounter.Counter.Value++;
-            _missionsCounter.Save();
+            _missionsCounter.TrySaveProgress(Mission);
             _currentTimer.StopTimer();
         }
 
@@ -70,7 +75,7 @@ namespace Source.Scripts.Gameplay
 
             _currencyHandler.Save();
         }
-        
+
         public void EndLevel()
         {
             Level++;
@@ -80,12 +85,17 @@ namespace Source.Scripts.Gameplay
                 Level = 0;
                 Stage++;
             }
+            
+            _currentTimer.StopTimer();
         }
 
         public void RestartWave()
         {
             Level = 0;
-            SceneLoader.LoadScene("MainGameplay");
+            _currentTimer.StopTimer();
+            //SceneLoader.LoadScene("MainGameplay_RomaTest");
+            //SceneLoader.LoadScene("MainGameplay");
+            SceneLoader.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

@@ -1,4 +1,5 @@
 using Source.Scripts.Counter;
+using Source.Scripts.Data.LevelData;
 using Source.Scripts.Load;
 using Source.Scripts.Prefs;
 using Source.Scripts.Save;
@@ -21,6 +22,17 @@ namespace Source.Scripts.Gameplay
             return value;
         }
 
+        public bool TrySaveProgress(MissionConfig config)
+        {
+            if (PlayerPrefs.HasKey(config.missionName) || config.missionName.Equals("Tutorial")) return false;
+            
+            PlayerPrefs.SetInt(config.missionName, 1);
+            Counter.Value++;
+            Save();
+            return true;
+
+        }
+        
         public void Save()
         {
             PlayerPrefs.SetInt(PrefsNames.OpenedMissionsNumber.ToString(), Counter.Value);

@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Source/Scenes/MainGameplay.unity
     guid: bce8c91a953388642b713c93f6465871
+  - enabled: 1
+    path: Assets/Source/Scenes/MainGameplay_RomaTest.unity
+    guid: d088166a67eac62489e36316e55adf53
   m_configObjects: {}

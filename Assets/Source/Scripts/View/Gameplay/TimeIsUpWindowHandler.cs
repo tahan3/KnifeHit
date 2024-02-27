@@ -30,6 +30,11 @@ namespace Source.Scripts.View.Gameplay
             _window.mainMenuButton.onClick.AddListener(BackToMenu);
         }
 
+        public void OnDisable()
+        {
+            _missionsHandler.Timer.Time.OnValueChanged -= OnEndTime;
+        }
+        
         private void RestartMission()
         {
             _missionsHandler.LoadMission(_missionsHandler.Mission);
