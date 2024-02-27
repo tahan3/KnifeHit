@@ -6,6 +6,6 @@ namespace Source.Scripts.Level
     public class PlayersLevelInfo
     {
         public int exp;
-        public int level;
+        public int level = -1;
     }
 }

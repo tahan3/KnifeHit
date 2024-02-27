@@ -10,6 +10,7 @@ using Source.Scripts.Leaderboard;
 using UnityEngine;
 using Zenject;
 using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace Source.Scripts.View.Leaderboard
 {
@@ -17,7 +18,7 @@ namespace Source.Scripts.View.Leaderboard
     {
         private LeaderboardWindow _leaderboardWindow;
 
-        private List<LeaderboardItem> _items = new List<LeaderboardItem>();
+        private Dictionary<string, LeaderboardItem> _items = new Dictionary<string, LeaderboardItem>();
         private Action<GetUserDataResult> OnGetItemData;
 
         [Inject] private LeaderboardData _leaderboardData;
@@ -36,9 +37,9 @@ namespace Source.Scripts.View.Leaderboard
         {
             if (_items.Count > 0)
             {
-                for (var i = 0; i < _items.Count; i++)
+                foreach (var leaderboardItem in _items.Values)
                 {
-                    Object.Destroy(_items[i].gameObject);
+                    Object.Destroy(leaderboardItem.gameObject);
                 }
 
                 _items.Clear();
@@ -70,13 +71,13 @@ namespace Source.Scripts.View.Leaderboard
                 item.number.text = (i + 1).ToString();
                 item.points.text = items[i].StatValue.ToString();
 
-                _items.Add(item);
+                _items.Add(items[i].PlayFabId, item);
             }
 
-            /*for (var i = 0; i < items.Count; i++)
+            for (var i = 0; i < items.Count; i++)
             {
                 InitLeaderboardItem(items[i]);
-            }*/
+            }
         }
 
         private LeaderboardItem GetLeaderboardItemByIndex(int index)
@@ -111,13 +112,13 @@ namespace Source.Scripts.View.Leaderboard
             if (result.Data != null && result.Data.TryGetValue(key, out var value))
             {
                 ProfileData profileData = JsonConvert.DeserializeObject<ProfileData>(value.Value);
-                var item = Object.Instantiate(_leaderboardData.anyPlacePrefab, _leaderboardWindow.itemsContainer);
+                profileData.IconID = Random.Range(0, 3);
                 
-                if (_leaderboardData.icons.TryGetValue(profileData.IconID, out var sprite))
+                /*if (_leaderboardData.icons.TryGetValue(profileData.IconID, out var sprite))
                 {
                     item.icon.sprite = sprite;
                     item.playerName.text = profileData.Nickname;
-                }
+                }*/
             }
         }
 

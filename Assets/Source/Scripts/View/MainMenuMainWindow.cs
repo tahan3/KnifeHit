@@ -35,13 +35,14 @@ namespace Source.Scripts.View
         public TextMeshProUGUI coins;
         public TextMeshProUGUI cash;
         
-        private CurrencyHandler _currencyHandler;
         private WindowsHandler _windowsHandler;
+        private ExpHandler _expHandler;
         
         [Inject]
         public void Construct(WindowsHandler windowsHandler, ExpHandler expHandler, CurrencyHandler currencyHandler)
         {
             _windowsHandler = windowsHandler;
+            _expHandler = expHandler;
             
             leaderboardButton.button.onClick.AddListener(()=>windowsHandler.OpenWindow(WindowType.Leaderboard, true));
             shopButton.button.onClick.AddListener(()=>windowsHandler.OpenWindow(WindowType.Shop, true));
@@ -56,7 +57,7 @@ namespace Source.Scripts.View
             usdPlusButton.onClick.AddListener(shopButton.button.onClick.Invoke);
             expProgressButton.onClick.AddListener(() => windowsHandler.OpenWindow(WindowType.LevelReward, true));
 
-            expProgress.SetProgress(expHandler.LevelInfo.exp / (float)expHandler.ExpToLevelUp);
+            expProgress.SetProgress(expHandler.LevelInfo.Value.exp / (float)expHandler.ExpToLevelUp);
             
             ChangeCoins(currencyHandler.Currencies[CurrencyType.Coin].Counter.Value);
             currencyHandler.Currencies[CurrencyType.Coin].Counter.OnValueChanged += ChangeCoins;
@@ -77,7 +78,7 @@ namespace Source.Scripts.View
                 _windowsHandler.OpenWindow(WindowType.DailyReward, true);
             }
         }
-
+        
         private void ChangeCash(int value)
         {
             cash.text = CurrencyConverter.Convert(CurrencyType.Cash, value);
