@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using AYellowpaper.SerializedCollections;
 using Cysharp.Threading.Tasks;
 using Source.Scripts.Currency;
 using Source.Scripts.DailyReward;
@@ -9,6 +10,7 @@ using Source.Scripts.Prefs;
 using Source.Scripts.Sounds;
 using Source.Scripts.Tutorial;
 using Source.Scripts.UI.ProgressBar;
+using Source.Scripts.View.Animations;
 using Source.Scripts.View.Buttons;
 using Source.Scripts.View.Windows;
 using TMPro;
@@ -41,6 +43,9 @@ namespace Source.Scripts.View
         public TextMeshProUGUI coins;
         public TextMeshProUGUI cash;
 
+        [Header("Icons")] 
+        public SerializedDictionary<DailyRewardType, Image> icons;
+        
         [Header("Tutor")]
         public LastTutorWindow tutorWindow;
         
@@ -48,15 +53,17 @@ namespace Source.Scripts.View
         private ExpHandler _expHandler;
         private CurrencyHandler _currencyHandler;
         private SoundsHandler _soundsHandler;
+        private RewardAnimations _rewardAnimations;
 
         [Inject]
         public void Construct(WindowsHandler windowsHandler, ExpHandler expHandler, CurrencyHandler currencyHandler,
-            SoundsHandler soundsHandler)
+            SoundsHandler soundsHandler, RewardAnimations rewardAnimations)
         {
             _windowsHandler = windowsHandler;
             _expHandler = expHandler;
             _currencyHandler = currencyHandler;
             _soundsHandler = soundsHandler;
+            _rewardAnimations = rewardAnimations;
             
             leaderboardButton.button.onClick.AddListener(()=>windowsHandler.OpenWindow(WindowType.Leaderboard, true));
             shopButton.button.onClick.AddListener(()=>windowsHandler.OpenWindow(WindowType.Shop, true));
@@ -102,6 +109,11 @@ namespace Source.Scripts.View
                 {
                     DailyRewardWindowOpen();
                 }
+            }
+            
+            foreach (var keyValuePair in icons)
+            {
+                _rewardAnimations.SetCachedPosition(keyValuePair.Key, keyValuePair.Value.rectTransform);
             }
         }
 
