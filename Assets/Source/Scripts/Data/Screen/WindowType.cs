@@ -12,7 +12,7 @@ namespace Source.Scripts.Data.Screen
         TimeBonus,
         YourScore,
         Leaderboard,
-        ShopError,
+        Error,
         TimeIsUp,
         LevelReward,
         DailyReward

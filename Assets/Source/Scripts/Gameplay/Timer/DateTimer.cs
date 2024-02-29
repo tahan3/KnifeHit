@@ -1,20 +1,27 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Source.Extension;
+using Source.Scripts.DailyReward;
+using Source.Scripts.Load;
 using Source.Scripts.Reactive;
 using UnityEngine;
 
 namespace Source.Scripts.Gameplay.Timer
 {
-    public class Timer : ITimer<int>
+    public class DateTimer : ITimer<DateTime>, ILoader<DateTime>
     {
-        public ReactiveVariable<int> Time { get; private set; }
+        public ReactiveVariable<DateTime> Time { get; private set; }
+
+        private readonly string _timerKey;
 
         private CancellationTokenSource _cancellationToken;
         
-        public Timer(int seconds)
+        public DateTimer(string timerKey, DateTime delay)
         {
-            Time = new ReactiveVariable<int>(seconds);
+            _timerKey = timerKey;
+
+            Time = new ReactiveVariable<DateTime>(delay);
         }
         
         public async void StartTimer()
@@ -23,11 +30,11 @@ namespace Source.Scripts.Gameplay.Timer
             
             try
             {
-                while (Time.Value > 0)
+                while (Time.Value >= DateTime.Now)
                 {
                     await UniTask.WaitForSeconds(1, cancellationToken: _cancellationToken.Token);
 
-                    Time.Value--;
+                    Time.Value = Time.Value.AddSeconds(-1).Trim(TimeSpan.TicksPerSecond);
                 }
             }
             catch (OperationCanceledException e)
@@ -39,6 +46,12 @@ namespace Source.Scripts.Gameplay.Timer
         public void StopTimer()
         {
             _cancellationToken.Cancel();
+        }
+
+        public DateTime Load()
+        {
+            return DateTime.FromBinary(
+                Convert.ToInt64(PlayerPrefs.GetString(_timerKey, DateTime.MinValue.ToBinary().ToString())));
         }
     }
 }

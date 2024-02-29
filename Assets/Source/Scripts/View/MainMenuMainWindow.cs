@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Source.Scripts.Currency;
 using Source.Scripts.DailyReward;
 using Source.Scripts.Data.Screen;
 using Source.Scripts.Level;
 using Source.Scripts.Prefs;
+using Source.Scripts.Sounds;
 using Source.Scripts.Tutorial;
 using Source.Scripts.UI.ProgressBar;
 using Source.Scripts.View.Buttons;
@@ -33,6 +35,7 @@ namespace Source.Scripts.View
         [Header("ExpProgressBar")] 
         public ProgressBar<float> expProgress;
         public TextMeshProUGUI levelText;
+        public TextMeshProUGUI progressText;
 
         [Header("Currency")] 
         public TextMeshProUGUI coins;
@@ -44,13 +47,16 @@ namespace Source.Scripts.View
         private WindowsHandler _windowsHandler;
         private ExpHandler _expHandler;
         private CurrencyHandler _currencyHandler;
-        
+        private SoundsHandler _soundsHandler;
+
         [Inject]
-        public void Construct(WindowsHandler windowsHandler, ExpHandler expHandler, CurrencyHandler currencyHandler)
+        public void Construct(WindowsHandler windowsHandler, ExpHandler expHandler, CurrencyHandler currencyHandler,
+            SoundsHandler soundsHandler)
         {
             _windowsHandler = windowsHandler;
             _expHandler = expHandler;
             _currencyHandler = currencyHandler;
+            _soundsHandler = soundsHandler;
             
             leaderboardButton.button.onClick.AddListener(()=>windowsHandler.OpenWindow(WindowType.Leaderboard, true));
             shopButton.button.onClick.AddListener(()=>windowsHandler.OpenWindow(WindowType.Shop, true));
@@ -67,11 +73,12 @@ namespace Source.Scripts.View
 
             expProgress.SetProgress(expHandler.LevelInfo.Value.exp / (float)expHandler.ExpToLevelUp);
             levelText.text = (expHandler.LevelInfo.Value.level + 1).ToString();
+            progressText.text = expHandler.LevelInfo.Value.exp.ToString() + '%';
             
-            ChangeCoins(currencyHandler.Currencies[CurrencyType.Coin].Counter.Value);
+            cash.text = CurrencyConverter.Convert(CurrencyType.Cash, currencyHandler.Currencies[CurrencyType.Cash].Counter.Value);
+            coins.text = CurrencyConverter.Convert(CurrencyType.Coin, currencyHandler.Currencies[CurrencyType.Coin].Counter.Value);
+            
             currencyHandler.Currencies[CurrencyType.Coin].Counter.OnValueChanged += ChangeCoins;
-            
-            ChangeCash(currencyHandler.Currencies[CurrencyType.Cash].Counter.Value);
             currencyHandler.Currencies[CurrencyType.Cash].Counter.OnValueChanged += ChangeCash;
         }
 
@@ -79,6 +86,8 @@ namespace Source.Scripts.View
         {
             homeButton.button.onClick?.Invoke();
 
+            LevelEarnedWindowOpen();
+            
             if (PlayerPrefs.HasKey(PrefsNames.TutorStage.ToString()))
             {
                 int lastTutorStage = 24;
@@ -103,6 +112,18 @@ namespace Source.Scripts.View
             _expHandler.GetExp(25);
             _currencyHandler.Currencies[CurrencyType.Coin].Counter.Value += 200;
         }
+
+        private async void LevelEarnedWindowOpen()
+        {
+            await UniTask.WaitForSeconds(1f);
+            
+            if (_expHandler.LevelEarned)
+            {
+                _soundsHandler.PlaySound(SoundType.NewLevelEarned);
+                _windowsHandler.OpenWindow(WindowType.LevelReward, true);
+                _expHandler.LevelEarned = false;
+            }
+        }
         
         private void DailyRewardWindowOpen()
         {
@@ -118,12 +139,20 @@ namespace Source.Scripts.View
         
         private void ChangeCash(int value)
         {
+            _soundsHandler.PlaySound(SoundType.Currency);
             cash.text = CurrencyConverter.Convert(CurrencyType.Cash, value);
         }
 
         private void ChangeCoins(int value)
         {
+            _soundsHandler.PlaySound(SoundType.Currency);
             coins.text = CurrencyConverter.Convert(CurrencyType.Coin, value);
+        }
+
+        private void OnDisable()
+        {
+            _currencyHandler.Currencies[CurrencyType.Coin].Counter.OnValueChanged -= ChangeCoins;
+            _currencyHandler.Currencies[CurrencyType.Cash].Counter.OnValueChanged -= ChangeCash;
         }
     }
 }

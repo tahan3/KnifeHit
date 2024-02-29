@@ -12,7 +12,7 @@ namespace Source.Scripts.Gameplay
     public class MissionsHandler
     {
         private MissionConfig _currentMission;
-        private ITimer _currentTimer;
+        private ITimer<int> _currentTimer;
         private ICounter _pointsCounter;
         private MissionsCounter _missionsCounter;
         private MultiplierHandler _multiplierHandler;
@@ -20,7 +20,7 @@ namespace Source.Scripts.Gameplay
         public int Level { get; private set; }
         public int Stage { get; private set; }
         public MissionConfig Mission => _currentMission;
-        public ITimer Timer => _currentTimer;
+        public ITimer<int> Timer => _currentTimer;
         public ICounter PointsCounter => _pointsCounter;
         public MultiplierHandler Multiplier => _multiplierHandler;
         public int OpenedMissions => _missionsCounter.Counter.Value;
@@ -28,7 +28,7 @@ namespace Source.Scripts.Gameplay
         [Inject] private CurrencyHandler _currencyHandler;
         [Inject] private ExpHandler _expHandler;
 
-        private const int ExpPerMission = 25;
+        private const int ExpPerMission = 75;
 
         public MissionsHandler()
         {

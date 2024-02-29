@@ -16,5 +16,10 @@ namespace Source.Scripts.View.Windows
         {
             canvas.enabled = false;
         }
+
+        public override bool IsActive()
+        {
+            return canvas.enabled;
+        }
     }
 }

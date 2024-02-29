@@ -30,7 +30,7 @@ namespace Source.Scripts.View.Shop
 
         private void ShowError()
         {
-            _windowsHandler.OpenWindow(WindowType.ShopError);
+            _windowsHandler.OpenWindow(WindowType.Error);
         }
         
         private void ShowDescription()

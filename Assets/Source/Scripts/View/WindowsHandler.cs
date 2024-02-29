@@ -50,7 +50,7 @@ namespace Source.Scripts.View
         
         public void OpenWindow(WindowType type, bool force = false)
         {
-            if (_currentWindow == _windows[type]) return;
+            if (_currentWindow == _windows[type] && _currentWindow.IsActive()) return;
             
             if (force)
             {
@@ -65,7 +65,7 @@ namespace Source.Scripts.View
             _currentWindow = _windows[type];
             _currentWindow.Open();
         }
-
+        
         public void OpenPreviousWindow(bool force = false)
         {
             if (force)
@@ -85,6 +85,8 @@ namespace Source.Scripts.View
         {
             _currentWindow = _windows[type];
             _currentWindow.Close();
+
+            OpenPreviousWindow();
         }
 
         private void ForceClose()

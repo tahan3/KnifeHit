@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using Source.Scripts.Currency;
 using Source.Scripts.Data.LevelReward;
 using Source.Scripts.Data.Screen;
@@ -43,8 +44,6 @@ namespace Source.Scripts.View.LevelReward
         {
             _levelRewardWindow.closeButton.onClick.AddListener(
                 () => _windowsHandler.OpenPreviousWindow(true));
-
-            var position = _levelRewardWindow.itemsContainer.anchoredPosition;
             
             for (var i = 0; i < _levelRewardConfig.rewardPerLevel.Count; i++)
             {
@@ -80,7 +79,6 @@ namespace Source.Scripts.View.LevelReward
                 if (i == _expHandler.LevelInfo.Value.level + 1)
                 {
                     item.SetProgress(_expHandler.LevelInfo.Value.exp);
-                    position = item.fillImage.rectTransform.anchoredPosition;
                 }
                 else if (i <= _expHandler.LevelInfo.Value.level)
                 {
@@ -100,10 +98,31 @@ namespace Source.Scripts.View.LevelReward
                 _levelRewardWindowData.claimButtonSprites.GetSprite(_levelRewardHandler.CollectedRewards.level <
                                                                     _expHandler.LevelInfo.Value.level);
             _levelRewardWindow.claimButton.onClick.AddListener(ClaimButtonClick);
-
-            _levelRewardWindow.itemsContainer.anchoredPosition = _levelRewardWindow.itemsContainer.TransformPoint(position);
         }
 
+        public void Rescale()
+        {
+            float perItemHeight = _levelRewardWindow.itemsContainer.sizeDelta.y / (_items.Count - 1);
+
+            _levelRewardWindow.itemsContainer.DOKill();
+
+            _levelRewardWindow.itemsContainer.anchoredPosition = new Vector2(
+                _levelRewardWindow.itemsContainer.anchoredPosition.x,
+                _levelRewardWindow.itemsContainer.sizeDelta.y);
+
+            _levelRewardWindow.itemsContainer.DOAnchorPos(new Vector2(
+                _levelRewardWindow.itemsContainer.anchoredPosition.x,
+                _levelRewardWindow.itemsContainer.sizeDelta.y -
+                (perItemHeight * (_expHandler.LevelInfo.Value.level))), 0.5f).SetEase(Ease.InCubic);
+
+            /*_levelRewardWindow.itemsContainer.anchoredPosition = new Vector2(
+                _levelRewardWindow.itemsContainer.anchoredPosition.x,
+                _levelRewardWindow.itemsContainer.sizeDelta.y -
+                (perItemHeight * (_expHandler.LevelInfo.Value.level)));*/
+
+            //_levelRewardWindow.itemsContainer.anchoredPosition = ;
+        }
+        
         private void ClaimButtonClick()
         {
             if (_levelRewardHandler.CollectedRewards.level < _expHandler.LevelInfo.Value.level)

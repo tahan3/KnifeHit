@@ -11,5 +11,6 @@ namespace Source.Scripts.Sounds
         PointsPerTime,
         Currency,
         BossDefeated,
+        NewLevelEarned
     }
 }

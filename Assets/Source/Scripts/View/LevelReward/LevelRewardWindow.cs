@@ -11,12 +11,21 @@ namespace Source.Scripts.View.LevelReward
         public Button claimButton;
         public Button closeButton;
 
+        private LevelRewardWindowHandler _handler;
+        
         [Inject]
         public void Construct(DiContainer container)
         {
-            var handler = new LevelRewardWindowHandler(this);
-            container.Inject(handler);
-            handler.Init();
+            _handler = new LevelRewardWindowHandler(this);
+            container.Inject(_handler);
+            _handler.Init();
+        }
+
+        public override void Open()
+        {
+            _handler.Rescale();
+            
+            base.Open();
         }
     }
 }

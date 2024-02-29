@@ -12,6 +12,8 @@ namespace Source.Scripts.Level
         public ReactiveVariable<PlayersLevelInfo> LevelInfo { get; private set; }
 
         public readonly int ExpToLevelUp = 100;
+
+        public bool LevelEarned;
         
         public ExpHandler()
         {
@@ -22,11 +24,13 @@ namespace Source.Scripts.Level
         public void GetExp(int exp)
         {
             LevelInfo.Value.exp += exp;
+            LevelEarned = false;
 
             if (LevelInfo.Value.exp >= ExpToLevelUp)
             {
                 LevelInfo.Value.exp %= ExpToLevelUp;
                 LevelInfo.Value.level++;
+                LevelEarned = true;
             }
 
             Save();

@@ -696,6 +696,7 @@ MonoBehaviour:
   expProgressButton: {fileID: 5625684602157186966}
   expProgress: {fileID: 2460963876913667465}
   levelText: {fileID: 1983801021122089336}
+  progressText: {fileID: 988392531066256677}
   coins: {fileID: 189707490426751957}
   cash: {fileID: 853424372657667904}
   tutorWindow: {fileID: 4001872676919537355}
@@ -808,6 +809,22 @@ PrefabInstance:
     - target: {fileID: 3814906081330857338, guid: e680109d22d46e24cbb6c89b7e716c31, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5257571398282248121, guid: e680109d22d46e24cbb6c89b7e716c31, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -21.300049
+      objectReference: {fileID: 0}
+    - target: {fileID: 5257571398282248121, guid: e680109d22d46e24cbb6c89b7e716c31, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -59
+      objectReference: {fileID: 0}
+    - target: {fileID: 5338039300728567240, guid: e680109d22d46e24cbb6c89b7e716c31, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -57
+      objectReference: {fileID: 0}
+    - target: {fileID: 5338039300728567240, guid: e680109d22d46e24cbb6c89b7e716c31, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -59
       objectReference: {fileID: 0}
     - target: {fileID: 6179947604980448022, guid: e680109d22d46e24cbb6c89b7e716c31, type: 3}
       propertyPath: m_AnchorMax.y
@@ -924,6 +941,17 @@ MonoBehaviour:
 --- !u!114 &853424372657667904 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6558537847127878425, guid: e680109d22d46e24cbb6c89b7e716c31, type: 3}
+  m_PrefabInstance: {fileID: 5824108271747241049}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &988392531066256677 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6729532711380380028, guid: e680109d22d46e24cbb6c89b7e716c31, type: 3}
   m_PrefabInstance: {fileID: 5824108271747241049}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
