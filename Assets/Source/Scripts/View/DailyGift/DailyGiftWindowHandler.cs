@@ -50,12 +50,10 @@ namespace Source.Scripts.View.DailyGift
             
             int showCoins = 10;
             int reward = 20;
-            
-            _rewardAnimations.Animate(DailyRewardType.Coin,
-                _giftWindow.freeDailyGift.button.image.rectTransform.position,
-                () => _currencyHandler.Currencies[CurrencyType.Coin].Counter.Value++, 
-                () => _currencyHandler.Currencies[CurrencyType.Coin].Counter.Value+=reward-showCoins,
-                showCoins);
+
+            _currencyHandler.AddCurrency(CurrencyType.Coin,
+                _giftWindow.freeDailyGift.button.image.rectTransform.position, showCoins,
+                reward);
         }
         
         private void UpdateDate(DateTime time)

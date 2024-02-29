@@ -2,6 +2,7 @@ using System;
 using Source.Scripts.Currency;
 using Source.Scripts.DailyReward;
 using Source.Scripts.Level;
+using UnityEngine;
 using Zenject;
 
 namespace Source.Scripts.View.DailyReward
@@ -104,15 +105,16 @@ namespace Source.Scripts.View.DailyReward
                 _dailyRewardWindow._items[_dailyRewardLoader.Day].SetActive(false);
                 _dailyRewardWindow._items[_dailyRewardLoader.Day].mainItem.image.sprite =
                     _dailyRewardWindowData.todaySprites.GetSprite(false);
-                
-                GetReward(_dailyRewardWindowData.dailyRewardConfig.dailyRewards[_dailyRewardLoader.Day]);
+
+                GetReward(_dailyRewardWindowData.dailyRewardConfig.dailyRewards[_dailyRewardLoader.Day],
+                    _dailyRewardWindow._items[_dailyRewardLoader.Day].rewardIcon.rectTransform.position);
                 _dailyRewardWindow._items[_dailyRewardLoader.Day].mainItem.onClick.RemoveAllListeners();
             }
             else
             {
                 for (var i = 0; i < _dailyRewardWindowData.dailyRewardConfig.lastDayRewards.Count; i++)
                 {
-                    GetReward(_dailyRewardWindowData.dailyRewardConfig.lastDayRewards[i]);
+                    GetReward(_dailyRewardWindowData.dailyRewardConfig.lastDayRewards[i], _dailyRewardWindow._lastItem.icons[i].rectTransform.position);
                 }
 
                 _dailyRewardWindow._lastItem.mainItem.onClick.RemoveAllListeners();
@@ -124,17 +126,15 @@ namespace Source.Scripts.View.DailyReward
             _dailyRewardLoader.Save();
         }
 
-        private void GetReward(DailyRewardData data)
+        private void GetReward(DailyRewardData data, Vector2 position)
         {
             switch (data.rewardType)
             {
                 case DailyRewardType.Coin:
-                    _currencyHandler.Currencies[CurrencyType.Coin].Counter.Value += data.amount;
-                    _currencyHandler.Save();
+                    _currencyHandler.AddCurrency(CurrencyType.Coin, position, data.amount, data.amount);
                     break;
                 case DailyRewardType.Cash:
-                    _currencyHandler.Currencies[CurrencyType.Cash].Counter.Value += data.amount;
-                    _currencyHandler.Save();
+                    _currencyHandler.AddCurrency(CurrencyType.Cash, position, data.amount, data.amount);
                     break;
                 case DailyRewardType.Exp:
                     _expHandler.GetExp(data.amount);

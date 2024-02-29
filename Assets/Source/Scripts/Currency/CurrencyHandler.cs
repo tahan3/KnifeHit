@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Source.Scripts.Counter;
+using Source.Scripts.DailyReward;
 using Source.Scripts.Load;
 using Source.Scripts.Prefs;
 using Source.Scripts.Save;
+using Source.Scripts.View.Animations;
 using UnityEngine;
+using Zenject;
 
 namespace Source.Scripts.Currency
 {
@@ -12,6 +15,8 @@ namespace Source.Scripts.Currency
     {
         public Dictionary<CurrencyType, ICounter> Currencies { get; private set; }
 
+        [Inject] private RewardAnimations _rewardAnimations;
+        
         public CurrencyHandler()
         {
             Currencies = Load();
@@ -38,6 +43,23 @@ namespace Source.Scripts.Currency
             return currency;
         }
 
+        public void AddCurrency(CurrencyType type, Vector2 position, int countToShow, int totalCurrencyToAdd)
+        {
+            int showCoins = countToShow;
+            int reward = totalCurrencyToAdd;
+            DailyRewardType rewardType = type == CurrencyType.Coin ? DailyRewardType.Coin : DailyRewardType.Cash;
+            
+            _rewardAnimations.Animate(rewardType,
+                position,
+                () => Currencies[type].Counter.Value++, 
+                () =>
+                {
+                    Currencies[type].Counter.Value += reward - showCoins;
+                    Save();
+                },
+                showCoins);
+        }
+        
         public void Save()
         {
             var dataToSave = new Dictionary<CurrencyType, int>();

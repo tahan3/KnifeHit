@@ -55,13 +55,14 @@ namespace Source.Scripts.View.Animations
             Action perItemDeliveredAction = null,
             Action onEndAnimation = null,
             int count = 7,
-            float moveDuration = 0.25f, 
-            float perItemDelay = 0.25f)
+            float moveDuration = 0.2f, 
+            float perItemDelay = 2f)
         {
             if (cachedPositions.TryGetValue(type, out var rectTransform))
             {
                 var pointToTravel = rectTransform.position;
                 float range = 100f;
+                float delay = perItemDelay / count;
                 
                 for (int i = 0; i < count; i++)
                 {
@@ -70,10 +71,10 @@ namespace Source.Scripts.View.Animations
                     item.rectTransform.localScale = Vector3.zero;
                     item.gameObject.SetActive(true);
 
-                    await item.rectTransform.DOScale(Vector3.one, perItemDelay).AsyncWaitForCompletion();
+                    await item.rectTransform.DOScale(Vector3.one, delay).AsyncWaitForCompletion();
                     item.rectTransform.DOAnchorPos(pointToTravel, moveDuration).SetEase(Ease.InExpo).onComplete += () =>
                     {
-                        rectTransform.DOPunchScale(Vector3.one * 1.5f, perItemDelay);
+                        rectTransform.DOPunchScale(Vector3.one * 1.5f, delay);
                         perItemDeliveredAction?.Invoke();
                         item.gameObject.SetActive(false);
                     };

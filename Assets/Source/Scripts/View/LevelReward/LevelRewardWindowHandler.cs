@@ -17,6 +17,7 @@ namespace Source.Scripts.View.LevelReward
         private LevelRewardConfig _levelRewardConfig;
         private LevelRewardWindowData _levelRewardWindowData;
         private ExpHandler _expHandler;
+        private CurrencyHandler _currencyHandler;
 
         private LevelRewardHandler _levelRewardHandler;
 
@@ -36,6 +37,7 @@ namespace Source.Scripts.View.LevelReward
             _levelRewardConfig = levelRewardConfig;
             _levelRewardWindowData = levelRewardWindowData;
             _expHandler = expHandler;
+            _currencyHandler = currencyHandler;
 
             _levelRewardHandler = new LevelRewardHandler(_levelRewardConfig, _expHandler.LevelInfo.Value, currencyHandler);
         }
@@ -134,7 +136,17 @@ namespace Source.Scripts.View.LevelReward
                     currentLevel = 0;
                 }
                 
-                _levelRewardHandler.ClaimRewards();
+                //_levelRewardHandler.ClaimRewards();
+                
+                if (_levelRewardHandler.CollectedRewards.level < _expHandler.LevelInfo.Value.level)
+                {
+                    for (int i = _levelRewardHandler.CollectedRewards.level + 1; i <= _expHandler.LevelInfo.Value.level; i++)
+                    {
+                        _currencyHandler.AddCurrency(_levelRewardConfig.rewardPerLevel[i].currency,
+                            _items[i].rewardIcon.rectTransform.position, _levelRewardConfig.rewardPerLevel[i].amount,
+                            _levelRewardConfig.rewardPerLevel[i].amount);
+                    }
+                }
 
                 for (int i = currentLevel; i <= _expHandler.LevelInfo.Value.level; i++)
                 {

@@ -32,20 +32,11 @@ namespace Source.Scripts.View.LevelReward
                 CollectedRewards.level = 0;
             }
             
-            if (CollectedRewards.level < _playersLevelInfo.level)
-            {
-                for (int i = CollectedRewards.level + 1; i <= _playersLevelInfo.level; i++)
-                {
-
-                    _currencyHandler.Currencies[_rewards.rewardPerLevel[i].currency].Counter.Value +=
-                        _rewards.rewardPerLevel[i].amount;
-                }
-
-                CollectedRewards.level = _playersLevelInfo.level;
-                
-                _currencyHandler.Save();
-                Save();
-            }
+            
+            
+            CollectedRewards.level = _playersLevelInfo.level;
+            
+            Save();
         }
         
         public PlayersLevelInfo Load()
