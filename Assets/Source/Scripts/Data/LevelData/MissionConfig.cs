@@ -17,6 +17,7 @@ namespace Source.Scripts.Data.LevelData
         public string missionName;
         public int playersLimit;
         public int time;
+        public int exp = 25;
 
         [Header("BG")] 
         public Sprite bgSprite;

@@ -123,7 +123,7 @@ namespace Source.Scripts.View.Leaderboard
             {
                 if (items[i].PlayFabId.Equals(_loginHandler.ID))
                 {
-                    _playerItem = Object.Instantiate(GetLeaderboardItemByIndex(i, true), _leaderboardWindow.playerContainer);
+                    _playerItem = Object.Instantiate(_leaderboardData.playerPlacePrefab, _leaderboardWindow.playerContainer);
                     _playerItem.playerName.text =
                         string.IsNullOrEmpty(items[i].DisplayName) ? "Name" : items[i].DisplayName;
                     _playerItem.number.text = (items[i].Position + 1).ToString();
@@ -137,7 +137,7 @@ namespace Source.Scripts.View.Leaderboard
             }
         }
 
-        private LeaderboardItem GetLeaderboardItemByIndex(int index, bool isPlayer = false)
+        private LeaderboardItem GetLeaderboardItemByIndex(int index)
         {
             switch (index)
             {
@@ -148,14 +148,7 @@ namespace Source.Scripts.View.Leaderboard
                 case 2:
                     return _leaderboardData.thirdPlacePrefab;
                 default:
-                    if (isPlayer)
-                    {
-                        return _leaderboardData.playerPlacePrefab;
-                    }
-                    else
-                    {
-                        return _leaderboardData.anyPlacePrefab;
-                    }
+                    return _leaderboardData.anyPlacePrefab;
             }
         }
         
@@ -181,8 +174,11 @@ namespace Source.Scripts.View.Leaderboard
                 
                 if (_leaderboardData.icons.TryGetValue(profileData.IconID, out var sprite))
                 {
-                    _items[id].icon.sprite = sprite;
-                    _items[id].playerName.text = profileData.Nickname;
+                    if (_items.ContainsKey(id))
+                    {
+                        _items[id].icon.sprite = sprite;
+                        _items[id].playerName.text = profileData.Nickname;
+                    }
                 }
             }
             else

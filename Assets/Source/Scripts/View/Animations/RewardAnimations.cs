@@ -80,14 +80,15 @@ namespace Source.Scripts.View.Animations
                     
                     tween.onComplete += () =>
                     {
-                        rectTransform.DOPunchScale(Vector3.one * 1.25f, delay);
+                        rectTransform.DOPunchScale(Vector3.one * 1.25f, delay, 1);
                         perItemDeliveredAction?.Invoke();
                         item.gameObject.SetActive(false);
                     };
                 }
 
                 await lastItem;
-                
+
+                rectTransform.DOKill();
                 rectTransform.localScale = Vector3.one;
                 
                 onEndAnimation?.Invoke();
