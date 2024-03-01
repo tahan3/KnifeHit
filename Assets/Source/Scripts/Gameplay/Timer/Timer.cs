@@ -17,7 +17,7 @@ namespace Source.Scripts.Gameplay.Timer
             Time = new ReactiveVariable<int>(seconds);
         }
         
-        public async void StartTimer()
+        public async UniTaskVoid StartTimer()
         {
             _cancellationToken = new CancellationTokenSource();
             

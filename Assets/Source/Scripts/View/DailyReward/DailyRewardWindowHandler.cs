@@ -131,14 +131,13 @@ namespace Source.Scripts.View.DailyReward
             switch (data.rewardType)
             {
                 case DailyRewardType.Coin:
-                    _currencyHandler.AddCurrency(CurrencyType.Coin, position, data.amount, data.amount);
+                    _currencyHandler.AddCurrency(CurrencyType.Coin, position, data.amount);
                     break;
                 case DailyRewardType.Cash:
-                    _currencyHandler.AddCurrency(CurrencyType.Cash, position, data.amount, data.amount);
+                    _currencyHandler.AddCurrency(CurrencyType.Cash, position, data.amount);
                     break;
                 case DailyRewardType.Exp:
-                    _expHandler.GetExp(data.amount);
-                    _expHandler.Save();
+                    _expHandler.AddStars(position, data.amount);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(data.rewardType), data.rewardType, null);

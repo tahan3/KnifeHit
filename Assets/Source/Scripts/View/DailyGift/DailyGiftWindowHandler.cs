@@ -1,8 +1,10 @@
 using System;
+using Facebook.Unity;
 using NaughtyAttributes.Test;
 using Source.Extension;
 using Source.Scripts.Currency;
 using Source.Scripts.DailyReward;
+using Source.Scripts.Data.Screen;
 using Source.Scripts.Gameplay.Timer;
 using Source.Scripts.View.Animations;
 using Unity.Collections.LowLevel.Unsafe;
@@ -16,53 +18,104 @@ namespace Source.Scripts.View.DailyGift
         private DailyGiftWindow _giftWindow;
 
         private DateTimer _testDateTimer;
+        
+        private CurrencyHandler _currencyHandler;
+        private WindowsHandler _windowsHandler;
 
-        [Inject] private RewardAnimations _rewardAnimations;
-        [Inject] private CurrencyHandler _currencyHandler;
+        private const string TimerHoursKey = "HoursTimer";
+        private const int TimerHoursDelay = 1;
+
+        private DateTime TimerStarted;
         
         public DailyGiftWindowHandler(DailyGiftWindow giftWindow)
         {
             _giftWindow = giftWindow;
 
+            _testDateTimer = new DateTimer(TimerHoursKey + TimerHoursDelay);
+        }
+
+        [Inject]
+        public void Construct(CurrencyHandler currencyHandler, WindowsHandler windowsHandler)
+        {
+            _currencyHandler = currencyHandler;
+            _windowsHandler = windowsHandler;
+
             _giftWindow.freeDailyGift.button.onClick.AddListener(EnableTimer);
+
+            if (DateTime.Now >= _testDateTimer.Time.Value)
+            {
+                _giftWindow.freeDailyGift.button.gameObject.SetActive(true);
+            }
+            else
+            {
+                _giftWindow.freeDailyGift.button.gameObject.SetActive(false);
+                _giftWindow.freeDailyGift.timerText.gameObject.SetActive(true);
+                _giftWindow.freeDailyGift.timerBG.gameObject.SetActive(true);
+                
+                TimerStarted = DateTime.Now.Trim(TimeSpan.TicksPerSecond);
+                
+                _testDateTimer.StartTimer();
+            }
+            
+            _giftWindow.adDailyGift.button.onClick.AddListener(ShowError);
         }
         
         public void Enable()
         {
-            //_testDateTimer?.StartTimer();
+            if (_testDateTimer != null)
+            {
+                UpdateDate(_testDateTimer.Time.Value);
+                _testDateTimer.Time.OnValueChanged += UpdateDate;
+            }
         }
 
         public void Disable()
         {
-            _testDateTimer?.StopTimer();
+            if (_testDateTimer != null)
+            {
+                _testDateTimer.Time.OnValueChanged -= UpdateDate;
+            }
         }
 
+        private void ShowError()
+        {
+            _windowsHandler.OpenWindow(WindowType.Error);
+        }
+        
         private void EnableTimer()
         {
-            /*_testDateTimer = new DateTimer("test", DateTime.Now.AddHours(5).Trim(TimeSpan.TicksPerSecond));
+            TimerStarted = DateTime.Now.Trim(TimeSpan.TicksPerSecond);
+            
+            _testDateTimer.SetDelay(DateTime.Now.Trim(TimeSpan.TicksPerSecond)./*AddHours*/AddMinutes(TimerHoursDelay));
+
+            _testDateTimer.StartTimer();
+            
             UpdateDate(_testDateTimer.Time.Value);
             _testDateTimer.Time.OnValueChanged += UpdateDate;
-            _testDateTimer.StartTimer();
 
             _giftWindow.freeDailyGift.button.gameObject.SetActive(false);
             _giftWindow.freeDailyGift.timerText.gameObject.SetActive(true);
-            _giftWindow.freeDailyGift.timerBG.gameObject.SetActive(true);*/
+            _giftWindow.freeDailyGift.timerBG.gameObject.SetActive(true);
             
-            int showCoins = 10;
             int reward = 20;
 
             _currencyHandler.AddCurrency(CurrencyType.Coin,
-                _giftWindow.freeDailyGift.button.image.rectTransform.position, showCoins,
-                reward);
+                _giftWindow.freeDailyGift.button.image.rectTransform.position, reward);
         }
         
         private void UpdateDate(DateTime time)
         {
-            var now = DateTime.Now.Trim(TimeSpan.TicksPerSecond);
-            var timing = time - now;
+            _giftWindow.freeDailyGift.timerText.text = (time - TimerStarted).ToString(@"hh\:mm\:ss");
 
-            _giftWindow.freeDailyGift.timerText.text = string.Format("{0:00}:{1:00}:{2:00}", timing.Hours,
-                timing.Minutes, timing.Seconds);
+            if (TimerStarted >= time)
+            {
+                _giftWindow.freeDailyGift.button.gameObject.SetActive(true);
+                _giftWindow.freeDailyGift.timerText.gameObject.SetActive(false);
+                _giftWindow.freeDailyGift.timerBG.gameObject.SetActive(false);
+                
+                _testDateTimer.StopTimer();
+                _testDateTimer.Time.OnValueChanged -= UpdateDate;
+            }
         }
     }
 }

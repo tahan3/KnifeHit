@@ -29,20 +29,32 @@ namespace Source.Scripts.View.LevelReward
         {
             if (CollectedRewards.level < 0)
             {
-                CollectedRewards.level = 0;
+                var info = CollectedRewards;
+                info.level = 0;
+                CollectedRewards = info;
             }
-            
-            
-            
-            CollectedRewards.level = _playersLevelInfo.level;
+
+
+            var rewards = CollectedRewards;
+            rewards.level = _playersLevelInfo.level;
+            CollectedRewards = rewards;
             
             Save();
         }
         
         public PlayersLevelInfo Load()
         {
-            var info = JsonConvert.DeserializeObject<PlayersLevelInfo>
-                (PlayerPrefs.GetString(PrefsNames.RewardLevelInfo.ToString())) ?? new PlayersLevelInfo();
+            PlayersLevelInfo info;
+            
+            if (PlayerPrefs.HasKey(PrefsNames.RewardLevelInfo.ToString()))
+            {
+                info = JsonConvert.DeserializeObject<PlayersLevelInfo>
+                    (PlayerPrefs.GetString(PrefsNames.RewardLevelInfo.ToString()));
+            }
+            else
+            {
+                info = new PlayersLevelInfo(0, -1);
+            }
 
             return info;
         }

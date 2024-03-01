@@ -106,23 +106,19 @@ namespace Source.Scripts.View.LevelReward
         {
             float perItemHeight = _levelRewardWindow.itemsContainer.sizeDelta.y / (_items.Count - 1);
 
-            _levelRewardWindow.itemsContainer.DOKill();
-
             _levelRewardWindow.itemsContainer.anchoredPosition = new Vector2(
                 _levelRewardWindow.itemsContainer.anchoredPosition.x,
                 _levelRewardWindow.itemsContainer.sizeDelta.y);
 
-            _levelRewardWindow.itemsContainer.DOAnchorPos(new Vector2(
-                _levelRewardWindow.itemsContainer.anchoredPosition.x,
-                _levelRewardWindow.itemsContainer.sizeDelta.y -
-                (perItemHeight * (_expHandler.LevelInfo.Value.level))), 0.5f).SetEase(Ease.InCubic);
+            if (_expHandler.LevelInfo.Value.level > 0)
+            {
+                _levelRewardWindow.itemsContainer.DOKill();
 
-            /*_levelRewardWindow.itemsContainer.anchoredPosition = new Vector2(
-                _levelRewardWindow.itemsContainer.anchoredPosition.x,
-                _levelRewardWindow.itemsContainer.sizeDelta.y -
-                (perItemHeight * (_expHandler.LevelInfo.Value.level)));*/
-
-            //_levelRewardWindow.itemsContainer.anchoredPosition = ;
+                _levelRewardWindow.itemsContainer.DOAnchorPos(new Vector2(
+                    _levelRewardWindow.itemsContainer.anchoredPosition.x,
+                    _levelRewardWindow.itemsContainer.sizeDelta.y -
+                    (perItemHeight * (_expHandler.LevelInfo.Value.level))), 0.5f).SetEase(Ease.InCubic);
+            }
         }
         
         private void ClaimButtonClick()
@@ -136,26 +132,23 @@ namespace Source.Scripts.View.LevelReward
                     currentLevel = 0;
                 }
                 
-                //_levelRewardHandler.ClaimRewards();
-                
                 if (_levelRewardHandler.CollectedRewards.level < _expHandler.LevelInfo.Value.level)
                 {
                     for (int i = _levelRewardHandler.CollectedRewards.level + 1; i <= _expHandler.LevelInfo.Value.level; i++)
                     {
                         _currencyHandler.AddCurrency(_levelRewardConfig.rewardPerLevel[i].currency,
-                            _items[i].rewardIcon.rectTransform.position, _levelRewardConfig.rewardPerLevel[i].amount,
+                            _items[i].rewardIcon.rectTransform.position,
                             _levelRewardConfig.rewardPerLevel[i].amount);
+                        
+                        _items[i].canTakeMark.SetActive(false);
+                        _items[i].rewardTakenMark.SetActive(true);
                     }
-                }
-
-                for (int i = currentLevel; i <= _expHandler.LevelInfo.Value.level; i++)
-                {
-                    _items[i].canTakeMark.SetActive(false);
-                    _items[i].rewardTakenMark.SetActive(true);
                 }
 
                 _levelRewardWindow.claimButton.image.sprite =
                     _levelRewardWindowData.claimButtonSprites.GetSprite(false);
+                
+                _levelRewardHandler.ClaimRewards();
             }
         }
         

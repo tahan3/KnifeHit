@@ -77,10 +77,12 @@ namespace Source.Scripts.View
 
             usdPlusButton.onClick.AddListener(shopButton.button.onClick.Invoke);
             expProgressButton.onClick.AddListener(() => windowsHandler.OpenWindow(WindowType.LevelReward, true));
-
-            expProgress.SetProgress(expHandler.LevelInfo.Value.exp / (float)expHandler.ExpToLevelUp);
+            
+            expProgress.SetProgress(_expHandler.LevelInfo.Value.exp / (float)_expHandler.ExpToLevelUp);
             levelText.text = (expHandler.LevelInfo.Value.level + 1).ToString();
             progressText.text = expHandler.LevelInfo.Value.exp.ToString() + '%';
+
+            expHandler.LevelInfo.OnValueChanged += ChangeLevel;
             
             cash.text = CurrencyConverter.Convert(CurrencyType.Cash, currencyHandler.Currencies[CurrencyType.Cash].Counter.Value);
             coins.text = CurrencyConverter.Convert(CurrencyType.Coin, currencyHandler.Currencies[CurrencyType.Coin].Counter.Value);
@@ -93,7 +95,7 @@ namespace Source.Scripts.View
         {
             homeButton.button.onClick?.Invoke();
 
-            LevelEarnedWindowOpen();
+            LevelEarnedWindowOpen(1f);
             
             if (PlayerPrefs.HasKey(PrefsNames.TutorStage.ToString()))
             {
@@ -117,24 +119,22 @@ namespace Source.Scripts.View
             }
         }
 
-        private void TutorClose()
+        private async void TutorClose()
         {
-            tutorWindow.gameObject.SetActive(false);
             DailyRewardWindowOpen();
-            _expHandler.GetExp(25);
-            _currencyHandler.Currencies[CurrencyType.Coin].Counter.Value += 200;
+            _expHandler.AddStars(tutorWindow.stars.position, 10);
+            await _currencyHandler.AddCurrency(CurrencyType.Coin, tutorWindow.coins.position, 200);
+            tutorWindow.gameObject.SetActive(false);
         }
 
-        private async void LevelEarnedWindowOpen()
+        private async void LevelEarnedWindowOpen(float delay = 0f)
         {
-            await UniTask.WaitForSeconds(1f);
+            if (!_expHandler.LevelEarned) return;
             
-            if (_expHandler.LevelEarned)
-            {
-                _soundsHandler.PlaySound(SoundType.NewLevelEarned);
-                _windowsHandler.OpenWindow(WindowType.LevelReward, true);
-                _expHandler.LevelEarned = false;
-            }
+            await UniTask.WaitForSeconds(delay);
+            _soundsHandler.PlaySound(SoundType.NewLevelEarned);
+            _windowsHandler.OpenWindow(WindowType.LevelReward, true);
+            _expHandler.LevelEarned = false;
         }
         
         private void DailyRewardWindowOpen()
@@ -161,10 +161,20 @@ namespace Source.Scripts.View
             coins.text = CurrencyConverter.Convert(CurrencyType.Coin, value);
         }
 
+        private void ChangeLevel(PlayersLevelInfo info)
+        {
+            expProgress.SetProgress(info.exp / (float)_expHandler.ExpToLevelUp);
+            levelText.text = (info.level + 1).ToString();
+            progressText.text = info.exp.ToString() + '%';
+
+            LevelEarnedWindowOpen();
+        }
+        
         private void OnDisable()
         {
             _currencyHandler.Currencies[CurrencyType.Coin].Counter.OnValueChanged -= ChangeCoins;
             _currencyHandler.Currencies[CurrencyType.Cash].Counter.OnValueChanged -= ChangeCash;
+            _expHandler.LevelInfo.OnValueChanged -= ChangeLevel;
         }
     }
 }

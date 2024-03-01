@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using Source.Scripts.Counter;
 using Source.Scripts.DailyReward;
@@ -43,23 +44,30 @@ namespace Source.Scripts.Currency
             return currency;
         }
 
-        public void AddCurrency(CurrencyType type, Vector2 position, int countToShow, int totalCurrencyToAdd)
+        public async UniTask AddCurrency(CurrencyType type, Vector2 position, int value)
         {
-            int showCoins = countToShow;
-            int reward = totalCurrencyToAdd;
-            DailyRewardType rewardType = type == CurrencyType.Coin ? DailyRewardType.Coin : DailyRewardType.Cash;
-            
-            _rewardAnimations.Animate(rewardType,
+            int max = 10;
+            int showCoins = value;
+            int reward = 0;
+
+            if (value > max)
+            {
+                reward = value - max;
+                showCoins = max;
+            }
+
+            await _rewardAnimations.Animate(type == CurrencyType.Coin ? DailyRewardType.Coin : DailyRewardType.Cash,
                 position,
-                () => Currencies[type].Counter.Value++, 
+                () => Currencies[type].Counter.Value++,
                 () =>
                 {
-                    Currencies[type].Counter.Value += reward - showCoins;
-                    Save();
+                    Currencies[type].Counter.Value += reward;
                 },
                 showCoins);
+            
+            Save();
         }
-        
+         
         public void Save()
         {
             var dataToSave = new Dictionary<CurrencyType, int>();

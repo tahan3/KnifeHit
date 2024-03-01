@@ -51,18 +51,20 @@ namespace Source.Scripts.View.Animations
             }
         }
 
-        public async UniTaskVoid Animate(DailyRewardType type, Vector2 from, 
+        public async UniTask Animate(DailyRewardType type, Vector2 from, 
             Action perItemDeliveredAction = null,
             Action onEndAnimation = null,
             int count = 7,
             float moveDuration = 0.2f, 
-            float perItemDelay = 2f)
+            float perItemDelay = 1f)
         {
             if (cachedPositions.TryGetValue(type, out var rectTransform))
             {
                 var pointToTravel = rectTransform.position;
                 float range = 100f;
                 float delay = perItemDelay / count;
+                
+                UniTask lastItem = default;
                 
                 for (int i = 0; i < count; i++)
                 {
@@ -72,13 +74,21 @@ namespace Source.Scripts.View.Animations
                     item.gameObject.SetActive(true);
 
                     await item.rectTransform.DOScale(Vector3.one, delay).AsyncWaitForCompletion();
-                    item.rectTransform.DOAnchorPos(pointToTravel, moveDuration).SetEase(Ease.InExpo).onComplete += () =>
+                    
+                    var tween = item.rectTransform.DOAnchorPos(pointToTravel, moveDuration).SetEase(Ease.InExpo);
+                    lastItem = tween.AsyncWaitForCompletion().AsUniTask();
+                    
+                    tween.onComplete += () =>
                     {
-                        rectTransform.DOPunchScale(Vector3.one * 1.5f, delay);
+                        rectTransform.DOPunchScale(Vector3.one * 1.25f, delay);
                         perItemDeliveredAction?.Invoke();
                         item.gameObject.SetActive(false);
                     };
                 }
+
+                await lastItem;
+                
+                rectTransform.localScale = Vector3.one;
                 
                 onEndAnimation?.Invoke();
             }

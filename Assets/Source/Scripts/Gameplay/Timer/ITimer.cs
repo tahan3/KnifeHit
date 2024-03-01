@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using Source.Scripts.Reactive;
 
 namespace Source.Scripts.Gameplay.Timer
@@ -6,7 +7,7 @@ namespace Source.Scripts.Gameplay.Timer
     {
         public ReactiveVariable<T> Time { get; }
         
-        public void StartTimer();
+        public UniTaskVoid StartTimer();
         
         public void StopTimer();
     }
