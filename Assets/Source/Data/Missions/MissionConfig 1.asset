@@ -25,3 +25,4 @@ MonoBehaviour:
   reward:
     currency: 1
     amount: 420
+  cost: 50

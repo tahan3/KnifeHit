@@ -4,6 +4,7 @@ using AYellowpaper.SerializedCollections;
 using Cysharp.Threading.Tasks;
 using Source.Scripts.Currency;
 using Source.Scripts.DailyReward;
+using Source.Scripts.Data;
 using Source.Scripts.Data.Screen;
 using Source.Scripts.Level;
 using Source.Scripts.Prefs;
@@ -54,16 +55,18 @@ namespace Source.Scripts.View
         private CurrencyHandler _currencyHandler;
         private SoundsHandler _soundsHandler;
         private RewardAnimations _rewardAnimations;
+        private MainConfig _mainConfig;
 
         [Inject]
         public void Construct(WindowsHandler windowsHandler, ExpHandler expHandler, CurrencyHandler currencyHandler,
-            SoundsHandler soundsHandler, RewardAnimations rewardAnimations)
+            SoundsHandler soundsHandler, RewardAnimations rewardAnimations, MainConfig mainConfig)
         {
             _windowsHandler = windowsHandler;
             _expHandler = expHandler;
             _currencyHandler = currencyHandler;
             _soundsHandler = soundsHandler;
             _rewardAnimations = rewardAnimations;
+            _mainConfig = mainConfig;
             
             leaderboardButton.button.onClick.AddListener(()=>windowsHandler.OpenWindow(WindowType.Leaderboard, true));
             shopButton.button.onClick.AddListener(()=>windowsHandler.OpenWindow(WindowType.Shop, true));
@@ -110,6 +113,7 @@ namespace Source.Scripts.View
                 else
                 {
                     DailyRewardWindowOpen();
+                    LeaderboardOpen();
                 }
             }
             
@@ -127,6 +131,19 @@ namespace Source.Scripts.View
             tutorWindow.gameObject.SetActive(false);
         }
 
+        private async void LeaderboardOpen()
+        {
+            await UniTask.WaitForSeconds(0.5f);
+            
+            if (PlayerPrefs.HasKey(_mainConfig.missions[0].missionName))
+            {
+                if (!PlayerPrefs.HasKey(_mainConfig.missions[0].missionName + "Window"))
+                {
+                    _windowsHandler.OpenWindow(WindowType.Leaderboard, true);
+                }
+            }
+        }
+        
         private async void LevelEarnedWindowOpen(float delay = 0f)
         {
             if (!_expHandler.LevelEarned) return;

@@ -159,7 +159,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.DefaultCompany.KnifeTour
-    iPhone: com.DefaultCompany.Knife-Hit
+    iPhone: com.DefaultCompany.Knife-Tour
   buildNumber:
     Standalone: 0
     VisionOS: 0

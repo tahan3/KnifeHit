@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using Source.Scripts.Counter;
@@ -8,6 +9,7 @@ using Source.Scripts.Prefs;
 using Source.Scripts.Save;
 using Source.Scripts.View.Animations;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace Source.Scripts.Currency
@@ -67,7 +69,15 @@ namespace Source.Scripts.Currency
             
             Save();
         }
-         
+
+        public void SelfClean()
+        {
+            var newCurrencies = Currencies.Keys.ToDictionary<CurrencyType, CurrencyType, ICounter>(key => key,
+                key => new PositiveCounter(Currencies[key].Counter.Value));
+
+            Currencies = newCurrencies;
+        }
+        
         public void Save()
         {
             var dataToSave = new Dictionary<CurrencyType, int>();

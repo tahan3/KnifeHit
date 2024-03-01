@@ -1,6 +1,7 @@
 using Source.Scripts.View.Windows;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Source.Scripts.View.Leaderboard
@@ -9,6 +10,7 @@ namespace Source.Scripts.View.Leaderboard
     {
         public Transform itemsContainer;
         public Transform playerContainer;
+        public Button button;
 
         private LeaderboardWindowHandler _windowHandler;
         

@@ -12,6 +12,9 @@ namespace Source.Scripts.Login
             var login = new PlayFabLogin();
             login.OnLogin += OnLogin;
             login.OnError += OnError;
+
+            Container.Bind<ILoginHandler<string>>().FromInstance(login).AsSingle();
+            
             login.Login();
         }
         

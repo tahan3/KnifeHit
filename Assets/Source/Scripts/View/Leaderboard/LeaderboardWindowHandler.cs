@@ -6,7 +6,10 @@ using PlayFab.ClientModels;
 using Source.Scripts.Data;
 using Source.Scripts.Data.Leaderboard;
 using Source.Scripts.Data.Profile;
+using Source.Scripts.Data.Screen;
 using Source.Scripts.Leaderboard;
+using Source.Scripts.Login;
+using Source.Scripts.Profile;
 using UnityEngine;
 using Zenject;
 using Object = UnityEngine.Object;
@@ -19,9 +22,14 @@ namespace Source.Scripts.View.Leaderboard
         private LeaderboardWindow _leaderboardWindow;
 
         private Dictionary<string, LeaderboardItem> _items = new Dictionary<string, LeaderboardItem>();
+        private LeaderboardItem _playerItem;
         private Action<GetUserDataResult> OnGetItemData;
 
         [Inject] private LeaderboardData _leaderboardData;
+        [Inject] private ILoginHandler<string> _loginHandler;
+        [Inject] private IProfileHandler _profileHandler;
+        [Inject] private MainConfig _mainConfig;
+        [Inject] private WindowsHandler _windowsHandler;
 
         public LeaderboardWindowHandler(LeaderboardWindow leaderboardWindow)
         {
@@ -35,12 +43,32 @@ namespace Source.Scripts.View.Leaderboard
 
         private void GetLeaderboard()
         {
+            if (PlayerPrefs.HasKey(_mainConfig.missions[0].missionName))
+            {
+                if (!PlayerPrefs.HasKey(_mainConfig.missions[0].missionName + "Window"))
+                {
+                    _leaderboardWindow.playerContainer.gameObject.SetActive(false);
+                    _leaderboardWindow.button.gameObject.SetActive(true);
+
+                    _leaderboardWindow.button.onClick.AddListener(() =>
+                        _windowsHandler.CloseWindow(WindowType.Leaderboard));
+                    PlayerPrefs.SetInt(_mainConfig.missions[0].missionName + "Window", 1);
+                }
+                else
+                {
+                    _leaderboardWindow.playerContainer.gameObject.SetActive(true);
+                    _leaderboardWindow.button.gameObject.SetActive(false);
+                }
+            }
+            
             if (_items.Count > 0)
             {
                 foreach (var leaderboardItem in _items.Values)
                 {
                     Object.Destroy(leaderboardItem.gameObject);
                 }
+                
+                Object.Destroy(_playerItem);
 
                 _items.Clear();
             }
@@ -51,8 +79,15 @@ namespace Source.Scripts.View.Leaderboard
                 StartPosition = 0,
                 MaxResultsCount = 10,
             };
+
+            var playerRequest = new GetLeaderboardAroundPlayerRequest
+            {
+                StatisticName = LeaderboardType.Points.ToString(),
+                MaxResultsCount = 1
+            };
             
             PlayFabClientAPI.GetLeaderboard(request, OnSuccessGetLeaderboard, OnErrorGetLeaderboard);
+            PlayFabClientAPI.GetLeaderboardAroundPlayer(playerRequest, OnSuccessGetPlayerLeaderboard, OnErrorGetLeaderboard);
         }
 
         private void OnErrorGetLeaderboard(PlayFabError obj)
@@ -68,7 +103,7 @@ namespace Source.Scripts.View.Leaderboard
             {
                 var item = Object.Instantiate(GetLeaderboardItemByIndex(i), _leaderboardWindow.itemsContainer);
                 item.playerName.text = string.IsNullOrEmpty(items[i].DisplayName) ? "Name" : items[i].DisplayName;
-                item.number.text = (i + 1).ToString();
+                item.number.text = (items[i].Position + 1).ToString();
                 item.points.text = items[i].StatValue.ToString();
 
                 _items.Add(items[i].PlayFabId, item);
@@ -80,7 +115,29 @@ namespace Source.Scripts.View.Leaderboard
             }
         }
 
-        private LeaderboardItem GetLeaderboardItemByIndex(int index)
+        private void OnSuccessGetPlayerLeaderboard(GetLeaderboardAroundPlayerResult obj)
+        {
+            var items = obj.Leaderboard;
+
+            for (var i = 0; i < items.Count; i++)
+            {
+                if (items[i].PlayFabId.Equals(_loginHandler.ID))
+                {
+                    _playerItem = Object.Instantiate(GetLeaderboardItemByIndex(i, true), _leaderboardWindow.playerContainer);
+                    _playerItem.playerName.text =
+                        string.IsNullOrEmpty(items[i].DisplayName) ? "Name" : items[i].DisplayName;
+                    _playerItem.number.text = (items[i].Position + 1).ToString();
+                    _playerItem.points.text = items[i].StatValue.ToString();
+                    
+                    if (_leaderboardData.icons.TryGetValue(_profileHandler.Profile.IconID, out var sprite))
+                    {
+                        _playerItem.icon.sprite = sprite;
+                    }
+                }
+            }
+        }
+
+        private LeaderboardItem GetLeaderboardItemByIndex(int index, bool isPlayer = false)
         {
             switch (index)
             {
@@ -91,7 +148,14 @@ namespace Source.Scripts.View.Leaderboard
                 case 2:
                     return _leaderboardData.thirdPlacePrefab;
                 default:
-                    return _leaderboardData.anyPlacePrefab;
+                    if (isPlayer)
+                    {
+                        return _leaderboardData.playerPlacePrefab;
+                    }
+                    else
+                    {
+                        return _leaderboardData.anyPlacePrefab;
+                    }
             }
         }
         

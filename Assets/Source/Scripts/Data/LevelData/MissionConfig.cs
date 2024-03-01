@@ -23,5 +23,8 @@ namespace Source.Scripts.Data.LevelData
 
         [Header("Mission rewards")]
         public RewardData reward;
+
+        [Header("Cost")] 
+        public int cost;
     }
 }
