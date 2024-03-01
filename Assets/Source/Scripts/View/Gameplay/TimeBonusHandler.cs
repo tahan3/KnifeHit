@@ -12,7 +12,7 @@ namespace Source.Scripts.View.Gameplay
     {
         private TimeBonusWindow _timeBonusWindow;
 
-        private readonly float _delay;
+        private readonly float _totalDelay;
         private readonly int _bonusPerSecond;
 
         private MissionsHandler _missionsHandler;
@@ -21,11 +21,11 @@ namespace Source.Scripts.View.Gameplay
         private GameOverHandler _gameOverHandler;
         
         
-        public TimeBonusHandler(TimeBonusWindow timeBonusWindow, int bonusPerSecond = 200, float delay = 1f)
+        public TimeBonusHandler(TimeBonusWindow timeBonusWindow, int bonusPerSecond = 200, float totalDelay = 2f)
         {
             _timeBonusWindow = timeBonusWindow;
             _bonusPerSecond = bonusPerSecond;
-            _delay = delay;
+            _totalDelay = totalDelay;
         }
 
         [Inject]
@@ -44,19 +44,24 @@ namespace Source.Scripts.View.Gameplay
         {
             int time = _missionsHandler.Timer.Time.Value;
             int points = 0;
+            float timer = _totalDelay;
 
             _soundsHandler.PlaySound(SoundType.PointsPerTime);
             
-            while (time >= 0)
+            while (time >= 0 && timer > 0)
             {
                 _timeBonusWindow.seconds.text = time + " sec";
                 _timeBonusWindow.points.text = points.ToString();
 
-                await UniTask.WaitForSeconds(_delay / _missionsHandler.Timer.Time.Value, true);
+                await UniTask.Yield();
 
                 time--;
+                timer -= Time.deltaTime;
                 points += _bonusPerSecond;
             }
+            
+            _timeBonusWindow.seconds.text = 0 + " sec";
+            _timeBonusWindow.points.text = (_missionsHandler.Timer.Time.Value * _bonusPerSecond).ToString();
             
             await UniTask.WaitForSeconds(0.5f);
 

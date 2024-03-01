@@ -28,8 +28,6 @@ namespace Source.Scripts.Gameplay
         [Inject] private CurrencyHandler _currencyHandler;
         [Inject] private ExpHandler _expHandler;
 
-        private const int ExpPerMission = 25;
-
         public MissionsHandler()
         {
             _missionsCounter = new MissionsCounter();
@@ -66,7 +64,7 @@ namespace Source.Scripts.Gameplay
         public void EndMission()
         {
             AddRewards();
-            _expHandler.GetExp(ExpPerMission);
+            _expHandler.GetExp(_currentMission.exp);
             _missionsCounter.TrySaveProgress(Mission);
             _currentTimer.StopTimer();
         }

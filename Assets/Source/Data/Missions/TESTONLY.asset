@@ -16,8 +16,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 73e0601f2b2aec24a87fef87380635e2, type: 2}
   missionName: TEST ONLY
   playersLimit: 5
-  time: 25
+  time: 360
   bgSprite: {fileID: 0}
   reward:
     currency: 1
     amount: 55
+  cost: 0
