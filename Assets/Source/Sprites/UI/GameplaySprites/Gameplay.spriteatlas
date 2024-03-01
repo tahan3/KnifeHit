@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Gameplay
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: Android
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 50
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_IgnorePlatformSupport: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 96bbb403e94f75b4e8e85918b7f9415b, type: 3}
+    - {fileID: 2800000, guid: b2bf8f54ae2d5ec419ee147c3b2078a1, type: 3}
+    - {fileID: 2800000, guid: bd62e4959c0c77b479f7cba13e33cb03, type: 3}
+    - {fileID: 2800000, guid: 0c6e801c6c815a34da50eb365a056118, type: 3}
+    - {fileID: 2800000, guid: 019a3057c4d667540b3e8447bdcfa4ae, type: 3}
+    - {fileID: 2800000, guid: 08f18e26ab327d94fbb3701f73723f77, type: 3}
+    - {fileID: 2800000, guid: ab73ef92f96a4554e8070463f6d3534e, type: 3}
+    - {fileID: 2800000, guid: 4e8e14c5a88192f429584cc7d0aca384, type: 3}
+    - {fileID: 2800000, guid: 2990b54212525e84da6978bfcd4747a6, type: 3}
+    - {fileID: 2800000, guid: b0ebd46e7c8a6e8478ded7487a03c31c, type: 3}
+    - {fileID: 2800000, guid: 26355cc0809ae9846a3ce1ca650517dc, type: 3}
+    - {fileID: 2800000, guid: f92c3033be628a9428fb2bea2d04958f, type: 3}
+    - {fileID: 2800000, guid: a2813868ef46e1845b5f421e57bea2d6, type: 3}
+    - {fileID: 2800000, guid: 7d60644191579a246b177074fd0a77a3, type: 3}
+    - {fileID: 2800000, guid: e0ea8d38acd6d2043b88edd610cca4f0, type: 3}
+    - {fileID: 2800000, guid: bb83d8c1c83bae346a59e84916e769fd, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 26355cc0809ae9846a3ce1ca650517dc: 21300000
+    - 7d60644191579a246b177074fd0a77a3: 21300000
+    - bb83d8c1c83bae346a59e84916e769fd: 21300000
+    - 2990b54212525e84da6978bfcd4747a6: 21300000
+    - ab73ef92f96a4554e8070463f6d3534e: 21300000
+    - 96bbb403e94f75b4e8e85918b7f9415b: 21300000
+    - f92c3033be628a9428fb2bea2d04958f: 21300000
+    - b2bf8f54ae2d5ec419ee147c3b2078a1: 21300000
+    - bd62e4959c0c77b479f7cba13e33cb03: 21300000
+    - 4e8e14c5a88192f429584cc7d0aca384: 21300000
+    - 08f18e26ab327d94fbb3701f73723f77: 21300000
+    - 019a3057c4d667540b3e8447bdcfa4ae: 21300000
+    - e0ea8d38acd6d2043b88edd610cca4f0: 21300000
+    - a2813868ef46e1845b5f421e57bea2d6: 21300000
+    - 0c6e801c6c815a34da50eb365a056118: 21300000
+    - b0ebd46e7c8a6e8478ded7487a03c31c: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 26355cc0809ae9846a3ce1ca650517dc, type: 3}
+  - {fileID: 21300000, guid: 7d60644191579a246b177074fd0a77a3, type: 3}
+  - {fileID: 21300000, guid: bb83d8c1c83bae346a59e84916e769fd, type: 3}
+  - {fileID: 21300000, guid: 2990b54212525e84da6978bfcd4747a6, type: 3}
+  - {fileID: 21300000, guid: ab73ef92f96a4554e8070463f6d3534e, type: 3}
+  - {fileID: 21300000, guid: 96bbb403e94f75b4e8e85918b7f9415b, type: 3}
+  - {fileID: 21300000, guid: f92c3033be628a9428fb2bea2d04958f, type: 3}
+  - {fileID: 21300000, guid: b2bf8f54ae2d5ec419ee147c3b2078a1, type: 3}
+  - {fileID: 21300000, guid: bd62e4959c0c77b479f7cba13e33cb03, type: 3}
+  - {fileID: 21300000, guid: 4e8e14c5a88192f429584cc7d0aca384, type: 3}
+  - {fileID: 21300000, guid: 08f18e26ab327d94fbb3701f73723f77, type: 3}
+  - {fileID: 21300000, guid: 019a3057c4d667540b3e8447bdcfa4ae, type: 3}
+  - {fileID: 21300000, guid: e0ea8d38acd6d2043b88edd610cca4f0, type: 3}
+  - {fileID: 21300000, guid: a2813868ef46e1845b5f421e57bea2d6, type: 3}
+  - {fileID: 21300000, guid: 0c6e801c6c815a34da50eb365a056118, type: 3}
+  - {fileID: 21300000, guid: b0ebd46e7c8a6e8478ded7487a03c31c, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Plashka_missions
+  - Points_icon
+  - Settings
+  - Pashka_timer
+  - mission_white
+  - Boss
+  - Plashka_multiplyer
+  - strelka
+  - Boss_green
+  - Ok_button
+  - Mission_green
+  - Knife30
+  - Points_icon2
+  - Plashka_points
+  - Knife2
+  - Pause
+  m_RenderDataMap: {}
+  m_Tag: Gameplay
+  m_IsVariant: 0
