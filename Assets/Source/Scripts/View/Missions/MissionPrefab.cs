@@ -14,6 +14,8 @@ namespace Source.Scripts.View.Missions
         public Button playButton;
         public Image rewardIcon;
         public TextMeshProUGUI rewardText;
+        public GameObject costContainer;
+        public TextMeshProUGUI costText;
 
         public void Open()
         {
@@ -27,6 +29,12 @@ namespace Source.Scripts.View.Missions
             locker.SetActive(true);
             lockPlayButton.SetActive(true);
             playButton.gameObject.SetActive(false);
+        }
+
+        public void SetCost(int cost)
+        {
+            costContainer.SetActive(true);
+            costText.text = cost.ToString();
         }
     }
 }

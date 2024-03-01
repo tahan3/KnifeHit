@@ -3893,6 +3893,7 @@ GameObject:
   - component: {fileID: 1504954757}
   - component: {fileID: 1504954756}
   - component: {fileID: 1504954759}
+  - component: {fileID: 1504954760}
   m_Layer: 5
   m_Name: Canvas_Tutors
   m_TagString: Untagged
@@ -3965,7 +3966,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
+  m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -4020,6 +4021,18 @@ MonoBehaviour:
   - {fileID: 188433309}
   - {fileID: 901832951}
   - {fileID: 1681854887}
+--- !u!114 &1504954760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504954754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6a29d038c6349af947f4fce02ee6eb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1509645818
 GameObject:
   m_ObjectHideFlags: 0

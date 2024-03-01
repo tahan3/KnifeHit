@@ -28,7 +28,7 @@ namespace Source.Scripts.Gameplay
         [Inject] private CurrencyHandler _currencyHandler;
         [Inject] private ExpHandler _expHandler;
 
-        private const int ExpPerMission = 75;
+        private const int ExpPerMission = 25;
 
         public MissionsHandler()
         {
@@ -37,6 +37,8 @@ namespace Source.Scripts.Gameplay
 
         public void LoadMission(MissionConfig mission, bool isTutor = false)
         {
+            _currencyHandler.SelfClean();
+            
             _currentMission = mission;
 
             _currentTimer = new Timer.Timer(mission.time);

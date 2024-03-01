@@ -16,26 +16,27 @@ namespace Source.Scripts.View.Missions
         [SerializeField] private MissionPrefab prefab;
         [SerializeField] private Transform parent;
 
-        [SerializeField] private MainConfig mainConfig;
         [SerializeField] private KeyValueStorage<CurrencyType, Sprite> currencySprites;
 
         private MissionsHandler _missionsHandler;
+        private MainConfig _mainConfig;
         
         [Inject]
-        private void Construct(MissionsHandler missionsHandler)
+        private void Construct(MissionsHandler missionsHandler, CurrencyHandler currencyHandler, MainConfig mainConfig)
         {
             _missionsHandler = missionsHandler;
+            _mainConfig = mainConfig;
             
-            for (var i = 0; i < mainConfig.missions.Count; i++)
+            for (var i = 0; i < _mainConfig.missions.Count; i++)
             {
                 var item = Instantiate(prefab, parent);
                 var i1 = i;
 
-                item.missionNameText.text = mainConfig.missions[i].missionName;
-                item.playerCountText.text = mainConfig.missions[i].playersLimit + " players";
+                item.missionNameText.text = _mainConfig.missions[i].missionName;
+                item.playerCountText.text = _mainConfig.missions[i].playersLimit + " players";
 
-                int minutes = mainConfig.missions[i].time / 60;
-                int seconds = mainConfig.missions[i].time % 60;
+                int minutes = _mainConfig.missions[i].time / 60;
+                int seconds = _mainConfig.missions[i].time % 60;
 
                 if (seconds > 0)
                 {
@@ -50,16 +51,39 @@ namespace Source.Scripts.View.Missions
                 {
                     item.Open();
                     item.playButton.onClick.AddListener(() => SetMission(i1));
+
+                    if (_mainConfig.missions[i1].cost > 0)
+                    {
+                        item.SetCost(_mainConfig.missions[i1].cost);
+                        item.playButton.onClick.AddListener(() =>
+                        {
+                            currencyHandler.Currencies[CurrencyType.Coin].Counter.Value -=
+                                _mainConfig.missions[i1].cost;
+                            currencyHandler.Save();
+                        });
+
+                        var status = _mainConfig.missions[i1].cost >=
+                                     currencyHandler.Currencies[CurrencyType.Coin].Counter.Value;
+                        
+                        item.playButton.gameObject.SetActive(!status);
+                        item.lockPlayButton.gameObject.SetActive(status);
+                        
+                        currencyHandler.Currencies[CurrencyType.Coin].Counter.OnValueChanged += (int cost) =>
+                        {
+                            item.playButton.gameObject.SetActive(!(_mainConfig.missions[i1].cost >= cost));
+                            item.lockPlayButton.gameObject.SetActive(_mainConfig.missions[i1].cost >= cost);
+                        };
+                    }
                 }
                 else
                 {
                     item.Close();
                 }
 
-                if (currencySprites.TryGetValue(mainConfig.missions[i].reward.currency, out var sprite))
+                if (currencySprites.TryGetValue(_mainConfig.missions[i].reward.currency, out var sprite))
                 {
                     item.rewardIcon.sprite = sprite;
-                    item.rewardText.text = CurrencyConverter.Convert(mainConfig.missions[i].reward.currency, mainConfig.missions[i].reward.amount);
+                    item.rewardText.text = CurrencyConverter.Convert(_mainConfig.missions[i].reward.currency, _mainConfig.missions[i].reward.amount);
                 }
             }
         }
@@ -76,7 +100,7 @@ namespace Source.Scripts.View.Missions
 
         private void SetMission(int missionIndex)
         {
-            _missionsHandler.LoadMission(mainConfig.missions[missionIndex]);
+            _missionsHandler.LoadMission(_mainConfig.missions[missionIndex]);
         }
     }
 }

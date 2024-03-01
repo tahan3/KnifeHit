@@ -23,7 +23,7 @@ namespace Source.Scripts.View.DailyGift
         private WindowsHandler _windowsHandler;
 
         private const string TimerHoursKey = "HoursTimer";
-        private const int TimerHoursDelay = 1;
+        private const int TimerHoursDelay = 5;
 
         private DateTime TimerStarted;
         
@@ -86,7 +86,7 @@ namespace Source.Scripts.View.DailyGift
         {
             TimerStarted = DateTime.Now.Trim(TimeSpan.TicksPerSecond);
             
-            _testDateTimer.SetDelay(DateTime.Now.Trim(TimeSpan.TicksPerSecond)./*AddHours*/AddMinutes(TimerHoursDelay));
+            _testDateTimer.SetDelay(DateTime.Now.Trim(TimeSpan.TicksPerSecond).AddHours(TimerHoursDelay));
 
             _testDateTimer.StartTimer();
             

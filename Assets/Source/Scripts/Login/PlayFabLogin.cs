@@ -6,8 +6,9 @@ using UnityEngine;
 
 namespace Source.Scripts.Login
 {
-    public class PlayFabLogin : ILoginHandler
+    public class PlayFabLogin : ILoginHandler<string>
     {
+        public string ID { get; private set; }
         public event Action OnLogin;
         public event Action OnError;
 
@@ -25,6 +26,8 @@ namespace Source.Scripts.Login
         private void OnSuccessLogin(LoginResult result)
         {
             OnLogin?.Invoke();
+
+            ID = result.PlayFabId;
             
             var request = new UpdateUserTitleDisplayNameRequest()
             {
