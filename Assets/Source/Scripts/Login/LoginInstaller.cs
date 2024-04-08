@@ -1,33 +1,40 @@
 using Source.Scripts.Profile;
-using Source.Scripts.Scene;
-using UnityEngine;
+using Source.Scripts.SceneManagement;
 using Zenject;
 
 namespace Source.Scripts.Login
 {
-    public class LoginInstaller : MonoInstaller
+    public class LoginInstaller : Installer<LoginInstaller>
     {
+        private readonly ILoginHandler<string> _loginHandler;
+
+        [Inject] private SceneLoader _sceneLoader;
+        
+        public LoginInstaller(ILoginHandler<string> loginHandler)
+        {
+            _loginHandler = loginHandler;
+        }
+
         public override void InstallBindings()
         {
-            var login = new PlayFabLogin();
-            login.OnLogin += OnLogin;
-            login.OnError += OnError;
-
-            Container.Bind<ILoginHandler<string>>().FromInstance(login).AsSingle();
+            _loginHandler.OnLogin += OnLogin;
+            _loginHandler.OnError += OnError;
             
-            login.Login();
+            Container.Bind<ILoginHandler<string>>().FromInstance(_loginHandler).AsSingle();
+            
+            _loginHandler.Login();
         }
         
-        public void OnLogin()
+        public async void OnLogin()
         {
             Container.Bind<IProfileHandler>().To<PlayFabProfileHandler>().FromNew().AsSingle().NonLazy();
-            SceneLoader.LoadScene("MainMenu");
+            await _sceneLoader.LoadScene(SceneType.MainMenu);
         }
 
-        public void OnError()
+        public async void OnError()
         {
-            Container.Bind<IProfileHandler>().To<PlayFabProfileHandler>().FromNew().AsSingle().NonLazy();
-            SceneLoader.LoadScene("MainMenu");
+            Container.Bind<IProfileHandler>().To<PlayFabProfileHandler/*LocalProfileHandler*/>().FromNew().AsSingle().NonLazy();
+            await _sceneLoader.LoadScene(SceneType.MainMenu);
         }
     }
 }

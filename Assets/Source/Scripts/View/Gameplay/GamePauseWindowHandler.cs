@@ -1,5 +1,5 @@
 using Source.Scripts.Gameplay;
-using Source.Scripts.Scene;
+using Source.Scripts.SceneManagement;
 using UnityEngine.Networking;
 using Zenject;
 
@@ -10,6 +10,7 @@ namespace Source.Scripts.View.Gameplay
         private GamePauseWindow _gamePauseWindow;
 
         [Inject] private MissionsHandler _missionsHandler;
+        [Inject] private SceneLoader _sceneLoader;
 
         public GamePauseWindowHandler(GamePauseWindow gamePauseWindow)
         {
@@ -23,14 +24,22 @@ namespace Source.Scripts.View.Gameplay
             _gamePauseWindow.exitButton.onClick.AddListener(Exit);
         }
 
-        private void Restart()
+        private async void Restart()
         {
-            _missionsHandler.RestartWave();
+            _gamePauseWindow.restartButton.interactable = false;
+            
+            await _missionsHandler.RestartWave();
+
+            _gamePauseWindow.restartButton.interactable = true;
         }
         
-        private void Exit()
+        private async void Exit()
         {
-            SceneLoader.LoadScene("MainMenu");
+            _gamePauseWindow.exitButton.interactable = false;
+            
+            await _sceneLoader.LoadScene(SceneType.MainMenu);
+
+            _gamePauseWindow.exitButton.interactable = true;
         }
     }
 }

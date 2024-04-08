@@ -101,7 +101,7 @@ namespace Source.Scripts.View.Leaderboard
 
             for (var i = 0; i < items.Count; i++)
             {
-                var item = Object.Instantiate(GetLeaderboardItemByIndex(i), _leaderboardWindow.itemsContainer);
+                var item = Object.Instantiate(GetLeaderboardItemByPlace(i), _leaderboardWindow.itemsContainer);
                 item.playerName.text = string.IsNullOrEmpty(items[i].DisplayName) ? "Name" : items[i].DisplayName;
                 item.number.text = (items[i].Position + 1).ToString();
                 item.points.text = items[i].StatValue.ToString();
@@ -137,19 +137,15 @@ namespace Source.Scripts.View.Leaderboard
             }
         }
 
-        private LeaderboardItem GetLeaderboardItemByIndex(int index)
+        private LeaderboardItem GetLeaderboardItemByPlace(int place)
         {
-            switch (index)
+            return place switch
             {
-                case 0:
-                    return _leaderboardData.firstPlacePrefab;
-                case 1:
-                    return _leaderboardData.secondPlacePrefab;
-                case 2:
-                    return _leaderboardData.thirdPlacePrefab;
-                default:
-                    return _leaderboardData.anyPlacePrefab;
-            }
+                0 => _leaderboardData.firstPlacePrefab,
+                1 => _leaderboardData.secondPlacePrefab,
+                2 => _leaderboardData.thirdPlacePrefab,
+                _ => _leaderboardData.anyPlacePrefab
+            };
         }
         
         private void InitLeaderboardItem(PlayerLeaderboardEntry playerLeaderboard)
@@ -183,7 +179,7 @@ namespace Source.Scripts.View.Leaderboard
             }
             else
             {
-                if (_leaderboardData.icons.TryGetValue(Random.Range(0,4), out var sprite))
+                if (_leaderboardData.icons.TryGetValue(Random.Range(0, _leaderboardData.icons.GetKeys().Count), out var sprite))
                 {
                     _items[id].icon.sprite = sprite;
                 }

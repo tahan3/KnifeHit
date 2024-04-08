@@ -8,13 +8,14 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Source/Scenes/Boot.unity
     guid: 736fc20d6e8462f408aec71511df166a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Source/Scenes/MainMenu.unity
     guid: cdd488a46d3d7d9459266cef4cffd23f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Source/Scenes/MainGameplay.unity
     guid: bce8c91a953388642b713c93f6465871
-  - enabled: 1
+  - enabled: 0
     path: Assets/Source/Scenes/MainGameplay_RomaTest.unity
     guid: d088166a67eac62489e36316e55adf53
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 3e11aeea0ab4c8c4ba6b0a4f2b08da32, type: 2}

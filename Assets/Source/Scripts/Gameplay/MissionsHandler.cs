@@ -1,9 +1,10 @@
+using Cysharp.Threading.Tasks;
 using Source.Scripts.Counter;
 using Source.Scripts.Currency;
 using Source.Scripts.Data.LevelData;
 using Source.Scripts.Gameplay.Timer;
 using Source.Scripts.Level;
-using Source.Scripts.Scene;
+using Source.Scripts.SceneManagement;
 using UnityEngine.SceneManagement;
 using Zenject;
 
@@ -27,13 +28,14 @@ namespace Source.Scripts.Gameplay
 
         [Inject] private CurrencyHandler _currencyHandler;
         [Inject] private ExpHandler _expHandler;
+        [Inject] private SceneLoader _sceneLoader;
 
         public MissionsHandler()
         {
             _missionsCounter = new MissionsCounter();
         }
 
-        public void LoadMission(MissionConfig mission, bool isTutor = false)
+        public async UniTask LoadMission(MissionConfig mission, bool isTutor = false)
         {
             _currencyHandler.SelfClean();
             
@@ -48,11 +50,11 @@ namespace Source.Scripts.Gameplay
 
             if (isTutor)
             {
-                SceneLoader.LoadScene("MainGameplay_RomaTest", StartMission);
+                await _sceneLoader.LoadScene(SceneType.Tutorial, StartMission);
             }
             else
             {
-                SceneLoader.LoadScene("MainGameplay", StartMission);
+                await _sceneLoader.LoadScene(SceneType.MainGameplay, StartMission);
             }
         }
 
@@ -89,13 +91,13 @@ namespace Source.Scripts.Gameplay
             _currentTimer.StopTimer();
         }
 
-        public void RestartWave()
+        public async UniTask RestartWave()
         {
             Level = 0;
             _currentTimer.StopTimer();
             //SceneLoader.LoadScene("MainGameplay_RomaTest");
             //SceneLoader.LoadScene("MainGameplay");
-            SceneLoader.LoadScene(SceneManager.GetActiveScene().name);
+            await _sceneLoader.ReloadCurrentScene();
         }
     }
 }

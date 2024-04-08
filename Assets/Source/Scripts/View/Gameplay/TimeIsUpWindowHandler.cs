@@ -1,5 +1,5 @@
 using Source.Scripts.Gameplay;
-using Source.Scripts.Scene;
+using Source.Scripts.SceneManagement;
 using Zenject;
 
 namespace Source.Scripts.View.Gameplay
@@ -9,6 +9,7 @@ namespace Source.Scripts.View.Gameplay
         private TimeIsUpWindow _window;
 
         [Inject] private MissionsHandler _missionsHandler;
+        [Inject] private SceneLoader _sceneLoader;
         
         public TimeIsUpWindowHandler(TimeIsUpWindow window)
         {
@@ -35,14 +36,22 @@ namespace Source.Scripts.View.Gameplay
             _missionsHandler.Timer.Time.OnValueChanged -= OnEndTime;
         }
         
-        private void RestartMission()
+        private async void RestartMission()
         {
-            _missionsHandler.LoadMission(_missionsHandler.Mission);
+            _window.restartButton.interactable = false;
+            
+            await _missionsHandler.LoadMission(_missionsHandler.Mission);
+
+            _window.restartButton.interactable = true;
         }
 
-        private void BackToMenu()
+        private async void BackToMenu()
         {
-            SceneLoader.LoadScene("MainMenu");
+            _window.mainMenuButton.interactable = false;
+            
+            await _sceneLoader.LoadScene(SceneType.MainMenu);
+
+            _window.mainMenuButton.interactable = true;
         }
     }
 }

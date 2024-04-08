@@ -42,6 +42,7 @@ namespace Source.Scripts.Test
             _knifesPerRoundCounter = new KnifesPerRoundCounter();
 
             _gameOverHandler = new GameOverHandler(_knifesPerRoundCounter, _missionsHandler);
+            Container.Inject(_gameOverHandler);
             
             Container.Bind<MainEventsHandler>().FromInstance(_mainEvents).AsSingle();
             Container.Bind<LevelConfig>().FromInstance(_missionsHandler.Mission.stages[_missionsHandler.Stage].levels[_missionsHandler.Level]).AsSingle();

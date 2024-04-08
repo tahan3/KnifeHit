@@ -1,6 +1,7 @@
+using Cysharp.Threading.Tasks;
 using Source.Scripts.Gameplay;
 using Source.Scripts.Leaderboard;
-using Source.Scripts.Scene;
+using Source.Scripts.SceneManagement;
 using Zenject;
 
 namespace Source.Scripts.View.Gameplay
@@ -11,6 +12,7 @@ namespace Source.Scripts.View.Gameplay
 
         [Inject] private MissionsHandler _missionsHandler;
         [Inject] private ILeaderboardHandler _leaderboardHandler;
+        [Inject] private SceneLoader _sceneLoader;
         
         public YourScoreHandler(YourScoreWindow yourScoreWindow)
         {
@@ -30,11 +32,11 @@ namespace Source.Scripts.View.Gameplay
             _leaderboardHandler.SetLeaderboard(LeaderboardType.Points, yourScore + timeScore);
         }
 
-        private void OkButtonAction()
+        private async void OkButtonAction()
         {
             _yourScoreWindow.okButton.onClick.RemoveListener(OkButtonAction);
             
-            SceneLoader.LoadScene("MainMenu");
+            await _sceneLoader.LoadScene(SceneType.MainMenu);
         }
     }
 }

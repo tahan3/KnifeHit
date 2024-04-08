@@ -1,9 +1,10 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Source.Scripts.Counter;
-using Source.Scripts.Scene;
+using Source.Scripts.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace Source.Scripts.Gameplay
 {
@@ -18,10 +19,12 @@ namespace Source.Scripts.Gameplay
 
         private readonly MissionsHandler _missionsHandler;
         
+        [Inject] private readonly SceneLoader _sceneLoader;
+        
         public GameOverHandler(ICounter counter, MissionsHandler missionsHandler, float gameOverDelay = 1f)
         {
             _missionsHandler = missionsHandler;
-
+            
             _pointsToWin = _missionsHandler.Mission.stages[_missionsHandler.Stage].levels[_missionsHandler.Level]
                 .knifesToWin;
             _gameOverDelay = gameOverDelay;
@@ -56,7 +59,8 @@ namespace Source.Scripts.Gameplay
                 //SceneManager.LoadSceneAsync("MainGameplay_RomaTest");
                 //SceneManager.LoadSceneAsync("MainGameplay");
                 //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
-                SceneLoader.LoadScene(SceneManager.GetActiveScene().name);
+                
+                await _sceneLoader.ReloadCurrentScene();
             }
         }
     }

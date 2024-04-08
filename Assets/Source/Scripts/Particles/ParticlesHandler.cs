@@ -9,9 +9,8 @@ namespace Source.Scripts.Particles
 {
     public class ParticlesHandler
     {
-        private KeyValueStorage<ParticleType, ParticleSystem> _particlesStorage;
-
-        private Dictionary<ParticleType, IPool<ParticleSystem>> particlesPools;
+        private readonly KeyValueStorage<ParticleType, ParticleSystem> _particlesStorage;
+        private readonly Dictionary<ParticleType, IPool<ParticleSystem>> _particlesPools;
 
         private const int ParticleCount = 5;
         
@@ -19,13 +18,13 @@ namespace Source.Scripts.Particles
         {
             _particlesStorage = particlesStorage;
             
-            particlesPools = new Dictionary<ParticleType, IPool<ParticleSystem>>();
+            _particlesPools = new Dictionary<ParticleType, IPool<ParticleSystem>>();
             
             foreach (var key in _particlesStorage.GetKeys())
             {
                 if (_particlesStorage.TryGetValue(key, out var value))
                 {
-                    particlesPools.Add(key,
+                    _particlesPools.Add(key,
                         new ParticlesPool(container, value, ParticleCount, parent));
                 }
             }
@@ -33,7 +32,7 @@ namespace Source.Scripts.Particles
 
         public void PlayParticle(ParticleType type, Vector3 position)
         {
-            var item = particlesPools[type].GetItem();
+            var item = _particlesPools[type].GetItem();
             item.transform.position = position;
             item.Play();
         }

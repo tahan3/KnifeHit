@@ -19,6 +19,5 @@ namespace Source.Scripts.Pool
             item.Clear();
             return item;
         }
-        
     }
 }
