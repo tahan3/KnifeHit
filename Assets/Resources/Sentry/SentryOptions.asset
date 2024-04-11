@@ -15,11 +15,11 @@ MonoBehaviour:
   <Enabled>k__BackingField: 1
   <Dsn>k__BackingField: https://b3907c6a8e2407231d82dde0473b39c5@o4506610357436416.ingest.us.sentry.io/4506610489425920
   <CaptureInEditor>k__BackingField: 1
-  <EnableLogDebouncing>k__BackingField: 0
+  <EnableLogDebouncing>k__BackingField: 1
   <DebounceTimeLog>k__BackingField: 1000
   <DebounceTimeWarning>k__BackingField: 1000
   <DebounceTimeError>k__BackingField: 1000
-  <TracesSampleRate>k__BackingField: 0.10000000149011612
+  <TracesSampleRate>k__BackingField: 0.004999999888241291
   <AutoStartupTraces>k__BackingField: 1
   <AutoSceneLoadTraces>k__BackingField: 1
   <AutoAwakeTraces>k__BackingField: 1
@@ -28,8 +28,8 @@ MonoBehaviour:
   <ReleaseOverride>k__BackingField: 
   <EnvironmentOverride>k__BackingField: 
   <AttachStacktrace>k__BackingField: 0
-  <AttachScreenshot>k__BackingField: 0
-  <ScreenshotQuality>k__BackingField: 1
+  <AttachScreenshot>k__BackingField: 1
+  <ScreenshotQuality>k__BackingField: 3
   <ScreenshotCompression>k__BackingField: 75
   <AttachViewHierarchy>k__BackingField: 0
   <MaxViewHierarchyRootObjects>k__BackingField: 100
@@ -47,7 +47,7 @@ MonoBehaviour:
   <EnableOfflineCaching>k__BackingField: 1
   <MaxCacheItems>k__BackingField: 30
   <InitCacheFlushTimeout>k__BackingField: 0
-  <SampleRate>k__BackingField: 1
+  <SampleRate>k__BackingField: 0.01
   <ShutdownTimeout>k__BackingField: 2000
   <MaxQueueItems>k__BackingField: 30
   <AnrDetectionEnabled>k__BackingField: 1
