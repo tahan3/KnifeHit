@@ -27,6 +27,11 @@ namespace Source.Scripts.SceneManagement
 
                 await Addressables.LoadSceneAsync(sceneRef);
                 
+                Caching.ClearCache();
+                Resources.UnloadUnusedAssets();
+                GL.Clear(true, true, Color.green);
+                GL.Flush();
+                
                 callback?.Invoke();
             }
         }
