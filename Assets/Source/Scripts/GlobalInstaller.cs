@@ -1,3 +1,4 @@
+using Source.Scripts.ATT;
 using Source.Scripts.Currency;
 using Source.Scripts.Data;
 using Source.Scripts.Gameplay;
@@ -17,6 +18,8 @@ namespace Source.Scripts
         
         public override async void InstallBindings()
         {
+            ATTHandler.ShowATT();
+            
             //Init scenes loader
             var scenesInstaller = new ScenesInstaller(scenes);
             await scenesInstaller.Install(Container);
